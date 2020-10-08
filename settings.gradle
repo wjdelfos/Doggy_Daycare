@@ -1,2 +1,2 @@
-include ':app'
+include ':myapplication'
 rootProject.name = "Doggy Daycare"
