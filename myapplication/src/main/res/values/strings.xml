@@ -10,4 +10,17 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="signup_message">Meld je aan!</string>
+    <string name="name1">Voornaam</string>
+    <string name="password">Wachtwoord</string>
+    <string name="name2">Achternaam</string>
+    <string name="dateformat">dd/mm/jjjj</string>
+    <string name="email">Email</string>
+
+    <string-array name="gender">
+        <item>Man</item>
+        <item>Vrouw</item>
+        <item>Overige</item>
+    </string-array>
+
 </resources>
