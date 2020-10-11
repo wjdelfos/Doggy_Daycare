@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 
 import com.example.myapplication.data_handeling.DataInitializer;
 
@@ -16,6 +17,7 @@ public class HondenDB {
         private static HondenDB sHonden;
         private Context mContext;
         private SQLiteDatabase mDatabase;
+        private SQLiteQueryBuilder QueryBuilder;
 
         public static HondenDB get(Context context) {
             return sHonden == null ? new HondenDB(context) : sHonden;
@@ -96,4 +98,7 @@ public class HondenDB {
         }
     }
 */
+
+
+//String a = QueryBuilder.buildQueryString(false,"",new String[]{"iets"},null,"iets",null,null,null);
 }
