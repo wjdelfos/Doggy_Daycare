@@ -28,7 +28,7 @@ public class HondenDB {
             mContext = context.getApplicationContext();
             mDatabase = new DataInitializer(mContext).getWritableDatabase();
         }
-/*
+        /*
         public List<Notitie> getNotities() {
             List<Notitie> notities = new ArrayList<>();
             Cursor cursor = mDatabase.rawQuery("SELECT * FROM Notities", null);
@@ -96,8 +96,8 @@ public class HondenDB {
         public void updateNotitie(Notitie notitie) {
             mDatabase.execSQL("UPDATE Notities SET titel='" + notitie.getTitel() + "', beschrijving='" + notitie.getBeschrijving() + "', datum='" + notitie.getDatum().getTime() + "' WHERE id='" + notitie.getId() + "'");
         }
-    }
-*/
+    }*/
+
 
 
 //String a = QueryBuilder.buildQueryString(false,"",new String[]{"iets"},null,"iets",null,null,null);
