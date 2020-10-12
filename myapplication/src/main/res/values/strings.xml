@@ -16,8 +16,8 @@
     <string name="name2">Achternaam</string>
     <string name="dateformat">dd/mm/jjjj</string>
     <string name="email">Email</string>
-
-    <string-array name="gender">
+    <string name="cellphone">Telefoon nummer</string>
+    <string-array name="genders">
         <item>Man</item>
         <item>Vrouw</item>
         <item>Overige</item>
