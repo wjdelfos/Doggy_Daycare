@@ -26,8 +26,8 @@ public class App_Gebruiker {
        ID=id;
     }
 
-    public App_Gebruiker(UUID ID, String naam, String plaatsnaam, String straatnaam, int huisnummer, String postcode, int telefoon_Nummer, Date geboortedatum, String wachtwoord, String introductieText) {
-        this.ID = ID;
+    public App_Gebruiker( String naam, String plaatsnaam, String straatnaam, int huisnummer, String postcode, int telefoon_Nummer, Date geboortedatum, String wachtwoord, String introductieText) {
+        this.ID = UUID.randomUUID();
         Naam = naam;
         Plaatsnaam = plaatsnaam;
         Straatnaam = straatnaam;

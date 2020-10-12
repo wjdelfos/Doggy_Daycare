@@ -22,23 +22,23 @@ public class HondenDB {
         public static HondenDB get(Context context) {
             return sHonden == null ? new HondenDB(context) : sHonden;
         }
-        // private constructor zodat niemand anders een NotitieBlok kan maken
-        // en we dus garanderen dat er maar één is
+
         private HondenDB(Context context) {
             mContext = context.getApplicationContext();
             mDatabase = new DataInitializer(mContext).getWritableDatabase();
             App_Gebruiker TestPersoon= new App_Gebruiker();
-            //TestPersoon.setGeboortedatum("e");
+            TestPersoon.setNaam("Eric");
             TestPersoon.setHuisnummer(5);
             TestPersoon.setIntroductieText("ik ben een test gebruiker");
-            TestPersoon.setWachtwoord("123");
+            TestPersoon.setWachtwoord("wachtwoord");
 
-            this.addApp_Gebruiker(new App_Gebruiker());
+            this.addApp_Gebruiker(TestPersoon);
         }
         /*
         public List<Notitie> getNotities() {
             List<Notitie> notities = new ArrayList<>();
             Cursor cursor = mDatabase.rawQuery("SELECT * FROM Notities", null);
+
 
             try {
                 cursor.moveToFirst();
@@ -99,6 +99,8 @@ public class HondenDB {
             String sql = "INSERT INTO App_Gebruiker VALUES ('" + app_Gebruiker.getID() + "', '" + app_Gebruiker.getNaam() + "', '" + app_Gebruiker.getPlaatsnaam() + "', '" + app_Gebruiker.getStraatnaam() + "', '" + app_Gebruiker.getHuisnummer() + "', '" + app_Gebruiker.getPostcode() + "','" + app_Gebruiker.getTelefoon_Nummer() + "', '" + app_Gebruiker.getGeboortedatum()+ "', '" + app_Gebruiker.getWachtwoord()+ "', '" + app_Gebruiker.getIntroductieText() + "' )";
             mDatabase.execSQL(sql);
         }
+
+
 
         //public void updateApp_Gebruiker(App_Gebruiker app_Gebruiker) {
         //    mDatabase.execSQL("UPDATE Notities SET titel='" + notitie.getTitel() + "', beschrijving='" + notitie.getBeschrijving() + "', datum='" + notitie.getDatum().getTime() + "' WHERE id='" + notitie.getId() + "'");
