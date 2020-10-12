@@ -19,7 +19,7 @@ import java.util.UUID;
 
 public class SignUpFragment extends Fragment {
 
-    @Override
+    /*@Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -27,15 +27,15 @@ public class SignUpFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-    }
+    }*/
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.sign_up_main, container, false);
 
         Spinner gender = (Spinner) v.findViewById(R.id.gender);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.genders, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gender.setAdapter(adapter);
