@@ -58,14 +58,14 @@ public class DataInitializer extends SQLiteOpenHelper {
                         " Status enum," +
                         " Afgesproken_prijs double," +
                         " Oppas int," +
+                        " Eigenaar int," +
+                        " Advertentie int," +
                         " CONSTRAINT fk_gebruiker_afspraak" +
                         "    FOREIGN KEY (Oppas)" +
-                        "    REFERENCES App_Gebruiker (id)" +
-                        " Eigenaar int," +
+                        "    REFERENCES App_Gebruiker (id), " +
                         " CONSTRAINT fk_gebruiker_afspraak" +
                         "    FOREIGN KEY (Eigenaar)" +
-                        "    REFERENCES App_Gebruiker (id)" +
-                        " Advertentie int," +
+                        "    REFERENCES App_Gebruiker (id)," +
                         " CONSTRAINT fk_advertentie_afspraak" +
                         "    FOREIGN KEY (Advertentie)" +
                         "    REFERENCES Advertentie (id))");
@@ -75,14 +75,14 @@ public class DataInitializer extends SQLiteOpenHelper {
                         " Inhoud text," +
                         " Sterren enum," +
                         " Reviewer int," +
+                        " Gereviewde int," +
+                        " Afspraak int," +
                         " CONSTRAINT fk_gebruiker_review" +
                         "    FOREIGN KEY (Reviewer)" +
-                        "    REFERENCES App_Gebruiker (id)" +
-                        " Gereviewde int," +
+                        "    REFERENCES App_Gebruiker (id)," +
                         " CONSTRAINT fk_gebruiker_review" +
                         "    FOREIGN KEY (Gereviewde)" +
-                        "    REFERENCES App_Gebruiker (id)" +
-                        " Afspraak int," +
+                        "    REFERENCES App_Gebruiker (id)," +
                         " CONSTRAINT fk_afspraak_review" +
                         "    FOREIGN KEY (Afspraak)" +
                         "    REFERENCES Afspraak (id))");

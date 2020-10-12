@@ -27,6 +27,13 @@ public class HondenDB {
         private HondenDB(Context context) {
             mContext = context.getApplicationContext();
             mDatabase = new DataInitializer(mContext).getWritableDatabase();
+            App_Gebruiker TestPersoon= new App_Gebruiker();
+            //TestPersoon.setGeboortedatum("e");
+            TestPersoon.setHuisnummer(5);
+            TestPersoon.setIntroductieText("ik ben een test gebruiker");
+            TestPersoon.setWachtwoord("123");
+
+            this.addApp_Gebruiker(new App_Gebruiker());
         }
         /*
         public List<Notitie> getNotities() {
@@ -87,16 +94,16 @@ public class HondenDB {
             values.put("datum", notitie.getDatum().getTime());
             return values;
         }
-
-        public void addNotitie(Notitie notitie) {
-            String sql = "INSERT INTO Notities VALUES ('" + notitie.getId() + "', '" + notitie.getTitel() + "', '" + notitie.getBeschrijving() + "', '" + notitie.getDatum().getTime() + "')";
+*/
+        public void addApp_Gebruiker(App_Gebruiker app_Gebruiker) {
+            String sql = "INSERT INTO App_Gebruiker VALUES ('" + app_Gebruiker.getID() + "', '" + app_Gebruiker.getNaam() + "', '" + app_Gebruiker.getPlaatsnaam() + "', '" + app_Gebruiker.getStraatnaam() + "', '" + app_Gebruiker.getHuisnummer() + "', '" + app_Gebruiker.getPostcode() + "','" + app_Gebruiker.getTelefoon_Nummer() + "', '" + app_Gebruiker.getGeboortedatum()+ "', '" + app_Gebruiker.getWachtwoord()+ "', '" + app_Gebruiker.getIntroductieText() + "' )";
             mDatabase.execSQL(sql);
         }
 
-        public void updateNotitie(Notitie notitie) {
-            mDatabase.execSQL("UPDATE Notities SET titel='" + notitie.getTitel() + "', beschrijving='" + notitie.getBeschrijving() + "', datum='" + notitie.getDatum().getTime() + "' WHERE id='" + notitie.getId() + "'");
-        }
-    }*/
+        //public void updateApp_Gebruiker(App_Gebruiker app_Gebruiker) {
+        //    mDatabase.execSQL("UPDATE Notities SET titel='" + notitie.getTitel() + "', beschrijving='" + notitie.getBeschrijving() + "', datum='" + notitie.getDatum().getTime() + "' WHERE id='" + notitie.getId() + "'");
+        //}
+   // }
 
 
 
