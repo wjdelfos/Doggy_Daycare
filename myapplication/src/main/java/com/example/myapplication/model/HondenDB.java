@@ -34,6 +34,8 @@ public class HondenDB {
             TestPersoon.setWachtwoord("123");
 
             this.addApp_Gebruiker(new App_Gebruiker());
+
+
         }
         /*
         public List<Notitie> getNotities() {
@@ -99,6 +101,22 @@ public class HondenDB {
             String sql = "INSERT INTO App_Gebruiker VALUES ('" + app_Gebruiker.getID() + "', '" + app_Gebruiker.getNaam() + "', '" + app_Gebruiker.getPlaatsnaam() + "', '" + app_Gebruiker.getStraatnaam() + "', '" + app_Gebruiker.getHuisnummer() + "', '" + app_Gebruiker.getPostcode() + "','" + app_Gebruiker.getTelefoon_Nummer() + "', '" + app_Gebruiker.getGeboortedatum()+ "', '" + app_Gebruiker.getWachtwoord()+ "', '" + app_Gebruiker.getIntroductieText() + "' )";
             mDatabase.execSQL(sql);
         }
+
+        public void addAdvertentie(Advertentie advertentie) {
+            String sql = "INSERT INTO Advertentie VALUES ('" + advertentie.getID() + "','" + advertentie.getBeginTijd() + "','" + advertentie.getEindTijd() + "','" + advertentie.getPrijs() + "','" + advertentie.getLocatie() + "','" + advertentie.getSpecialeVoorkeurenHond() + "','" + advertentie.getCapaciteit() + "','" + advertentie.getErvaringHonden() + "','" + advertentie.getOptiesEten() + "','" + advertentie.get_AdvertentiePlaatser() + "' )";
+            mDatabase.execSQL(sql);
+        }
+
+        public void addHond(Hond hond) {
+            String sql = "INSERT INTO Hond VALUES ('" + hond.getID() + "','" + hond.getNaam() + "','" + hond.getGeboortedatum() + "','" + hond.getRas() + "','" + hond.getOpmerkingen() + "','" + hond.getEigenaar() + "' )";
+            mDatabase.execSQL(sql);
+        }
+
+        public void addAfspraak(Afspraak afspraak) {
+            String sql = "INSERT INTO Afspraak VALUES ('" + afspraak.getID() + "','" + afspraak.getStatus() + "','" + afspraak.getAfgesproken_Prijs() + "','" + afspraak.getOppas() + "','" + afspraak.getEigenaar() + "','" + afspraak.getAdvertentie() + "' )";
+            mDatabase.execSQL(sql);
+        }
+
 
         //public void updateApp_Gebruiker(App_Gebruiker app_Gebruiker) {
         //    mDatabase.execSQL("UPDATE Notities SET titel='" + notitie.getTitel() + "', beschrijving='" + notitie.getBeschrijving() + "', datum='" + notitie.getDatum().getTime() + "' WHERE id='" + notitie.getId() + "'");
