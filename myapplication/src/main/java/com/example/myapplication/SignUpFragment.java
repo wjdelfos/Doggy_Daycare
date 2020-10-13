@@ -13,13 +13,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.UUID;
-public class SignUpFragment extends Fragment { //implements AdapterView.OnItemSelectedListener {
+public class SignUpFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+   private Spinner gender;
 
     /*@Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,11 +38,12 @@ public class SignUpFragment extends Fragment { //implements AdapterView.OnItemSe
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.sign_up_main, container, false);
 
-        Spinner gender = (Spinner) v.findViewById(R.id.gender);
+        gender = (Spinner) v.findViewById(R.id.gender);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.genders, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gender.setAdapter(adapter);
+        gender.setOnItemSelectedListener(this);
 
        /* @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -196,7 +199,17 @@ public class SignUpFragment extends Fragment { //implements AdapterView.OnItemSe
 
 
         */
+
         return v;
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Log.i("variables","Deus ex machina");
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
