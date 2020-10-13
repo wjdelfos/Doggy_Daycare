@@ -37,6 +37,9 @@ public class LoginFragment extends Fragment {
         Button LoginButton = (Button) root.findViewById(R.id.Login);
         LoginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                //TODO check credentials
+
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
             }

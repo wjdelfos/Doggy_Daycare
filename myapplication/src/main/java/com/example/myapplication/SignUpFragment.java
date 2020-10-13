@@ -44,6 +44,8 @@ public class SignUpFragment extends Fragment {
         Button Aanmelden = (Button) v.findViewById(R.id.Aanmelden);
         Aanmelden.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                //TODO create account
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
             }
