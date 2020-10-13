@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,8 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.UUID;
-
-public class SignUpFragment extends Fragment {
+public class SignUpFragment extends Fragment { //implements AdapterView.OnItemSelectedListener {
 
     /*@Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +42,19 @@ public class SignUpFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gender.setAdapter(adapter);
 
+       /* @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            parent.getItemAtPosition(pos)
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+*/
+
+
         Button Aanmelden = (Button) v.findViewById(R.id.Aanmelden);
         Aanmelden.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -53,13 +67,89 @@ public class SignUpFragment extends Fragment {
 
         EditText PersonName = (EditText) v.findViewById(R.id.PersonName);
         PersonName.addTextChangedListener(new TextWatcher() {
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //TODO update person name
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        EditText PersonName2 = (EditText) v.findViewById(R.id.PersonName2);
+        PersonName2.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //TODO update person name 2 (sir name)
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        EditText BirthDate = (EditText) v.findViewById(R.id.BirthDate);
+        BirthDate.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //TODO update Birth date
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        EditText Email = (EditText) v.findViewById(R.id.EmailAddress);
+        Email.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //TODO update email
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        EditText Phone = (EditText) v.findViewById(R.id.Phone);
+        Phone.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.i("variables",s.toString());
+
+                //TODO update phone
             }
 
             @Override
@@ -91,4 +181,6 @@ public class SignUpFragment extends Fragment {
         */
         return v;
     }
+
+
 }
