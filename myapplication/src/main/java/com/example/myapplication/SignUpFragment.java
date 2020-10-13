@@ -51,23 +51,23 @@ public class SignUpFragment extends Fragment {
             }
         });
 
-       /*
-        EditText titleField = (EditText) v.findViewById(R.id.notitie_titel);
-        titleField.setText(mNotitie.getTitel());
-        titleField.addTextChangedListener(new TextWatcher() {
+        EditText PersonName = (EditText) v.findViewById(R.id.PersonName);
+        PersonName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mNotitie.setTitel(s.toString());
+                //TODO update person name
             }
 
             @Override
             public void afterTextChanged(Editable s) {
             }
         });
+
+        /*
         EditText descField = (EditText) v.findViewById(R.id.notitie_beschrijving);
         descField.setText(mNotitie.getBeschrijving());
         descField.addTextChangedListener(new TextWatcher() {

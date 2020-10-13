@@ -21,6 +21,8 @@ import com.example.myapplication.SingUpActivity;
 public class LoginFragment extends Fragment {
 
     private LoginViewModel loginViewModel;
+    private String email;
+    private String password;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -38,12 +40,17 @@ public class LoginFragment extends Fragment {
         LoginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+
+                /*CheckEmail(email);
+                CheckPassword(password);*/
                 //TODO check credentials
 
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
             }
         });
+
+
 
         return root;
     }
