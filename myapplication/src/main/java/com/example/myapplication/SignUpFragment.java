@@ -155,6 +155,23 @@ public class SignUpFragment extends Fragment { //implements AdapterView.OnItemSe
             @Override
             public void afterTextChanged(Editable s) {
             }
+
+        });
+        EditText Password = (EditText) v.findViewById(R.id.Password);
+        Password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //TODO update Password
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         /*
@@ -181,6 +198,5 @@ public class SignUpFragment extends Fragment { //implements AdapterView.OnItemSe
         */
         return v;
     }
-
 
 }
