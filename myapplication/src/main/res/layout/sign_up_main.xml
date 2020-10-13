@@ -107,7 +107,7 @@
         android:importantForAutofill="no" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/Aanmelden"
         android:layout_width="208dp"
         android:layout_height="50dp"
         android:text="@string/signup_message"
