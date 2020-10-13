@@ -2,10 +2,13 @@ package com.example.myapplication.ui.LoginUI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -50,7 +53,42 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        EditText Wachtwoord = (EditText) root.findViewById(R.id.Wachtwoord);
+        Wachtwoord.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //TODO update ingevulde wachtwoord
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+
+        EditText email = (EditText) root.findViewById(R.id.Email);
+        email.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //TODO update ingevulde email
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
         return root;
     }
