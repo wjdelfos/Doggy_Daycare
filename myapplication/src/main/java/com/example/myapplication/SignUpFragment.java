@@ -19,19 +19,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.model.App_Gebruiker;
+import com.example.myapplication.model.HondenDB;
+
 import java.util.UUID;
+
 public class SignUpFragment extends Fragment implements AdapterView.OnItemSelectedListener {
-   private Spinner gender;
-
-    /*@Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }*/
+    private Spinner gender;
+    private App_Gebruiker temp = new App_Gebruiker();
+    private String vnaam;
+    private String anaam;
 
     @Nullable
     @Override
@@ -45,26 +42,17 @@ public class SignUpFragment extends Fragment implements AdapterView.OnItemSelect
         gender.setAdapter(adapter);
         gender.setOnItemSelectedListener(this);
 
-       /* @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            parent.getItemAtPosition(pos)
-
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-
-        }
-*/
-
-
         Button Aanmelden = (Button) v.findViewById(R.id.Aanmelden);
         Aanmelden.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                try {
+                    HondenDB.get(getActivity()).addApp_Gebruiker(temp);
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+                } finally {
 
-                //TODO create account
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
+                }
+
             }
         });
 
@@ -78,7 +66,8 @@ public class SignUpFragment extends Fragment implements AdapterView.OnItemSelect
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //TODO update person name
+                vnaam = s.toString();
+                temp.setNaam(vnaam + anaam);
             }
 
             @Override
@@ -96,7 +85,8 @@ public class SignUpFragment extends Fragment implements AdapterView.OnItemSelect
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //TODO update person name 2 (sir name)
+                anaam = s.toString();
+                temp.setNaam(vnaam + anaam);
             }
 
             @Override
@@ -122,24 +112,6 @@ public class SignUpFragment extends Fragment implements AdapterView.OnItemSelect
             }
         });
 
-        EditText Email = (EditText) v.findViewById(R.id.EmailAddress);
-        Email.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //TODO update email
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
         EditText Phone = (EditText) v.findViewById(R.id.Phone);
         Phone.addTextChangedListener(new TextWatcher() {
 
@@ -150,9 +122,9 @@ public class SignUpFragment extends Fragment implements AdapterView.OnItemSelect
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.i("variables",s.toString());
+                Log.i("variables", s.toString());
 
-                //TODO update phone
+                temp.setTelefoon_Nummer(Integer.parseInt(s.toString()));
             }
 
             @Override
@@ -169,43 +141,20 @@ public class SignUpFragment extends Fragment implements AdapterView.OnItemSelect
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //TODO update Password
+                temp.setWachtwoord(s.toString());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
             }
         });
-
-        /*
-        EditText descField = (EditText) v.findViewById(R.id.notitie_beschrijving);
-        descField.setText(mNotitie.getBeschrijving());
-        descField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mNotitie.setBeschrijving(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-        Button dateField = (Button) v.findViewById(R.id.notitie_datum);
-        dateField.setText(mNotitie.getDatum().toString());
-
-
-        */
 
         return v;
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.i("variables","Deus ex machina");
+        Log.i("variables", "Deus ex machina");
     }
 
     @Override

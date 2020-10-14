@@ -20,14 +20,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/Email"
+        android:id="@+id/Telefoon_nr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="34dp"
         android:layout_marginTop="139dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
-        android:hint="E-mail"
+        android:inputType="phone"
+        android:hint="Telefoon nummer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
