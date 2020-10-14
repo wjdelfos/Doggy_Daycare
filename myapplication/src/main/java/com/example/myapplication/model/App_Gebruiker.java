@@ -6,7 +6,8 @@ import java.util.UUID;
 public class App_Gebruiker {
     // region Private variables
     private UUID ID;
-    private enum Geslacht {man, vrouw, overig}
+    private enum Geslachten {man, vrouw, overig}
+    private Geslachten Geslacht;
     private String Naam;
     private String Plaatsnaam;
     private String Straatnaam;
@@ -116,6 +117,14 @@ public class App_Gebruiker {
 
     public void setIntroductieText(String introductieText) {
         IntroductieText = introductieText;
+    }
+
+    public Geslachten getGeslacht() {
+        return Geslacht;
+    }
+
+    public void setGeslacht(Geslachten geslacht) {
+        Geslacht = geslacht;
     }
 
     // endregion

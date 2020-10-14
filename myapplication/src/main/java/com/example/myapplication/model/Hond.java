@@ -9,12 +9,16 @@ public class Hond {
     private Date Leeftijd;
     private String Ras; // stond in fysiek model als data type text (is dat een ding?)
     private String Opmerkingen;
+    private String Naam;
+    private UUID Eigenaar;
 
 
     public Hond() {  this(UUID.randomUUID()); }
 
     public Hond(UUID id) { ID = id; }
 
+
+    // region getters and setters
     public void setID(UUID ID) {
         this.ID = ID;
     }
@@ -39,8 +43,21 @@ public class Hond {
 
     public String getOpmerkingen() { return Opmerkingen; }
 
-    public Hond(UUID ID, Date Leeftijd, String ras, String opmerkingen) {
-
-
+    public void setNaam(String naam) {
+        this.Naam = naam;
     }
+
+    public String getNaam() {
+        return Naam;
+    }
+
+    public UUID getEigenaar() {
+        return Eigenaar;
+    }
+
+    public void setEigenaar(UUID eigenaar) {
+        Eigenaar = eigenaar;
+    }
+
+    // end region
 }

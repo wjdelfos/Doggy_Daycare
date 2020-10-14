@@ -7,6 +7,7 @@ public class Review {
     private UUID ID;
     private String Review_Inhoud;
     private enum Sterren{een,twee,drie,vier,vijf}
+    private Sterren Rating;
 
 
 
