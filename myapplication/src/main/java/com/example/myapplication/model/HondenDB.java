@@ -28,6 +28,8 @@ public class HondenDB {
             mContext = context.getApplicationContext();
             mDatabase = new DataInitializer(mContext).getWritableDatabase();
             App_Gebruiker TestPersoon= new App_Gebruiker();
+            TestPersoon.setNaam("Gerard");
+            TestPersoon.setTelefoon_Nummer(123456789);
             TestPersoon.setHuisnummer(5);
             TestPersoon.setIntroductieText("ik ben een test gebruiker");
             TestPersoon.setWachtwoord("123");
@@ -42,6 +44,21 @@ public class HondenDB {
             this.addApp_Gebruiker(TestPersoon);
             this.addAdvertentie(TestAdvertentie);
 
+        }
+
+        public boolean CheckCredentials(int telnr,String passw){
+            Cursor cursor = mDatabase.rawQuery("SELECT * FROM App_Gebruiker WHERE Telefoon_Nummer='"+telnr+"'AND Wachtwoord='"+passw+"' limit 1", null);
+
+            try {
+                if (cursor.getCount() == 0) {
+                    return false;
+                }else{
+                    return true;
+                    //TODO set current user to this user
+                }
+            } finally {
+                cursor.close();
+            }
         }
 
         public void addApp_Gebruiker(App_Gebruiker app_Gebruiker) {

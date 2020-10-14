@@ -9,23 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.SingUpActivity;
+import com.example.myapplication.model.HondenDB;
 
 public class LoginFragment extends Fragment {
 
     private LoginViewModel loginViewModel;
-    private String email;
-    private String password;
+    private int _telefoonNummer;
+    private String _password;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,13 +40,12 @@ public class LoginFragment extends Fragment {
         LoginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-
-                /*CheckEmail(email);
-                CheckPassword(password);*/
-                //TODO check credentials
-
+                if(HondenDB.get(getActivity()).CheckCredentials(_telefoonNummer,_password)){
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
+                }else{
+                    //TODO weergeven inlog is fout
+                }
             }
         });
 
@@ -63,7 +59,7 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //TODO update ingevulde wachtwoord
+                _password=s.toString();
             }
 
             @Override
@@ -72,8 +68,8 @@ public class LoginFragment extends Fragment {
         });
 
 
-        EditText email = (EditText) root.findViewById(R.id.Email);
-        email.addTextChangedListener(new TextWatcher() {
+        EditText TelefoonNr = (EditText) root.findViewById(R.id.Telefoon_nr);
+        TelefoonNr.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -82,7 +78,7 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //TODO update ingevulde email
+                _telefoonNummer = Integer.parseInt(s.toString());
             }
 
             @Override
