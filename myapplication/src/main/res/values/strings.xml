@@ -12,5 +12,9 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="advert">Advertentie maken</string>
     <string name="price">Prijs</string>
+    <string-array name="Types">
+        <item>Uitlaten</item>
+        <item>Opvang</item>
+    </string-array>
 
 </resources>
