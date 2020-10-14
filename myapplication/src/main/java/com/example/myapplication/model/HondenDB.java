@@ -47,12 +47,15 @@ public class HondenDB {
         }
 
         public boolean CheckCredentials(int telnr,String passw){
+
+            // sql injection? ;-)
             Cursor cursor = mDatabase.rawQuery("SELECT * FROM App_Gebruiker WHERE Telefoon_Nummer='"+telnr+"'AND Wachtwoord='"+passw+"' limit 1", null);
 
             try {
                 if (cursor.getCount() == 0) {
                     return false;
                 }else{
+                    // more checks around user validity
                     return true;
                     //TODO set current user to this user
                 }
