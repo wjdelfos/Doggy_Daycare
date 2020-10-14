@@ -31,15 +31,14 @@ public class Advertentie {
         OptiesEten = optiesEten;
         AdvertentiePlaatser = advertentiePlaatser;
     }
+    public Advertentie(){
+        ID= UUID.randomUUID();
+    }
 
     // region Getters en setters
 
     public UUID getID() {
         return ID;
-    }
-
-    public void setID(UUID ID) {
-        this.ID = ID;
     }
 
     public Date getBeginTijd() {
@@ -120,6 +119,7 @@ public class Advertentie {
 
     public void set_AdvertentiePlaatser(App_Gebruiker _AdvertentiePlaatser) {
         this._AdvertentiePlaatser = _AdvertentiePlaatser;
+        this.ID=_AdvertentiePlaatser.getID();
     }
 
 

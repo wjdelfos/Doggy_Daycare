@@ -32,7 +32,15 @@ public class HondenDB {
             TestPersoon.setIntroductieText("ik ben een test gebruiker");
             TestPersoon.setWachtwoord("123");
 
-            this.addApp_Gebruiker(new App_Gebruiker());
+            Advertentie TestAdvertentie= new Advertentie();
+            TestAdvertentie.set_AdvertentiePlaatser(TestPersoon);
+            TestAdvertentie.setCapaciteit(3);
+            TestAdvertentie.setErvaringHonden("Ik ben opgegroeid met honden");
+            TestAdvertentie.setLocatie("rotterdam");
+            TestAdvertentie.setPrijs(2);
+
+            this.addApp_Gebruiker(TestPersoon);
+            this.addAdvertentie(TestAdvertentie);
 
         }
 
@@ -42,7 +50,7 @@ public class HondenDB {
         }
 
         public void addAdvertentie(Advertentie advertentie) {
-            String sql = "INSERT INTO Advertentie VALUES ('" + advertentie.getID() + "','" + advertentie.getBeginTijd() + "','" + advertentie.getEindTijd() + "','" + advertentie.getPrijs() + "','" + advertentie.getLocatie() + "','" + advertentie.getSpecialeVoorkeurenHond() + "','" + advertentie.getCapaciteit() + "','" + advertentie.getErvaringHonden() + "','" + advertentie.getOptiesEten() + "','" + advertentie.get_AdvertentiePlaatser() + "' )";
+            String sql = "INSERT INTO Advertentie VALUES ('" + advertentie.getID() + "','" + advertentie.getBeginTijd() + "','" + advertentie.getEindTijd() + "','" + advertentie.getPrijs() + "','" + advertentie.getLocatie() + "','" + advertentie.getSpecialeVoorkeurenHond() + "','" + advertentie.getCapaciteit() + "','" + advertentie.getErvaringHonden() + "','" + advertentie.getOptiesEten() + "','" + advertentie.getAdvertentiePlaatser() + "' )";
             mDatabase.execSQL(sql);
         }
 

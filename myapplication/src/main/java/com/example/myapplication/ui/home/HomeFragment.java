@@ -23,7 +23,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HondenDB.get(getActivity());
-        HondenDB.get(getActivity()).addApp_Gebruiker(new App_Gebruiker());
 
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
