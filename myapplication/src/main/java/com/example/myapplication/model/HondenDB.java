@@ -108,13 +108,13 @@ public class HondenDB {
         }
 
         public void addHond(Hond hond) {
-            String sql = "INSERT INTO Hond VALUES ('" + hond.getID() + "','" + hond.getNaam() + "','" + hond.getGeboortedatum() + "','" + hond.getRas() + "','" + hond.getOpmerkingen() + "','" + hond.getEigenaar() + "' )";
-            mDatabase.execSQL(sql);
+            //String sql = "INSERT INTO Hond VALUES ('" + hond.getID() + "','" + hond.getNaam() + "','" + hond.getGeboortedatum() + "','" + hond.getRas() + "','" + hond.getOpmerkingen() + "','" + hond.getEigenaar() + "' )";
+            //mDatabase.execSQL(sql);
         }
 
         public void addAfspraak(Afspraak afspraak) {
-            String sql = "INSERT INTO Afspraak VALUES ('" + afspraak.getID() + "','" + afspraak.getStatus() + "','" + afspraak.getAfgesproken_Prijs() + "','" + afspraak.getOppas() + "','" + afspraak.getEigenaar() + "','" + afspraak.getAdvertentie() + "' )";
-            mDatabase.execSQL(sql);
+            //String sql = "INSERT INTO Afspraak VALUES ('" + afspraak.getID() + "','" + afspraak.getStatus() + "','" + afspraak.getAfgesproken_Prijs() + "','" + afspraak.getOppas() + "','" + afspraak.getEigenaar() + "','" + afspraak.getAdvertentie() + "' )";
+            //mDatabase.execSQL(sql);
         }
 
 
