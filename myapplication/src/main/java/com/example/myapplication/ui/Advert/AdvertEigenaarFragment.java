@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.MainActivity;
@@ -35,11 +36,15 @@ public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnIt
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.advert_create_oppas_main, container, false);
+        View v = inflater.inflate(R.layout.advert_eigenaar_main, container, false);
 
         hondenplus = v.findViewById(R.id.availableDogs);
+
         s1 = getResources().getStringArray(R.array.Types);
-        RyclerFixer myadapter = new RyclerFixer(this, s1);
+
+        RyclerFixer myadapter = new RyclerFixer(getActivity(), s1);
+        hondenplus.setAdapter(myadapter);
+        hondenplus.setLayoutManager(new LinearLayoutManager(getActivity()));
         
         Type = (Spinner) v.findViewById(R.id.TypeCare);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
