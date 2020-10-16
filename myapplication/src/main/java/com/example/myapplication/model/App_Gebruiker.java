@@ -1,9 +1,10 @@
 package com.example.myapplication.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-public class App_Gebruiker {
+public class App_Gebruiker implements Serializable {
     // region Private variables
     private UUID ID;
     private enum Geslachten {man, vrouw, overig}
