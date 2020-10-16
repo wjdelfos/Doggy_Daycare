@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
         TestAdvertentie.setErvaringHonden("Ik ben opgegroeid met honden");
         TestAdvertentie.setLocatie("rotterdam");
         TestAdvertentie.setBeginTijd(new Date());
-        TestAdvertentie.setPrijs(2);
+        TestAdvertentie.setPrijs(2.56);
         Advertentie TestAdvertentie2= new Advertentie();
         TestAdvertentie2.set_AdvertentiePlaatser(TestPersoon);
         TestAdvertentie2.setCapaciteit(3);
