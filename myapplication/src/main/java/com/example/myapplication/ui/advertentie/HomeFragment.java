@@ -1,5 +1,6 @@
-package com.example.myapplication.ui.home;
+package com.example.myapplication.ui.advertentie;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -13,12 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.AdvertDetailActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.model.Advertentie;
 import com.example.myapplication.model.App_Gebruiker;
-import com.example.myapplication.model.HondenDB;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -120,15 +120,10 @@ public class HomeFragment extends Fragment {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /* TODO open advert
-                    Intent intent = new Intent(getActivity(), NotitieActivity.class);
-
-                    intent.putExtra("com.example.noteapplication.notitie_id", mAdvertentie.getId());
-                    startActivity(intent);*/
-
-                    Toast.makeText(getActivity(),
-                            mAdvertentie.getCapaciteit() + " clicked!", Toast.LENGTH_SHORT)
-                                .show();
+                    Intent intent = new Intent(getActivity(), AdvertDetailActivity.class);
+                    intent.putExtra("Advertentie", mAdvertentie);
+                    //intent.putExtra("LoggedInUser", app_Gebruiker);
+                    startActivity(intent);
                 }
             });
             mCapacityTextView = (TextView) itemView.findViewById(R.id.Capacity);
@@ -142,6 +137,7 @@ public class HomeFragment extends Fragment {
             mCapacityTextView.setText("Capacity: "+ mAdvertentie.getCapaciteit());
             mDateTextView.setText(mAdvertentie.getBeginTijd().toString());
             mOwnerTextView.setText(mAdvertentie.get_AdvertentiePlaatser().getNaam());
+            mLocationTextView.setText(mAdvertentie.getLocatie());
         }
     }
 

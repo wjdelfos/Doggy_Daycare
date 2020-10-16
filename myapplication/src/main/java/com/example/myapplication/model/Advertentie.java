@@ -1,9 +1,10 @@
 package com.example.myapplication.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-public class Advertentie {
+public class Advertentie implements Serializable {
     private UUID ID;
     private enum AdvertentieTypes {eigenaar,oppas}
     private AdvertentieTypes AdvertentieType;
