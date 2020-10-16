@@ -26,7 +26,7 @@ import androidx.appcompat.widget.Toolbar;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
-
+    private App_Gebruiker loggedInUser;
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 
-        App_Gebruiker loggedInUser = (App_Gebruiker) this.getIntent()
+        loggedInUser = (App_Gebruiker) this.getIntent()
                 .getSerializableExtra("user");
         //Get the name of the logged in user
         String n= loggedInUser.getNaam();

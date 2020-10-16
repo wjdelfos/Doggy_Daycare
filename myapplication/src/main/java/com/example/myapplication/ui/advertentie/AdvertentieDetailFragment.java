@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
 import com.example.myapplication.model.Advertentie;
+import com.example.myapplication.model.App_Gebruiker;
 
 public class AdvertentieDetailFragment extends Fragment {
     @Nullable
@@ -19,7 +20,8 @@ public class AdvertentieDetailFragment extends Fragment {
         View root = inflater.inflate(R.layout.advertentie_detail, container, false);
         Advertentie _advertentie= (Advertentie) getActivity().getIntent()
                 .getSerializableExtra("Advertentie");
-
+        App_Gebruiker loggedInUser= (App_Gebruiker) getActivity().getIntent()
+                .getSerializableExtra("LoggedInUser");
 
 
 

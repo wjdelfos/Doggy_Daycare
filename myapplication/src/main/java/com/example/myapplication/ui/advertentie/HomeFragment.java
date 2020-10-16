@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.AdvertDetailActivity;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.model.Advertentie;
 import com.example.myapplication.model.App_Gebruiker;
@@ -122,7 +123,8 @@ public class HomeFragment extends Fragment {
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), AdvertDetailActivity.class);
                     intent.putExtra("Advertentie", mAdvertentie);
-                    //intent.putExtra("LoggedInUser", app_Gebruiker);
+                    intent.putExtra("LoggedInUser", (App_Gebruiker) getActivity().getIntent()
+                            .getSerializableExtra("user"));
                     startActivity(intent);
                 }
             });
