@@ -17,6 +17,10 @@
     <string name="dateformat">dd/mm/jjjj</string>
     <string name="email">Email</string>
     <string name="cellphone">Telefoon nummer</string>
+    <string name="placeholder_hoeveelheid_honden">Placeholder hoeveelheid honden</string>
+    <string name="placeholder_datum">Placeholder datum</string>
+    <string name="advert_plaatser">Advert plaatser</string>
+    <string name="locatie">Locatie</string>
     <string-array name="genders">
         <item>Man</item>
         <item>Vrouw</item>

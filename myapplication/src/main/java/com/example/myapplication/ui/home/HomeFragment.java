@@ -1,14 +1,12 @@
 package com.example.myapplication.ui.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,12 +14,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.model.Advertentie;
+import com.example.myapplication.model.App_Gebruiker;
+import com.example.myapplication.model.HondenDB;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
     private RecyclerView mAdvertentieRecyclerView;
-    private NotitieAdapter mAdapter;
+    private AdvertentieAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,20 +53,15 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_notitieblok, menu);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.new_notitie:
+            case R.id.fab:// TODO New advert
+                /*
                 Notitie notitie = new Notitie();
                 NotitieBlok.getCurrent(getActivity()).addNotitie(notitie);
                 Intent intent = new Intent(getActivity(), NotitieActivity.class);
                 intent.putExtra("com.example.noteapplication.notitie_id", notitie.getId());
-                startActivity(intent);
+                startActivity(intent);*/
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -70,72 +69,108 @@ public class HomeFragment extends Fragment {
     }
 
     private void updateUI() {
-        List<Notitie> notities = NotitieBlok.getCurrent(getActivity()).getNotities();
+        List<Advertentie> advertenties=new ArrayList<>();
+        App_Gebruiker TestPersoon= new App_Gebruiker();
+        TestPersoon.setNaam("Gerard");
+        TestPersoon.setTelefoon_Nummer(123456789);
+        TestPersoon.setHuisnummer(5);
+        TestPersoon.setIntroductieText("ik ben een test gebruiker");
+        TestPersoon.setWachtwoord("123");
+
+        Advertentie TestAdvertentie= new Advertentie();
+        TestAdvertentie.set_AdvertentiePlaatser(TestPersoon);
+        TestAdvertentie.setCapaciteit(3);
+        TestAdvertentie.setErvaringHonden("Ik ben opgegroeid met honden");
+        TestAdvertentie.setLocatie("rotterdam");
+        TestAdvertentie.setBeginTijd(new Date());
+        TestAdvertentie.setPrijs(2);
+        Advertentie TestAdvertentie2= new Advertentie();
+        TestAdvertentie2.set_AdvertentiePlaatser(TestPersoon);
+        TestAdvertentie2.setCapaciteit(3);
+        TestAdvertentie2.setLocatie("rotterdam");
+        TestAdvertentie2.setBeginTijd(new Date());
+
+        advertenties.add(TestAdvertentie);
+        advertenties.add(TestAdvertentie2);
+        advertenties.add(TestAdvertentie);
+        advertenties.add(TestAdvertentie2);
+        advertenties.add(TestAdvertentie);
+        advertenties.add(TestAdvertentie2);
+
+        // = HondenDB.get(getActivity()).getAdvertenties();
 
         if (mAdapter == null) {
-            mAdapter = new NotitieAdapter(notities);
+            mAdapter = new AdvertentieAdapter(advertenties);
             mAdvertentieRecyclerView.setAdapter(mAdapter);
         } else {
-            mAdapter.setNotities(notities);
+            mAdapter.setAdvertenties(advertenties);
             mAdapter.notifyDataSetChanged();
         }
     }
 
-    private class NotitieHolder extends RecyclerView.ViewHolder {
-        private Notitie mNotitie;
-        private TextView mTitleTextView;
+    private class AdvertentieHolder extends RecyclerView.ViewHolder {
+        private Advertentie mAdvertentie;
+        private TextView mCapacityTextView;
         private TextView mDateTextView;
+        private TextView mOwnerTextView;
+        private TextView mLocationTextView;
 
-        public NotitieHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.list_item_notitie, parent, false));
+        public AdvertentieHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater.inflate(R.layout.row_advertentie, parent, false));
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    /* TODO open advert
                     Intent intent = new Intent(getActivity(), NotitieActivity.class);
-                    intent.putExtra("com.example.noteapplication.notitie_id", mNotitie.getId());
-                    startActivity(intent);
-                    //Toast.makeText(getActivity(),
-                    //        mNotitie.getTitel() + " clicked!", Toast.LENGTH_SHORT)
-                    //            .show();
+
+                    intent.putExtra("com.example.noteapplication.notitie_id", mAdvertentie.getId());
+                    startActivity(intent);*/
+
+                    Toast.makeText(getActivity(),
+                            mAdvertentie.getCapaciteit() + " clicked!", Toast.LENGTH_SHORT)
+                                .show();
                 }
             });
-            mTitleTextView = (TextView) itemView.findViewById(R.id.notitie_titel);
-            mDateTextView = (TextView) itemView.findViewById(R.id.notitie_datum);
+            mCapacityTextView = (TextView) itemView.findViewById(R.id.Capacity);
+            mDateTextView = (TextView) itemView.findViewById(R.id.Date);
+            mOwnerTextView = (TextView) itemView.findViewById(R.id.Owner);
+            mLocationTextView = (TextView) itemView.findViewById(R.id.Location);
         }
 
-        public void bind(Notitie notitie) {
-            mNotitie = notitie;
-            mTitleTextView.setText(mNotitie.getTitel());
-            mDateTextView.setText(mNotitie.getDatum().toString());
+        public void bind(Advertentie advertentie) {
+            mAdvertentie = advertentie;
+            mCapacityTextView.setText("Capacity: "+ mAdvertentie.getCapaciteit());
+            mDateTextView.setText(mAdvertentie.getBeginTijd().toString());
+            mOwnerTextView.setText(mAdvertentie.get_AdvertentiePlaatser().getNaam());
         }
     }
 
-    private class NotitieAdapter extends RecyclerView.Adapter<NotitieHolder> {
-        private List<Notitie> mNotities;
+    private class AdvertentieAdapter extends RecyclerView.Adapter<AdvertentieHolder> {
+        private List<Advertentie> mAdvertenties;
 
-        public NotitieAdapter(List<Notitie> notities) {
-            mNotities = notities;
+        public AdvertentieAdapter(List<Advertentie> advertenties) {
+            mAdvertenties = advertenties;
         }
 
         @Override
-        public NotitieHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public AdvertentieHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            return new NotitieHolder(layoutInflater, parent);
+            return new AdvertentieHolder(layoutInflater, parent);
         }
 
         @Override
-        public void onBindViewHolder(NotitieHolder holder, int position) {
-            Notitie notitie = mNotities.get(position);
-            holder.bind(notitie);
+        public void onBindViewHolder(AdvertentieHolder holder, int position) {
+            Advertentie advertentie = mAdvertenties.get(position);
+            holder.bind(advertentie);
         }
 
         @Override
         public int getItemCount() {
-            return mNotities.size();
+            return mAdvertenties.size();
         }
 
-        public void setNotities(List<Notitie> notities) {
-            mNotities = notities;
+        public void setAdvertenties(List<Advertentie> advertenties) {
+            mAdvertenties = advertenties;
         }
 
 
