@@ -49,39 +49,40 @@
 
     <EditText
         android:id="@+id/startDate"
-        android:layout_width="194dp"
-        android:layout_height="37dp"
+        android:layout_width="195dp"
+        android:layout_height="43dp"
+        android:autofillHints=""
         android:ems="10"
-        android:inputType="date"
         android:hint="Start datum"
+        android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.038"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.38"
-        android:autofillHints="" />
+        app:layout_constraintVertical_bias="0.359" />
 
     <EditText
         android:id="@+id/endDate"
         android:layout_width="172dp"
         android:layout_height="41dp"
         android:ems="10"
-        android:inputType="date"
         android:hint="Eind datum"
+        android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.981"
+        app:layout_constraintHorizontal_bias="0.983"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.384" />
+        app:layout_constraintVertical_bias="0.36" />
 
     <EditText
         android:id="@+id/startTime"
         android:layout_width="190dp"
-        android:layout_height="36dp"
+        android:layout_height="45dp"
         android:ems="10"
-        android:inputType="time"
         android:hint="Start tijd"
+        android:inputType="time"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.018"
@@ -94,25 +95,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="time"
         android:hint="Eind tijd"
+        android:inputType="time"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.486" />
+        app:layout_constraintVertical_bias="0.481" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/availableDogs"
-        android:layout_width="118dp"
-        android:layout_height="171dp"
+        android:layout_width="238dp"
+        android:layout_height="167dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.733" />
+        app:layout_constraintVertical_bias="0.691" />
 
     <Button
         android:id="@+id/createadvert"
@@ -121,8 +122,39 @@
         android:text="@string/advert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.916" />
+        app:layout_constraintVertical_bias="0.954" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.857">
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+
+            android:text="Ik heb voedsel"
+            tools:layout_editor_absoluteX="212dp"
+            tools:layout_editor_absoluteY="587dp" />
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Voedsel moet gegeven worden"
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="587dp" />
+    </RadioGroup>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

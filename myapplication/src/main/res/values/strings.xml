@@ -13,8 +13,8 @@
     <string name="advert">Advertentie maken</string>
     <string name="price">Prijs</string>
     <string-array name="Types">
-        <item>Uitlaten</item>
-        <item>Opvang</item>
+        <item>Bij eigenaar</item>
+        <item>Bij Oppas</item>
     </string-array>
 
 </resources>
