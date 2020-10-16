@@ -1,17 +1,24 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RyclerFixer extends RecyclerView.Adapter<RyclerFixer.MeerWerk> {
+import com.example.myapplication.ui.SelectDogs;
+
+public class RyclerFixer extends RecyclerView.Adapter<RyclerFixer.Myadapter> {
     String[] namen;
     Context context;
+
     
     
     public RyclerFixer(Context ct, String[] s1) {
@@ -21,15 +28,28 @@ public class RyclerFixer extends RecyclerView.Adapter<RyclerFixer.MeerWerk> {
 
     @NonNull
     @Override
-    public MeerWerk onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Myadapter onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View c = inflater.inflate(R.layout.row_dognames, parent,false);
-        return new MeerWerk(c);
+        return new Myadapter(c);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MeerWerk holder, int position) {
-    holder.hondennamen.setText(namen[position]);
+    public void onBindViewHolder(@NonNull final Myadapter holder, int position) {
+        holder.hondennamen.setText(namen[position]);
+        holder.selected = false;
+    holder.screen.setOnClickListener(new View.OnClickListener(){
+        @Override
+                public void onClick(View c) {
+            if (holder.selected == false) {
+                holder.card.setCardBackgroundColor(Color.RED);
+                holder.selected = true;
+            } else {
+                holder.card.setCardBackgroundColor(Color.WHITE);
+                holder.selected = false;
+            }
+        }
+        });
     }
 
     @Override
@@ -37,12 +57,18 @@ public class RyclerFixer extends RecyclerView.Adapter<RyclerFixer.MeerWerk> {
         return namen.length;
     }
 
-    public class MeerWerk extends RecyclerView.ViewHolder {
+    public class Myadapter extends RecyclerView.ViewHolder {
         TextView hondennamen;
-        public MeerWerk(@NonNull View itemView) {
+        ConstraintLayout screen;
+        CardView card;
+        Boolean selected;
+
+
+        public Myadapter(@NonNull View itemView) {
             super(itemView);
             hondennamen = itemView.findViewById(R.id.dogNames);
-
+            screen = itemView.findViewById(R.id.advert_eigenaar_main);
+            card = itemView.findViewById(R.id.Card);
         }
     }
 
