@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.slideshow;
+package com.example.myapplication.ui.afspraken;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,10 +19,9 @@ import com.example.myapplication.model.App_Gebruiker;
 import com.example.myapplication.model.HondenDB;
 
 import java.util.List;
-import java.util.UUID;
 
-public class SlideshowFragment extends Fragment {
-
+public class AfspraakRecyclerFragment extends Fragment {
+    App_Gebruiker loggedInUser;
 
     private RecyclerView mAfspraakRecyclerView;
     private AfspraakAdapter mAdapter;
@@ -30,6 +29,9 @@ public class SlideshowFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        loggedInUser=  (App_Gebruiker) getActivity().getIntent()
+                .getSerializableExtra("user");
+
         View view = inflater.inflate(R.layout.fragment_slideshow, container, false);
         mAfspraakRecyclerView = (RecyclerView) view
                 .findViewById(R.id.AfspraakRecycler);
@@ -64,8 +66,7 @@ public class SlideshowFragment extends Fragment {
 
     private void updateUI() {
         //TODO create get query
-        App_Gebruiker loggedInUser = (App_Gebruiker) getActivity().getIntent()
-                .getSerializableExtra("user");
+
 
         List<Afspraak> afspraakList = HondenDB.get(getActivity()).getAfspraken(loggedInUser.getID());
 
@@ -83,7 +84,9 @@ public class SlideshowFragment extends Fragment {
         private TextView mCapacityTextView;
         private TextView mDateTextView;
         private TextView mOwnerTextView;
+        private TextView mOppasTextView;
         private TextView mLocationTextView;
+        private TextView mStatusTextView;
 
         public AfspraakHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.row_afspraak, parent, false));
@@ -101,15 +104,19 @@ public class SlideshowFragment extends Fragment {
             mCapacityTextView = (TextView) itemView.findViewById(R.id.Capacity);
             mDateTextView = (TextView) itemView.findViewById(R.id.Date);
             mOwnerTextView = (TextView) itemView.findViewById(R.id.Owner);
+            mOppasTextView = (TextView) itemView.findViewById(R.id.Oppas);
             mLocationTextView = (TextView) itemView.findViewById(R.id.Location);
+            mStatusTextView = (TextView) itemView.findViewById(R.id.Status);
         }
 
         public void bind(Afspraak afspraak) {
             mAfspraak = afspraak;
             mCapacityTextView.setText("Capacity: " + mAfspraak.get_advertentie().getCapaciteit());
             mDateTextView.setText(mAfspraak.get_advertentie().getBeginTijd().toString());
-            mOwnerTextView.setText(mAfspraak.get_eigenaar().getNaam());
+            mOwnerTextView.setText("Dog owner:  "+mAfspraak.get_eigenaar().getNaam());
+            mOppasTextView.setText("Dog sitter: "+loggedInUser.getNaam());
             mLocationTextView.setText(mAfspraak.get_advertentie().getLocatie());
+            mStatusTextView.setText(""+ mAfspraak.getStatusAfspraak());
         }
     }
 

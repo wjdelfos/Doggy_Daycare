@@ -23,14 +23,14 @@ public class DataInitializer extends SQLiteOpenHelper {
                         " Huisnummer int," +
                         " Postcode text," +
                         " Telefoon_Nummer int," +
-                        " Geboortedatum long," +
+                        " Geboortedatum datetime," +
                         " Wachtwoord text," +
                         " Introductie text)");
         db.execSQL(
                 "create table Advertentie(" +
                         "id text primary key," +
-                        " BeginTijd long," +
-                        " EindTijd long," +
+                        " BeginTijd datetime," +
+                        " EindTijd datetime," +
                         " Prijs double," +
                         " Locatie text," +
                         " SpecialeVoorkeurenHond text," +
