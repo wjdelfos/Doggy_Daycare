@@ -1,7 +1,7 @@
 package com.example.myapplication.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.UUID;
 
 public class Advertentie implements Serializable {

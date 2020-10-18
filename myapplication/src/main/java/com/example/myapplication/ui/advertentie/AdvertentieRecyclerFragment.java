@@ -20,7 +20,6 @@ import com.example.myapplication.model.App_Gebruiker;
 import com.example.myapplication.model.HondenDB;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class AdvertentieRecyclerFragment extends Fragment {

@@ -8,8 +8,8 @@ import android.database.sqlite.SQLiteQueryBuilder;
 
 import com.example.myapplication.data_handeling.DataInitializer;
 
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,14 +54,14 @@ public class HondenDB {
             TestAdvertentie.setCapaciteit(3);
             TestAdvertentie.setErvaringHonden("Ik ben opgegroeid met honden");
             TestAdvertentie.setLocatie("rotterdam");
-            TestAdvertentie.setBeginTijd(new Date());
+            TestAdvertentie.setBeginTijd(new Date(new java.util.Date().getTime()));
             TestAdvertentie.setPrijs(2.56);
 
             Advertentie TestAdvertentie2 = new Advertentie();
             TestAdvertentie2.set_AdvertentiePlaatser(TestPersoon2);
             TestAdvertentie2.setCapaciteit(3);
             TestAdvertentie2.setLocatie("rotterdam");
-            TestAdvertentie2.setBeginTijd(new Date());
+            TestAdvertentie2.setBeginTijd(new Date(new java.util.Date().getTime()));
 
 
             Advertentie TestAdvertentie3 = new Advertentie();
@@ -269,8 +269,8 @@ public class HondenDB {
         String IdAdvertentiePlaatser = c.getString(c.getColumnIndex("IdAdvertentiePlaatser"));
 
         Advertentie advert = new Advertentie(UUID.fromString(UUIDString));
-        advert.setBeginTijd(new Date(BeginTijd));
-        advert.setEindTijd(new Date(EindTijd));
+        advert.setBeginTijd(new Date(BeginTijd*1000));
+        advert.setEindTijd(new Date(EindTijd*1000));
         advert.setPrijs(Prijs);
         advert.setLocatie(Locatie);
         advert.setSpecialeVoorkeurenHond(SpecialeVoorkeurenHond);
