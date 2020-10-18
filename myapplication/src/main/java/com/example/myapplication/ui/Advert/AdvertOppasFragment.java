@@ -50,7 +50,7 @@ public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemS
 */
 
 
-        Button createAdvert = (Button) v.findViewById(R.id.createadvert);
+            Button createAdvert = (Button) v.findViewById(R.id.createadvert);
         createAdvert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 

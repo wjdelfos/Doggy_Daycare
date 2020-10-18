@@ -42,7 +42,7 @@ public class RyclerFixer extends RecyclerView.Adapter<RyclerFixer.Myadapter> {
         @Override
                 public void onClick(View c) {
             if (holder.selected == false) {
-                holder.card.setCardBackgroundColor(Color.RED);
+                holder.card.setCardBackgroundColor(Color.BLUE);
                 holder.selected = true;
             } else {
                 holder.card.setCardBackgroundColor(Color.WHITE);
