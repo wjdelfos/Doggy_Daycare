@@ -8,9 +8,9 @@
 
     <TextView
         android:id="@+id/Advertoppas"
-        android:layout_width="203dp"
-        android:layout_height="31dp"
-        android:text="@string/advert"
+        android:layout_width="318dp"
+        android:layout_height="35dp"
+        android:text="Plaats uw oppas advertentie"
 
         android:textSize="24sp"
 
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:ems="10"
-        android:hint="@string/price"
+        android:hint="price"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

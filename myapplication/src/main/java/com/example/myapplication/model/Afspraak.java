@@ -1,8 +1,9 @@
 package com.example.myapplication.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Afspraak {
+public class Afspraak implements Serializable {
     public enum StatusAfspraken{concept,geaccepteerd,afgewezen,betaald}
 
 
