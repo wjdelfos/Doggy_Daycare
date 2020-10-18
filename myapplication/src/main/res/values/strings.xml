@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Doggy Daycare</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -7,7 +7,42 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_home">Advertenties</string>
+    <string name="menu_gallery">Pas op mijn hond</string>
+    <string name="menu_slideshow">Afspraken</string>
+    <string name="signup_message">Meld je aan!</string>
+    <string name="name1">Voornaam</string>
+    <string name="password">Wachtwoord</string>
+    <string name="name2">Achternaam</string>
+    <string name="dateformat">dd/mm/jjjj</string>
+    <string name="email">Email</string>
+    <string name="cellphone">Telefoon nummer</string>
+    <string name="placeholder_hoeveelheid_honden">Placeholder hoeveelheid honden</string>
+    <string name="placeholder_datum">Placeholder datum</string>
+    <string name="advert_plaatser">Naam</string>
+    <string name="locatie">Locatie</string>
+    <string name="capaciteit">Capaciteit:</string>
+    <string name="status_placeholder">Status placeholder</string>
+    <string name="prijs">Prijs</string>
+    <string-array name="genders">
+        <item>Man</item>
+        <item>Vrouw</item>
+        <item>Overige</item>
+    </string-array>
+    <string name="advert">Advertentie maken</string>
+    <string name="price">Prijs</string>
+    <string name="advertentie_oppas">Ik wil oppassen</string>
+    <string name="PlaceName1">Plaatsnaam</string>
+    <string-array name="Types">
+        <item>Opvang bij eigenaar</item>
+        <item>Opvang bij Oppas</item>
+    </string-array>
+    <string-array name="DummyDogNames">
+        <item>Rakker</item>
+        <item>Noortje</item>
+        <item>Bello</item>
+        <item>Max</item>
+        <item>Thomas</item>
+    </string-array>
+
 </resources>

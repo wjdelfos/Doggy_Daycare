@@ -1,0 +1,373 @@
+Index: myapplication/src/main/java/com/example/myapplication/ui/advertentie/HomeFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication.ui.advertentie;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.MenuItem;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.example.myapplication.AdvertDetailActivity;\r\nimport com.example.myapplication.MainActivity;\r\nimport com.example.myapplication.R;\r\nimport com.example.myapplication.model.Advertentie;\r\nimport com.example.myapplication.model.App_Gebruiker;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Date;\r\nimport java.util.List;\r\n\r\npublic class HomeFragment extends Fragment {\r\n    private RecyclerView mAdvertentieRecyclerView;\r\n    private AdvertentieAdapter mAdapter;\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        View view = inflater.inflate(R.layout.fragment_home, container, false);\r\n        mAdvertentieRecyclerView = (RecyclerView) view\r\n                .findViewById(R.id.AdvertRecycler);\r\n        mAdvertentieRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));\r\n\r\n        updateUI();\r\n\r\n        return view;\r\n    }\r\n\r\n    @Override\r\n    public void onResume() {\r\n        super.onResume();\r\n        updateUI();\r\n    }\r\n\r\n    @Override\r\n    public void onCreate(@Nullable Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setHasOptionsMenu(true);\r\n    }\r\n\r\n    @Override\r\n    public boolean onOptionsItemSelected(MenuItem item) {\r\n        switch (item.getItemId()) {\r\n            case R.id.fab:// TODO New advert\r\n                /*\r\n                Notitie notitie = new Notitie();\r\n                NotitieBlok.getCurrent(getActivity()).addNotitie(notitie);\r\n                Intent intent = new Intent(getActivity(), NotitieActivity.class);\r\n                intent.putExtra(\"com.example.noteapplication.notitie_id\", notitie.getId());\r\n                startActivity(intent);*/\r\n                return true;\r\n            default:\r\n                return super.onOptionsItemSelected(item);\r\n        }\r\n    }\r\n\r\n    private void updateUI() {\r\n        List<Advertentie> advertenties=new ArrayList<>();\r\n        App_Gebruiker TestPersoon= new App_Gebruiker();\r\n        TestPersoon.setNaam(\"Gerard\");\r\n        TestPersoon.setTelefoon_Nummer(123456789);\r\n        TestPersoon.setHuisnummer(5);\r\n        TestPersoon.setIntroductieText(\"ik ben een test gebruiker\");\r\n        TestPersoon.setWachtwoord(\"123\");\r\n\r\n        Advertentie TestAdvertentie= new Advertentie();\r\n        TestAdvertentie.set_AdvertentiePlaatser(TestPersoon);\r\n        TestAdvertentie.setCapaciteit(3);\r\n        TestAdvertentie.setErvaringHonden(\"Ik ben opgegroeid met honden\");\r\n        TestAdvertentie.setLocatie(\"rotterdam\");\r\n        TestAdvertentie.setBeginTijd(new Date());\r\n        TestAdvertentie.setPrijs(2.56);\r\n        Advertentie TestAdvertentie2= new Advertentie();\r\n        TestAdvertentie2.set_AdvertentiePlaatser(TestPersoon);\r\n        TestAdvertentie2.setCapaciteit(3);\r\n        TestAdvertentie2.setLocatie(\"rotterdam\");\r\n        TestAdvertentie2.setBeginTijd(new Date());\r\n\r\n        advertenties.add(TestAdvertentie);\r\n        advertenties.add(TestAdvertentie2);\r\n        advertenties.add(TestAdvertentie);\r\n        advertenties.add(TestAdvertentie2);\r\n        advertenties.add(TestAdvertentie);\r\n        advertenties.add(TestAdvertentie2);\r\n\r\n        // = HondenDB.get(getActivity()).getAdvertenties();\r\n\r\n        if (mAdapter == null) {\r\n            mAdapter = new AdvertentieAdapter(advertenties);\r\n            mAdvertentieRecyclerView.setAdapter(mAdapter);\r\n        } else {\r\n            mAdapter.setAdvertenties(advertenties);\r\n            mAdapter.notifyDataSetChanged();\r\n        }\r\n    }\r\n\r\n    private class AdvertentieHolder extends RecyclerView.ViewHolder {\r\n        private Advertentie mAdvertentie;\r\n        private TextView mCapacityTextView;\r\n        private TextView mDateTextView;\r\n        private TextView mOwnerTextView;\r\n        private TextView mLocationTextView;\r\n\r\n        public AdvertentieHolder(LayoutInflater inflater, ViewGroup parent) {\r\n            super(inflater.inflate(R.layout.row_advertentie, parent, false));\r\n            itemView.setOnClickListener(new View.OnClickListener() {\r\n                @Override\r\n                public void onClick(View v) {\r\n                    Intent intent = new Intent(getActivity(), AdvertDetailActivity.class);\r\n                    intent.putExtra(\"Advertentie\", mAdvertentie);\r\n                    intent.putExtra(\"LoggedInUser\", (App_Gebruiker) getActivity().getIntent()\r\n                            .getSerializableExtra(\"user\"));\r\n                    startActivity(intent);\r\n                }\r\n            });\r\n            mCapacityTextView = (TextView) itemView.findViewById(R.id.Capacity);\r\n            mDateTextView = (TextView) itemView.findViewById(R.id.Date);\r\n            mOwnerTextView = (TextView) itemView.findViewById(R.id.Owner);\r\n            mLocationTextView = (TextView) itemView.findViewById(R.id.Location);\r\n        }\r\n\r\n        public void bind(Advertentie advertentie) {\r\n            mAdvertentie = advertentie;\r\n            mCapacityTextView.setText(\"Capacity: \"+ mAdvertentie.getCapaciteit());\r\n            mDateTextView.setText(mAdvertentie.getBeginTijd().toString());\r\n            mOwnerTextView.setText(mAdvertentie.get_AdvertentiePlaatser().getNaam());\r\n            mLocationTextView.setText(mAdvertentie.getLocatie());\r\n        }\r\n    }\r\n\r\n    private class AdvertentieAdapter extends RecyclerView.Adapter<AdvertentieHolder> {\r\n        private List<Advertentie> mAdvertenties;\r\n\r\n        public AdvertentieAdapter(List<Advertentie> advertenties) {\r\n            mAdvertenties = advertenties;\r\n        }\r\n\r\n        @Override\r\n        public AdvertentieHolder onCreateViewHolder(ViewGroup parent, int viewType) {\r\n            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());\r\n            return new AdvertentieHolder(layoutInflater, parent);\r\n        }\r\n\r\n        @Override\r\n        public void onBindViewHolder(AdvertentieHolder holder, int position) {\r\n            Advertentie advertentie = mAdvertenties.get(position);\r\n            holder.bind(advertentie);\r\n        }\r\n\r\n        @Override\r\n        public int getItemCount() {\r\n            return mAdvertenties.size();\r\n        }\r\n\r\n        public void setAdvertenties(List<Advertentie> advertenties) {\r\n            mAdvertenties = advertenties;\r\n        }\r\n\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- myapplication/src/main/java/com/example/myapplication/ui/advertentie/HomeFragment.java	(revision fb836c9ea9dff3ac74d9d9830aa593fbfeb018aa)
++++ myapplication/src/main/java/com/example/myapplication/ui/advertentie/HomeFragment.java	(date 1602946740832)
+@@ -6,6 +6,7 @@
+ import android.view.MenuItem;
+ import android.view.View;
+ import android.view.ViewGroup;
++import android.widget.ImageButton;
+ import android.widget.TextView;
+ import android.widget.Toast;
+ 
+@@ -70,22 +71,22 @@
+     }
+ 
+     private void updateUI() {
+-        List<Advertentie> advertenties=new ArrayList<>();
+-        App_Gebruiker TestPersoon= new App_Gebruiker();
++        List<Advertentie> advertenties = new ArrayList<>();
++        App_Gebruiker TestPersoon = new App_Gebruiker();
+         TestPersoon.setNaam("Gerard");
+         TestPersoon.setTelefoon_Nummer(123456789);
+         TestPersoon.setHuisnummer(5);
+         TestPersoon.setIntroductieText("ik ben een test gebruiker");
+         TestPersoon.setWachtwoord("123");
+ 
+-        Advertentie TestAdvertentie= new Advertentie();
++        Advertentie TestAdvertentie = new Advertentie();
+         TestAdvertentie.set_AdvertentiePlaatser(TestPersoon);
+         TestAdvertentie.setCapaciteit(3);
+         TestAdvertentie.setErvaringHonden("Ik ben opgegroeid met honden");
+         TestAdvertentie.setLocatie("rotterdam");
+         TestAdvertentie.setBeginTijd(new Date());
+         TestAdvertentie.setPrijs(2.56);
+-        Advertentie TestAdvertentie2= new Advertentie();
++        Advertentie TestAdvertentie2 = new Advertentie();
+         TestAdvertentie2.set_AdvertentiePlaatser(TestPersoon);
+         TestAdvertentie2.setCapaciteit(3);
+         TestAdvertentie2.setLocatie("rotterdam");
+@@ -115,6 +116,10 @@
+         private TextView mDateTextView;
+         private TextView mOwnerTextView;
+         private TextView mLocationTextView;
++        private ImageButton mFavourite;
++        private Boolean favourite;
++
++
+ 
+         public AdvertentieHolder(LayoutInflater inflater, ViewGroup parent) {
+             super(inflater.inflate(R.layout.row_advertentie, parent, false));
+@@ -132,14 +137,28 @@
+             mDateTextView = (TextView) itemView.findViewById(R.id.Date);
+             mOwnerTextView = (TextView) itemView.findViewById(R.id.Owner);
+             mLocationTextView = (TextView) itemView.findViewById(R.id.Location);
++            mFavourite = (ImageButton) itemView.findViewById(R.id.imageButton);
++            mFavourite.setOnClickListener(new View.OnClickListener() {
++                public void onClick(View v) {
++                    // wanneer favourite gedefinieerd is kan onderstaande zin weg en kunnen de comments weg
++                    // TODO favorite definieren
++                    mFavourite.setBackgroundResource(R.drawable.favourite_button_gekleurd);
++                  //  if (favourite == false) {
++                  //      mFavourite.setBackgroundResource(R.drawable.favourite_button_gekleurd);
++                  //      favourite = true;
++                  //  } else {
++                  //      mFavourite.setBackgroundResource(R.drawable.favourite_button);
++                  //  }
++                } });
+         }
+ 
+         public void bind(Advertentie advertentie) {
+             mAdvertentie = advertentie;
+-            mCapacityTextView.setText("Capacity: "+ mAdvertentie.getCapaciteit());
++            mCapacityTextView.setText("Capacity: " + mAdvertentie.getCapaciteit());
+             mDateTextView.setText(mAdvertentie.getBeginTijd().toString());
+             mOwnerTextView.setText(mAdvertentie.get_AdvertentiePlaatser().getNaam());
+             mLocationTextView.setText(mAdvertentie.getLocatie());
++            // TODO choose starting image
+         }
+     }
+ 
+@@ -160,6 +179,7 @@
+         public void onBindViewHolder(AdvertentieHolder holder, int position) {
+             Advertentie advertentie = mAdvertenties.get(position);
+             holder.bind(advertentie);
++
+         }
+ 
+         @Override
+@@ -174,3 +194,4 @@
+ 
+     }
+ }
++
+Index: myapplication/src/main/res/layout/row_advertentie.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"wrap_content\">\r\n\r\n    <androidx.cardview.widget.CardView\r\n        android:layout_width=\"413dp\"\r\n        android:layout_height=\"155dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n        <androidx.constraintlayout.widget.ConstraintLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:visibility=\"visible\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/Owner\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"@string/advert_plaatser\"\r\n                app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintHorizontal_bias=\"0.949\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                app:layout_constraintVertical_bias=\"0.389\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/Date\"\r\n                android:layout_width=\"131dp\"\r\n                android:layout_height=\"25dp\"\r\n                android:text=\"@string/placeholder_datum\"\r\n                app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintHorizontal_bias=\"0.092\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                app:layout_constraintVertical_bias=\"0.638\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/Location\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"@string/locatie\"\r\n                app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintHorizontal_bias=\"0.948\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                app:layout_constraintVertical_bias=\"0.794\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/Capacity\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"@string/capaciteit\"\r\n                app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintHorizontal_bias=\"0.076\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                app:layout_constraintVertical_bias=\"0.117\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/Prijs\"\r\n                android:layout_width=\"57dp\"\r\n                android:layout_height=\"25dp\"\r\n                android:text=\"Prijs\"\r\n                app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintHorizontal_bias=\"0.073\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                app:layout_constraintVertical_bias=\"0.361\" />\r\n\r\n            <ImageButton\r\n                android:id=\"@+id/imageButton\"\r\n                android:layout_width=\"61dp\"\r\n                android:layout_height=\"54dp\"\r\n                android:background=\"@drawable/favourite_button\"\r\n                app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintHorizontal_bias=\"0.718\"\r\n\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                app:layout_constraintVertical_bias=\"0.0\" />\r\n        </androidx.constraintlayout.widget.ConstraintLayout>\r\n\r\n    </androidx.cardview.widget.CardView>\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- myapplication/src/main/res/layout/row_advertentie.xml	(revision fb836c9ea9dff3ac74d9d9830aa593fbfeb018aa)
++++ myapplication/src/main/res/layout/row_advertentie.xml	(date 1602941742268)
+@@ -84,11 +84,10 @@
+                 android:background="@drawable/favourite_button"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+-                app:layout_constraintHorizontal_bias="0.718"
+-
++                app:layout_constraintHorizontal_bias="0.727"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent"
+-                app:layout_constraintVertical_bias="0.0" />
++                app:layout_constraintVertical_bias="0.158" />
+         </androidx.constraintlayout.widget.ConstraintLayout>
+ 
+     </androidx.cardview.widget.CardView>
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_7\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision fb836c9ea9dff3ac74d9d9830aa593fbfeb018aa)
++++ .idea/misc.xml	(date 1602940746396)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+Index: myapplication/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    package=\"com.example.myapplication\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/AppTheme\">\r\n        <activity\r\n            android:name=\".SingUpActivity\"\r\n            android:theme=\"@style/AppTheme.NoActionBar\">\r\n        </activity>\r\n        <activity\r\n            android:name=\".AdvertDetailActivity\"\r\n            android:theme=\"@style/AppTheme.NoActionBar\">\r\n        </activity>\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:theme=\"@style/AppTheme.NoActionBar\">\r\n        </activity>\r\n        <activity\r\n            android:name=\".LoginActivity\"\r\n            android:label=\"@string/app_name\"\r\n            android:theme=\"@style/AppTheme.NoActionBar\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- myapplication/src/main/AndroidManifest.xml	(revision fb836c9ea9dff3ac74d9d9830aa593fbfeb018aa)
++++ myapplication/src/main/AndroidManifest.xml	(date 1602941635086)
+@@ -10,7 +10,7 @@
+         android:supportsRtl="true"
+         android:theme="@style/AppTheme">
+         <activity
+-            android:name=".SingUpActivity"
++            android:name=".SignUpActivity"
+             android:theme="@style/AppTheme.NoActionBar">
+         </activity>
+         <activity
+Index: gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Mon Sep 14 12:22:14 CEST 2020\r\ndistributionBase=GRADLE_USER_HOME\r\ndistributionPath=wrapper/dists\r\nzipStoreBase=GRADLE_USER_HOME\r\nzipStorePath=wrapper/dists\r\ndistributionUrl=https\\://services.gradle.org/distributions/gradle-6.1.1-all.zip\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1252
+===================================================================
+--- gradle/wrapper/gradle-wrapper.properties	(revision fb836c9ea9dff3ac74d9d9830aa593fbfeb018aa)
++++ gradle/wrapper/gradle-wrapper.properties	(date 1602940746530)
+@@ -1,6 +1,6 @@
+-#Mon Sep 14 12:22:14 CEST 2020
++#Tue Oct 13 14:53:14 CEST 2020
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-6.1.1-all.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-6.5-bin.zip
+Index: .idea/markdown-navigator-enh.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/markdown-navigator-enh.xml	(date 1602940746443)
++++ .idea/markdown-navigator-enh.xml	(date 1602940746443)
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="MarkdownEnhProjectSettings">
++    <AnnotatorSettings targetHasSpaces="true" linkCaseMismatch="true" wikiCaseMismatch="true" wikiLinkHasDashes="true" notUnderWikiHome="true" targetNotWikiPageExt="true" notUnderSourceWikiHome="true" targetNameHasAnchor="true" targetPathHasAnchor="true" wikiLinkHasSlash="true" wikiLinkHasSubdir="true" wikiLinkHasOnlyAnchor="true" linkTargetsWikiHasExt="true" linkTargetsWikiHasBadExt="true" notUnderSameRepo="true" targetNotUnderVcs="false" linkNeedsExt="true" linkHasBadExt="true" linkTargetNeedsExt="true" linkTargetHasBadExt="true" wikiLinkNotInWiki="true" imageTargetNotInRaw="true" repoRelativeAcrossVcsRoots="true" multipleWikiTargetsMatch="true" unresolvedLinkReference="true" linkIsIgnored="true" anchorIsIgnored="true" anchorIsUnresolved="true" anchorLineReferenceIsUnresolved="true" anchorLineReferenceFormat="true" anchorHasDuplicates="true" abbreviationDuplicates="true" abbreviationNotUsed="true" attributeIdDuplicateDefinition="true" attributeIdNotUsed="true" footnoteDuplicateDefinition="true" footnoteUnresolved="true" footnoteDuplicates="true" footnoteNotUsed="true" macroDuplicateDefinition="true" macroUnresolved="true" macroDuplicates="true" macroNotUsed="true" referenceDuplicateDefinition="true" referenceUnresolved="true" referenceDuplicates="true" referenceNotUsed="true" referenceUnresolvedNumericId="true" enumRefDuplicateDefinition="true" enumRefUnresolved="true" enumRefDuplicates="true" enumRefNotUsed="true" enumRefLinkUnresolved="true" enumRefLinkDuplicates="true" simTocUpdateNeeded="true" simTocTitleSpaceNeeded="true" />
++    <HtmlExportSettings updateOnSave="false" parentDir="" targetDir="" cssDir="css" scriptDir="js" plainHtml="false" imageDir="" copyLinkedImages="false" imagePathType="0" targetPathType="2" targetExt="" useTargetExt="false" noCssNoScripts="false" useElementStyleAttribute="false" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE" />
++    <LinkMapSettings>
++      <textMaps />
++    </LinkMapSettings>
++  </component>
++</project>
+\ No newline at end of file
+Index: myapplication/src/main/java/com/example/myapplication/SingUpActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\npublic class SingUpActivity extends AppCompatActivity {\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_sing_up);\r\n\r\n    }\r\n\r\n}\r\n
+===================================================================
+--- myapplication/src/main/java/com/example/myapplication/SingUpActivity.java	(revision fb836c9ea9dff3ac74d9d9830aa593fbfeb018aa)
++++ myapplication/src/main/java/com/example/myapplication/SignUpActivity.java	(date 1602941635144)
+@@ -4,11 +4,11 @@
+ 
+ import androidx.appcompat.app.AppCompatActivity;
+ 
+-public class SingUpActivity extends AppCompatActivity {
++public class SignUpActivity extends AppCompatActivity {
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_sing_up);
++        setContentView(R.layout.activity_sign_up);
+ 
+     }
+ 
+Index: myapplication/src/main/java/com/example/myapplication/ui/LoginUI/LoginFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication.ui.LoginUI;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.text.Editable;\r\nimport android.text.TextWatcher;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport com.example.myapplication.MainActivity;\r\nimport com.example.myapplication.R;\r\nimport com.example.myapplication.SingUpActivity;\r\nimport com.example.myapplication.model.App_Gebruiker;\r\nimport com.example.myapplication.model.HondenDB;\r\n\r\npublic class LoginFragment extends Fragment {\r\n\r\n    private int _telefoonNummer;\r\n    private String _password;\r\n\r\n    public View onCreateView(@NonNull LayoutInflater inflater,\r\n                             ViewGroup container, Bundle savedInstanceState) {\r\n        View root = inflater.inflate(R.layout.main_login, container, false);\r\n\r\n        Button AanmeldButton = (Button) root.findViewById(R.id.Aanmelden);\r\n        AanmeldButton.setOnClickListener(new View.OnClickListener() {\r\n            public void onClick(View v) {\r\n                Intent intent = new Intent(getActivity(), SingUpActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        Button LoginButton = (Button) root.findViewById(R.id.Login);\r\n        LoginButton.setOnClickListener(new View.OnClickListener() {\r\n            public void onClick(View v) {\r\n                //sql injection possible....\r\n                if (HondenDB.get(getActivity()).CheckCredentials(_telefoonNummer, _password)) {\r\n\r\n                    //Create a user object that is accessible to other classes to display the user or user information for object creation.\r\n                    App_Gebruiker loggedInUser= new App_Gebruiker();\r\n                    loggedInUser.setNaam(\"gerard\");\r\n\r\n                    Intent intent = new Intent(getActivity(), MainActivity.class);\r\n                    intent.putExtra(\"user\",loggedInUser);\r\n                    startActivity(intent);\r\n                } else {\r\n                    //TODO weergeven inlog is fout\r\n                }\r\n            }\r\n        });\r\n\r\n        EditText Wachtwoord = (EditText) root.findViewById(R.id.Wachtwoord);\r\n        Wachtwoord.addTextChangedListener(new TextWatcher() {\r\n\r\n            @Override\r\n            public void beforeTextChanged(CharSequence s, int start, int count, int after) {\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onTextChanged(CharSequence s, int start, int before, int count) {\r\n                _password = s.toString();\r\n            }\r\n\r\n            @Override\r\n            public void afterTextChanged(Editable s) {\r\n            }\r\n        });\r\n\r\n\r\n        EditText TelefoonNr = (EditText) root.findViewById(R.id.Telefoon_nr);\r\n        TelefoonNr.addTextChangedListener(new TextWatcher() {\r\n\r\n            @Override\r\n            public void beforeTextChanged(CharSequence s, int start, int count, int after) {\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onTextChanged(CharSequence s, int start, int before, int count) {\r\n                _telefoonNummer = Integer.parseInt(s.toString());\r\n            }\r\n\r\n            @Override\r\n            public void afterTextChanged(Editable s) {\r\n            }\r\n        });\r\n\r\n        return root;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- myapplication/src/main/java/com/example/myapplication/ui/LoginUI/LoginFragment.java	(revision fb836c9ea9dff3ac74d9d9830aa593fbfeb018aa)
++++ myapplication/src/main/java/com/example/myapplication/ui/LoginUI/LoginFragment.java	(date 1602941635171)
+@@ -15,7 +15,7 @@
+ 
+ import com.example.myapplication.MainActivity;
+ import com.example.myapplication.R;
+-import com.example.myapplication.SingUpActivity;
++import com.example.myapplication.SignUpActivity;
+ import com.example.myapplication.model.App_Gebruiker;
+ import com.example.myapplication.model.HondenDB;
+ 
+@@ -31,7 +31,7 @@
+         Button AanmeldButton = (Button) root.findViewById(R.id.Aanmelden);
+         AanmeldButton.setOnClickListener(new View.OnClickListener() {
+             public void onClick(View v) {
+-                Intent intent = new Intent(getActivity(), SingUpActivity.class);
++                Intent intent = new Intent(getActivity(), SignUpActivity.class);
+                 startActivity(intent);
+             }
+         });
+Index: .idea/markdown-navigator.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/markdown-navigator.xml	(date 1602940746435)
++++ .idea/markdown-navigator.xml	(date 1602940746435)
+@@ -0,0 +1,62 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="MarkdownProjectSettings">
++    <PreviewSettings splitEditorLayout="SPLIT" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="5" highlightOnTyping="true" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" lastLayoutSetsDefault="false">
++      <PanelProvider>
++        <provider providerId="com.vladsch.md.nav.editor.swing.html.panel" providerName="Default - Swing" />
++      </PanelProvider>
++    </PreviewSettings>
++    <ParserSettings gitHubSyntaxChange="false" correctedInvalidSettings="false" emojiShortcuts="1" emojiImages="0">
++      <PegdownExtensions>
++        <option name="ATXHEADERSPACE" value="true" />
++        <option name="FENCED_CODE_BLOCKS" value="true" />
++        <option name="INTELLIJ_DUMMY_IDENTIFIER" value="true" />
++        <option name="RELAXEDHRULES" value="true" />
++        <option name="STRIKETHROUGH" value="true" />
++        <option name="TABLES" value="true" />
++        <option name="TASKLISTITEMS" value="true" />
++      </PegdownExtensions>
++      <ParserOptions>
++        <option name="COMMONMARK_LISTS" value="true" />
++        <option name="EMOJI_SHORTCUTS" value="true" />
++        <option name="GFM_TABLE_RENDERING" value="true" />
++        <option name="PRODUCTION_SPEC_PARSER" value="true" />
++        <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
++      </ParserOptions>
++    </ParserSettings>
++    <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" addPageHeader="false" addAnchorLinks="false" anchorLinksWrapText="false" imageUriSerials="false" addDocTypeHtml="true" noParaTags="false" defaultUrlTitle="false" migratedPlantUml="true" migratedAnchorLinks="true" plantUmlConversion="0">
++      <GeneratorProvider>
++        <provider providerId="com.vladsch.md.nav.editor.text.html.generator" providerName="Unmodified HTML Generator" />
++      </GeneratorProvider>
++      <headerTop />
++      <headerBottom />
++      <bodyTop />
++      <bodyBottom />
++      <fencedCodeConversions>
++        <option name="c4plantuml" value="NONE" />
++        <option name="ditaa" value="NONE" />
++        <option name="erd" value="NONE" />
++        <option name="graphviz" value="NONE" />
++        <option name="latex" value="KATEX" />
++        <option name="math" value="KATEX" />
++        <option name="mermaid" value="NONE" />
++        <option name="nomnoml" value="NONE" />
++        <option name="plantuml" value="NONE" />
++        <option name="puml" value="NONE" />
++        <option name="svgbob" value="NONE" />
++        <option name="umlet" value="NONE" />
++        <option name="vega" value="NONE" />
++        <option name="vegalite" value="NONE" />
++        <option name="wavedrom" value="NONE" />
++      </fencedCodeConversions>
++    </HtmlSettings>
++    <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="false" isDynamicPageWidth="true">
++      <StylesheetProvider>
++        <provider providerId="com.vladsch.md.nav.editor.text.html.css" providerName="No Stylesheet" />
++      </StylesheetProvider>
++      <ScriptProviders />
++      <cssText />
++      <cssUriHistory />
++    </CssSettings>
++  </component>
++</project>
+\ No newline at end of file
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Top-level build file where you can add configuration options common to all sub-projects/modules.\r\nbuildscript {\r\n    repositories {\r\n        google()\r\n        jcenter()\r\n    }\r\n    dependencies {\r\n        classpath 'com.android.tools.build:gradle:4.0.2'\r\n\r\n        // NOTE: Do not place your application dependencies here; they belong\r\n        // in the individual module build.gradle files\r\n    }\r\n}\r\n\r\nallprojects {\r\n    repositories {\r\n        google()\r\n        jcenter()\r\n    }\r\n}\r\n\r\ntask clean(type: Delete) {\r\n    delete rootProject.buildDir\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(revision fb836c9ea9dff3ac74d9d9830aa593fbfeb018aa)
++++ build.gradle	(date 1602940746359)
+@@ -5,7 +5,7 @@
+         jcenter()
+     }
+     dependencies {
+-        classpath 'com.android.tools.build:gradle:4.0.2'
++        classpath 'com.android.tools.build:gradle:4.1.0'
+ 
+         // NOTE: Do not place your application dependencies here; they belong
+         // in the individual module build.gradle files
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/compiler.xml	(date 1602940746490)
++++ .idea/compiler.xml	(date 1602940746490)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <bytecodeTargetLevel target="1.8" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"PLATFORM\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"1.8\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/myapplication\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/gradle.xml	(revision fb836c9ea9dff3ac74d9d9830aa593fbfeb018aa)
++++ .idea/gradle.xml	(date 1602940746552)
+@@ -5,6 +5,7 @@
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+         <option name="testRunner" value="PLATFORM" />
++        <option name="disableWrapperSourceDistributionNotification" value="true" />
+         <option name="distributionType" value="DEFAULT_WRAPPED" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+         <option name="gradleJvm" value="1.8" />
+@@ -15,6 +16,7 @@
+           </set>
+         </option>
+         <option name="resolveModulePerSourceSet" value="false" />
++        <option name="useQualifiedModuleNames" value="true" />
+       </GradleProjectSettings>
+     </option>
+   </component>
+diff --git myapplication/src/main/res/layout/activity_sing_up.xml myapplication/src/main/res/layout/activity_sign_up.xml
+rename from myapplication/src/main/res/layout/activity_sing_up.xml
+rename to myapplication/src/main/res/layout/activity_sign_up.xml
