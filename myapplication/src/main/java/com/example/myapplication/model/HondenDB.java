@@ -46,22 +46,48 @@ public class HondenDB {
 
         }
 
-        public boolean CheckCredentials(int telnr,String passw){
+        public App_Gebruiker CheckCredentials(int telnr,String passw){
 
             // sql injection? ;-)
             Cursor cursor = mDatabase.rawQuery("SELECT * FROM App_Gebruiker WHERE Telefoon_Nummer='"+telnr+"'AND Wachtwoord='"+passw+"' limit 1", null);
 
             try {
                 if (cursor.getCount() == 0) {
-                    return false;
+                    return null;
                 }else{
                     // more checks around user validity
-                    return true;
+                    App_Gebruiker a=null;
+                    if(cursor.moveToFirst()){
+                    a=CurserToGebruiker(cursor);
+                    }
+                    return a;
                     //TODO set current user to this user
                 }
             } finally {
                 cursor.close();
             }
+        }
+        private App_Gebruiker CurserToGebruiker(Cursor c){
+            String UUIDString = c.getString(c.getColumnIndex("id"));
+            String naam =c.getString(c.getColumnIndex("Naam"));
+            String Plaatsnaam =c.getString(c.getColumnIndex("Plaatsnaam"));
+            String Straatnaam =c.getString(c.getColumnIndex("Straatnaam"));
+            int Huisnummer =c.getInt(c.getColumnIndex("Huisnummer"));
+            String Postcode =c.getString(c.getColumnIndex("Postcode"));
+            int Telefoon_Nummer =c.getInt(c.getColumnIndex("Telefoon_Nummer"));
+            long Geboortedatum =c.getLong(c.getColumnIndex("Geboortedatum"));
+            String Introductie =c.getString(c.getColumnIndex("Introductie"));
+
+            App_Gebruiker gebruiker= new App_Gebruiker(UUID.fromString(UUIDString));
+            gebruiker.setNaam(naam);
+            gebruiker.setPlaatsnaam(Plaatsnaam);
+            gebruiker.setStraatnaam(Straatnaam);
+            gebruiker.setHuisnummer(Huisnummer);
+            gebruiker.setPostcode(Postcode);
+            gebruiker.setTelefoon_Nummer(Telefoon_Nummer);
+            gebruiker.setGeboortedatum(new Date(Geboortedatum));
+            gebruiker.setIntroductieText(Introductie);
+            return gebruiker;
         }
 
         public void addApp_Gebruiker(App_Gebruiker app_Gebruiker) {
@@ -80,9 +106,8 @@ public class HondenDB {
         }
 
         public void addAfspraak(Afspraak afspraak) {
-            String sql = "INSERT INTO Afspraak VALUES ('" + afspraak.getID() + "','" + afspraak.getStatusAfspraak() + "','" + afspraak.getAfgesprokenPrijs() + "','" + afspraak.getOppas() + "','" + afspraak.getEigenaar() + "','" + afspraak.getAdvertentie() + "' )";
+            String sql = "INSERT INTO Afspraak VALUES ('" + afspraak.getID() + "','" + afspraak.getStatusAfspraak() + "','" + afspraak.getAfgesprokenPrijs() + "','" + afspraak.isIsgeaccepteerdeigenaar() + "','" + afspraak.isIsgeaccepteerdOppas() + "','" + afspraak.getOppas() + "','" + afspraak.getEigenaar() + "','" + afspraak.getAdvertentie() + "' )";
             mDatabase.execSQL(sql);
         }
 
-//String a = QueryBuilder.buildQueryString(false,"",new String[]{"iets"},null,"iets",null,null,null);
 }

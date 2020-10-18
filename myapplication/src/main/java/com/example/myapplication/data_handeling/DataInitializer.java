@@ -23,7 +23,7 @@ public class DataInitializer extends SQLiteOpenHelper {
                         " Huisnummer int," +
                         " Postcode text," +
                         " Telefoon_Nummer int," +
-                        " Geboortedatum datetime," +
+                        " Geboortedatum long," +
                         " Wachtwoord text," +
                         " Introductie text)");
         db.execSQL(
@@ -55,8 +55,10 @@ public class DataInitializer extends SQLiteOpenHelper {
         db.execSQL(
                 "create table Afspraak(" +
                         "id text primary key," +
-                        " Status enum," +
+                        " Status text," +
                         " Afgesproken_prijs double," +
+                        " Isgeaccepteerdeigenaar BOOLEAN," +
+                        " IsgeaccepteerdOppas BOOLEAN," +
                         " Oppas int," +
                         " Eigenaar int," +
                         " Advertentie int," +

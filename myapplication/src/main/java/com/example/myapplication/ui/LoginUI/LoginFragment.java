@@ -40,11 +40,11 @@ public class LoginFragment extends Fragment {
         LoginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //sql injection possible....
-                if (HondenDB.get(getActivity()).CheckCredentials(_telefoonNummer, _password)) {
-
+                App_Gebruiker loggedInUser =HondenDB.get(getActivity()).CheckCredentials(_telefoonNummer, _password);
+                if (loggedInUser!=null) {
                     //Create a user object that is accessible to other classes to display the user or user information for object creation.
-                    App_Gebruiker loggedInUser= new App_Gebruiker();
-                    loggedInUser.setNaam("gerard");
+
+                    loggedInUser.setNaam(loggedInUser.getNaam());
 
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     intent.putExtra("user",loggedInUser);

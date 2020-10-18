@@ -70,6 +70,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void updateUI() {
+        //TODO create get query
         List<Advertentie> advertenties=new ArrayList<>();
         App_Gebruiker TestPersoon= new App_Gebruiker();
         TestPersoon.setNaam("Gerard");
