@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -87,6 +88,9 @@ public class AdvertentieRecyclerFragment extends Fragment {
         private TextView mPriceTextView;
         private TextView mOwnerTextView;
         private TextView mLocationTextView;
+        private ImageButton mFavourite;
+        private Boolean favourite;
+
 
         public AdvertentieHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.row_advertentie, parent, false));
@@ -105,6 +109,7 @@ public class AdvertentieRecyclerFragment extends Fragment {
             mPriceTextView = (TextView) itemView.findViewById(R.id.Prijs);
             mOwnerTextView = (TextView) itemView.findViewById(R.id.Owner);
             mLocationTextView = (TextView) itemView.findViewById(R.id.Location);
+
         }
 
         public void bind(Advertentie advertentie) {
@@ -114,6 +119,21 @@ public class AdvertentieRecyclerFragment extends Fragment {
             mPriceTextView.setText("Prijs: "+ mAdvertentie.getPrijs());
             mOwnerTextView.setText(mAdvertentie.get_AdvertentiePlaatser().getNaam());
             mLocationTextView.setText(mAdvertentie.getLocatie());
+            mFavourite = (ImageButton) itemView.findViewById(R.id.imageButton);
+            mFavourite.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    // wanneer favourite gedefinieerd is kan onderstaande zin weg en kunnen de comments weg
+                    // TODO favorite definieren
+                    mFavourite.setBackgroundResource(R.drawable.favourite_button_gekleurd);
+                    //  if (favourite == false) {
+                    //      mFavourite.setBackgroundResource(R.drawable.favourite_button_gekleurd);
+                    //      favourite = true;
+                    //  } else {
+                    //      mFavourite.setBackgroundResource(R.drawable.favourite_button);
+                    //  }
+
+                }
+            });
         }
     }
 
