@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.gallery;
+package com.example.myapplication.ui.create_advert;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,34 +17,24 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.RyclerFixer;
+import com.example.myapplication.model.Advertentie;
+import com.example.myapplication.model.App_Gebruiker;
+import com.example.myapplication.model.HondenDB;
 
-public class GalleryFragment extends Fragment implements AdapterView.OnItemSelectedListener {
-
+public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private Spinner Type;
-    String DogNames[];
-
-
-    RecyclerView hondenplus;
-
+    private Advertentie temp = new Advertentie();
+    App_Gebruiker loggedInUser;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.advert_eigenaar_main, container, false);
-
-        hondenplus = v.findViewById(R.id.availableDogs);
-
-        DogNames = getResources().getStringArray(R.array.DummyDogNames);
-
-        RyclerFixer myadapter = new RyclerFixer(getActivity(), DogNames);
-        hondenplus.setAdapter(myadapter);
-        hondenplus.setLayoutManager(new LinearLayoutManager(getActivity()));
+        loggedInUser = (App_Gebruiker) getActivity().getIntent()
+                .getSerializableExtra("user");
+        View v = inflater.inflate(R.layout.advert_create_oppas_main, container, false);
 
         Type = (Spinner) v.findViewById(R.id.TypeCare);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
@@ -58,9 +48,9 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemSelec
         createAdvert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                //TODO create account
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
+                temp.set_AdvertentiePlaatser(loggedInUser);
+                HondenDB.get(getActivity()).addAdvertentie(temp);
+                //TODO change focus or notify user
             }
         });
 
@@ -74,7 +64,7 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemSelec
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //TODO update Price
+                temp.setPrijs(Double.parseDouble(s.toString()));
             }
 
             @Override
@@ -146,7 +136,7 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemSelec
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.i("variables",s.toString());
+                Log.i("variables", s.toString());
 
                 //TODO end time
             }
@@ -157,16 +147,52 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemSelec
 
         });
 
+        EditText Capacity = (EditText) v.findViewById(R.id.capacity);
+        Capacity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                temp.setCapaciteit(Integer.parseInt(s.toString()));
+            }
 
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        EditText experience = (EditText) v.findViewById(R.id.experience);
+        experience.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                temp.setErvaringHonden(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
         return v;
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.i("variables","Deus ex machina");
+        //position 0=bij eigenaar thuis 1=bij Oppas thuis
+        Log.i("variables", "postion is: " + position);
+        if (position == 0) {
+            temp.setLocatie("bij hond eigenaar");
+        } else {
+            temp.setLocatie(loggedInUser.getPlaatsnaam());
+        }
     }
 
     @Override
@@ -174,4 +200,3 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemSelec
 
     }
 }
-

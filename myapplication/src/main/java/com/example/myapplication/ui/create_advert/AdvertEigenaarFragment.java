@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.Advert;
+package com.example.myapplication.ui.create_advert;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -26,8 +25,9 @@ import com.example.myapplication.R;
 import com.example.myapplication.RyclerFixer;
 
 public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+
     private Spinner Type;
-    String s1[];
+    String DogNames[];
 
 
     RecyclerView hondenplus;
@@ -40,12 +40,12 @@ public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnIt
 
         hondenplus = v.findViewById(R.id.availableDogs);
 
-        s1 = getResources().getStringArray(R.array.Types);
+        DogNames = getResources().getStringArray(R.array.DummyDogNames);
 
-        RyclerFixer myadapter = new RyclerFixer(getActivity(), s1);
+        RyclerFixer myadapter = new RyclerFixer(getActivity(), DogNames);
         hondenplus.setAdapter(myadapter);
         hondenplus.setLayoutManager(new LinearLayoutManager(getActivity()));
-        
+
         Type = (Spinner) v.findViewById(R.id.TypeCare);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.Types, android.R.layout.simple_spinner_item);

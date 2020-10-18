@@ -40,6 +40,7 @@ public class HondenDB {
             TestPersoon.setHuisnummer(5);
             TestPersoon.setIntroductieText("ik ben een test gebruiker");
             TestPersoon.setWachtwoord("welkom");
+            TestPersoon.setPlaatsnaam("Delft");
 
 
             App_Gebruiker TestPersoon2 = new App_Gebruiker();
@@ -48,6 +49,7 @@ public class HondenDB {
             TestPersoon2.setHuisnummer(5);
             TestPersoon2.setIntroductieText("ik ben een test gebruiker");
             TestPersoon2.setWachtwoord("123");
+            TestPersoon2.setPlaatsnaam("Amsterdam");
 
             Advertentie TestAdvertentie = new Advertentie();
             TestAdvertentie.set_AdvertentiePlaatser(TestPersoon);

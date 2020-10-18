@@ -32,14 +32,14 @@
             <TextView
                 android:id="@+id/Date"
                 android:layout_width="131dp"
-                android:layout_height="25dp"
+                android:layout_height="38dp"
                 android:text="@string/placeholder_datum"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.092"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.638" />
+                app:layout_constraintVertical_bias="0.76" />
 
             <TextView
                 android:id="@+id/Location"
@@ -55,24 +55,24 @@
 
             <TextView
                 android:id="@+id/Capacity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="21dp"
                 android:text="@string/capaciteit"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.076"
+                app:layout_constraintHorizontal_bias="0.083"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.117" />
+                app:layout_constraintVertical_bias="0.119" />
 
             <TextView
                 android:id="@+id/Prijs"
-                android:layout_width="57dp"
+                android:layout_width="110dp"
                 android:layout_height="25dp"
                 android:text="Prijs"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.073"
+                app:layout_constraintHorizontal_bias="0.085"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.361" />
