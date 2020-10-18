@@ -8,19 +8,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,7 +27,7 @@ import com.example.myapplication.RyclerFixer;
 public class GalleryFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private Spinner Type;
-    String s1[];
+    String DogNames[];
 
 
     RecyclerView hondenplus;
@@ -44,9 +40,9 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemSelec
 
         hondenplus = v.findViewById(R.id.availableDogs);
 
-        s1 = getResources().getStringArray(R.array.Types);
+        DogNames = getResources().getStringArray(R.array.DummyDogNames);
 
-        RyclerFixer myadapter = new RyclerFixer(getActivity(), s1);
+        RyclerFixer myadapter = new RyclerFixer(getActivity(), DogNames);
         hondenplus.setAdapter(myadapter);
         hondenplus.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -56,18 +52,6 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemSelec
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Type.setAdapter(adapter);
         Type.setOnItemSelectedListener(this);
-
-       /* @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            parent.getItemAtPosition(pos)
-
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-
-        }
-*/
 
 
         Button createAdvert = (Button) v.findViewById(R.id.createadvert);

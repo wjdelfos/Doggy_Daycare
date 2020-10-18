@@ -22,10 +22,10 @@
 
             <TextView
                 android:id="@+id/dogNames"
-                android:layout_width="119dp"
-                android:layout_height="29dp"
+                android:layout_width="122dp"
+                android:layout_height="19dp"
                 android:text="Dognames"
-                android:textSize="24sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

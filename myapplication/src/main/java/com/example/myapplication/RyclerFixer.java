@@ -19,18 +19,17 @@ public class RyclerFixer extends RecyclerView.Adapter<RyclerFixer.Myadapter> {
     String[] namen;
     Context context;
 
-    
-    
+
     public RyclerFixer(Context ct, String[] s1) {
-    context = ct;
-    namen = s1;
+        context = ct;
+        namen = s1;
     }
 
     @NonNull
     @Override
     public Myadapter onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View c = inflater.inflate(R.layout.row_dognames, parent,false);
+        View c = inflater.inflate(R.layout.row_dognames, parent, false);
         return new Myadapter(c);
     }
 
@@ -38,17 +37,17 @@ public class RyclerFixer extends RecyclerView.Adapter<RyclerFixer.Myadapter> {
     public void onBindViewHolder(@NonNull final Myadapter holder, int position) {
         holder.hondennamen.setText(namen[position]);
         holder.selected = false;
-    holder.screen.setOnClickListener(new View.OnClickListener(){
-        @Override
-                public void onClick(View c) {
-            if (holder.selected == false) {
-                holder.card.setCardBackgroundColor(Color.BLUE);
-                holder.selected = true;
-            } else {
-                holder.card.setCardBackgroundColor(Color.WHITE);
-                holder.selected = false;
+        holder.screen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View c) {
+                if (holder.selected == false) {
+                    holder.card.setCardBackgroundColor(Color.BLUE);
+                    holder.selected = true;
+                } else {
+                    holder.card.setCardBackgroundColor(Color.WHITE);
+                    holder.selected = false;
+                }
             }
-        }
         });
     }
 

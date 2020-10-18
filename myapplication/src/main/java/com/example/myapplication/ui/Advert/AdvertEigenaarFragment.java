@@ -53,18 +53,6 @@ public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnIt
         Type.setAdapter(adapter);
         Type.setOnItemSelectedListener(this);
 
-       /* @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            parent.getItemAtPosition(pos)
-
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-
-        }
-*/
-
 
         Button createAdvert = (Button) v.findViewById(R.id.createadvert);
         createAdvert.setOnClickListener(new View.OnClickListener() {
