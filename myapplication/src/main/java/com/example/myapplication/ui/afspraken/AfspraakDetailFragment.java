@@ -31,23 +31,27 @@ public class AfspraakDetailFragment extends Fragment {
         final Afspraak _afspraak = (Afspraak) getActivity().getIntent()
                 .getSerializableExtra("Afspraak");
 
-        /*
-        TextView capaciteit = (TextView) root.findViewById(R.id.Capacity_id);
-        capaciteit.setText("" + _advertentie.getCapaciteit());
 
-        TextView prijs = (TextView) root.findViewById(R.id.Price_id);
-        prijs.setText("" + _advertentie.getPrijs());
 
-        TextView fromDate = (TextView) root.findViewById(R.id.from_id);
-        fromDate.setText(_advertentie.getBeginTijd().toString());
+        TextView locatie = (TextView) root.findViewById(R.id.locatie_id);
+        locatie.setText(_advertentie.getLocatie());
 
-        Button deal = (Button) root.findViewById(R.id.buttonDeal);
+        TextView naam = (TextView) root.findViewById(R.id.naam_id);
+        naam.setText(_afspraak.get_eigenaar().getNaam());
+
+        TextView tel = (TextView) root.findViewById(R.id.telefoon_id);
+        tel.setText(""+_afspraak.get_eigenaar().getTelefoon_Nummer());
+
+        TextView verhaal = (TextView) root.findViewById(R.id.peroonlijk_verhaal_id);
+        verhaal.setText(_advertentie.getErvaringHonden());
+
+        Button deal = (Button) root.findViewById(R.id.ButtonAfspraak);
         deal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //TODO everything
 
             }
-        });*/
+        });
         return root;
     }
 }
