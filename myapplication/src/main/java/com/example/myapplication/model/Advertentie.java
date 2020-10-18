@@ -35,6 +35,9 @@ public class Advertentie implements Serializable {
     public Advertentie(){
         ID= UUID.randomUUID();
     }
+    public Advertentie(UUID id){
+        ID= id;
+    }
 
     // region Getters en setters
 
@@ -120,7 +123,7 @@ public class Advertentie implements Serializable {
 
     public void set_AdvertentiePlaatser(App_Gebruiker _AdvertentiePlaatser) {
         this._AdvertentiePlaatser = _AdvertentiePlaatser;
-        this.ID=_AdvertentiePlaatser.getID();
+        this.AdvertentiePlaatser=_AdvertentiePlaatser.getID();
     }
 
 

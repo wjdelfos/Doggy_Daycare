@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -15,23 +14,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.AdvertDetailActivity;
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.model.Advertentie;
 import com.example.myapplication.model.App_Gebruiker;
+import com.example.myapplication.model.HondenDB;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class AdvertentieRecyclerFragment extends Fragment {
     private RecyclerView mAdvertentieRecyclerView;
     private AdvertentieAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_advert_recycler, container, false);
         mAdvertentieRecyclerView = (RecyclerView) view
                 .findViewById(R.id.AdvertRecycler);
         mAdvertentieRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -71,35 +70,7 @@ public class HomeFragment extends Fragment {
 
     private void updateUI() {
         //TODO create get query
-        List<Advertentie> advertenties=new ArrayList<>();
-        App_Gebruiker TestPersoon= new App_Gebruiker();
-        TestPersoon.setNaam("Gerard");
-        TestPersoon.setTelefoon_Nummer(123456789);
-        TestPersoon.setHuisnummer(5);
-        TestPersoon.setIntroductieText("ik ben een test gebruiker");
-        TestPersoon.setWachtwoord("123");
-
-        Advertentie TestAdvertentie= new Advertentie();
-        TestAdvertentie.set_AdvertentiePlaatser(TestPersoon);
-        TestAdvertentie.setCapaciteit(3);
-        TestAdvertentie.setErvaringHonden("Ik ben opgegroeid met honden");
-        TestAdvertentie.setLocatie("rotterdam");
-        TestAdvertentie.setBeginTijd(new Date());
-        TestAdvertentie.setPrijs(2.56);
-        Advertentie TestAdvertentie2= new Advertentie();
-        TestAdvertentie2.set_AdvertentiePlaatser(TestPersoon);
-        TestAdvertentie2.setCapaciteit(3);
-        TestAdvertentie2.setLocatie("rotterdam");
-        TestAdvertentie2.setBeginTijd(new Date());
-
-        advertenties.add(TestAdvertentie);
-        advertenties.add(TestAdvertentie2);
-        advertenties.add(TestAdvertentie);
-        advertenties.add(TestAdvertentie2);
-        advertenties.add(TestAdvertentie);
-        advertenties.add(TestAdvertentie2);
-
-        // = HondenDB.get(getActivity()).getAdvertenties();
+        List<Advertentie> advertenties = HondenDB.get(getActivity()).getAdvertenties();
 
         if (mAdapter == null) {
             mAdapter = new AdvertentieAdapter(advertenties);

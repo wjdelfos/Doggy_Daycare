@@ -29,8 +29,8 @@ public class DataInitializer extends SQLiteOpenHelper {
         db.execSQL(
                 "create table Advertentie(" +
                         "id text primary key," +
-                        " BeginTijd DateTime," +
-                        " EindTijd DateTime," +
+                        " BeginTijd long," +
+                        " EindTijd long," +
                         " Prijs double," +
                         " Locatie text," +
                         " SpecialeVoorkeurenHond text," +

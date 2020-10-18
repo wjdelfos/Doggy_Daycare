@@ -44,13 +44,15 @@ public class AdvertentieDetailFragment extends Fragment {
         deal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //TODO dynamically variables
-                Afspraak a = new Afspraak(_advertentie.getPrijs(),
-                        Afspraak.StatusAfspraken.concept,
-                        true, false,
-                        loggedInUser.getID(),
-                        _advertentie.get_AdvertentiePlaatser().getID(),
-                        _advertentie.getID());
-                HondenDB.get(getActivity()).addAfspraak(a);
+                if (_advertentie.getAdvertentiePlaatser()!= loggedInUser.getID()) {
+                    Afspraak a = new Afspraak(_advertentie.getPrijs(),
+                            Afspraak.StatusAfspraken.concept,
+                            true, false,
+                            loggedInUser.getID(),
+                            _advertentie.getAdvertentiePlaatser(),
+                            _advertentie.getID());
+                    HondenDB.get(getActivity()).addAfspraak(a);
+                }
             }
         });
         return root;
