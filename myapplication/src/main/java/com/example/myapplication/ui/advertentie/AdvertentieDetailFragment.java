@@ -1,6 +1,5 @@
 package com.example.myapplication.ui.advertentie;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
-import com.example.myapplication.SingUpActivity;
 import com.example.myapplication.model.Advertentie;
 import com.example.myapplication.model.Afspraak;
 import com.example.myapplication.model.App_Gebruiker;

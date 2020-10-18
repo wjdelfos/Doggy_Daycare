@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.SingUpActivity;
+import com.example.myapplication.SignUpActivity;
 import com.example.myapplication.model.App_Gebruiker;
 import com.example.myapplication.model.HondenDB;
 
@@ -32,7 +32,7 @@ public class LoginFragment extends Fragment {
         Button AanmeldButton = (Button) root.findViewById(R.id.Aanmelden);
         AanmeldButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SingUpActivity.class);
+                Intent intent = new Intent(getActivity(), SignUpActivity.class);
                 startActivity(intent);
             }
         });

@@ -32,6 +32,7 @@
     <string name="advert">Advertentie maken</string>
     <string name="price">Prijs</string>
     <string name="advertentie_oppas">Ik wil oppassen</string>
+    <string name="PlaceName1">Plaatsnaam</string>
     <string-array name="Types">
         <item>Opvang bij eigenaar</item>
         <item>Opvang bij Oppas</item>
