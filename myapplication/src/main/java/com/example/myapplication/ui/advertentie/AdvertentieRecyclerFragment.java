@@ -84,6 +84,7 @@ public class AdvertentieRecyclerFragment extends Fragment {
         private Advertentie mAdvertentie;
         private TextView mCapacityTextView;
         private TextView mDateTextView;
+        private TextView mPriceTextView;
         private TextView mOwnerTextView;
         private TextView mLocationTextView;
 
@@ -101,6 +102,7 @@ public class AdvertentieRecyclerFragment extends Fragment {
             });
             mCapacityTextView = (TextView) itemView.findViewById(R.id.Capacity);
             mDateTextView = (TextView) itemView.findViewById(R.id.Date);
+            mPriceTextView = (TextView) itemView.findViewById(R.id.Prijs);
             mOwnerTextView = (TextView) itemView.findViewById(R.id.Owner);
             mLocationTextView = (TextView) itemView.findViewById(R.id.Location);
         }
@@ -109,6 +111,7 @@ public class AdvertentieRecyclerFragment extends Fragment {
             mAdvertentie = advertentie;
             mCapacityTextView.setText("Capacity: "+ mAdvertentie.getCapaciteit());
             mDateTextView.setText(mAdvertentie.getBeginTijd().toString());
+            mPriceTextView.setText("Prijs: "+ mAdvertentie.getPrijs());
             mOwnerTextView.setText(mAdvertentie.get_AdvertentiePlaatser().getNaam());
             mLocationTextView.setText(mAdvertentie.getLocatie());
         }

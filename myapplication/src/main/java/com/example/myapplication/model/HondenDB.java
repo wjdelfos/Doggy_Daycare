@@ -33,13 +33,15 @@ public class HondenDB {
 
     private void AddDummyData() {
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM App_Gebruiker", null);
-        if(cursor.getCount()<1) {
+        if (cursor.getCount() < 1) {
+            Date today = new Date(new java.util.Date().getTime());
             App_Gebruiker TestPersoon = new App_Gebruiker();
             TestPersoon.setNaam("Gerard");
             TestPersoon.setTelefoon_Nummer(123456789);
             TestPersoon.setHuisnummer(5);
             TestPersoon.setIntroductieText("ik ben een test gebruiker");
             TestPersoon.setWachtwoord("welkom");
+            TestPersoon.setPlaatsnaam("Delft");
 
 
             App_Gebruiker TestPersoon2 = new App_Gebruiker();
@@ -48,20 +50,23 @@ public class HondenDB {
             TestPersoon2.setHuisnummer(5);
             TestPersoon2.setIntroductieText("ik ben een test gebruiker");
             TestPersoon2.setWachtwoord("123");
+            TestPersoon2.setPlaatsnaam("Amsterdam");
 
             Advertentie TestAdvertentie = new Advertentie();
             TestAdvertentie.set_AdvertentiePlaatser(TestPersoon);
             TestAdvertentie.setCapaciteit(3);
             TestAdvertentie.setErvaringHonden("Ik ben opgegroeid met honden");
             TestAdvertentie.setLocatie("rotterdam");
-            TestAdvertentie.setBeginTijd(new Date(new java.util.Date().getTime()));
+            TestAdvertentie.setBeginTijd(today);
+            TestAdvertentie.setEindTijd(today);
             TestAdvertentie.setPrijs(2.56);
 
             Advertentie TestAdvertentie2 = new Advertentie();
             TestAdvertentie2.set_AdvertentiePlaatser(TestPersoon2);
             TestAdvertentie2.setCapaciteit(3);
             TestAdvertentie2.setLocatie("rotterdam");
-            TestAdvertentie2.setBeginTijd(new Date(new java.util.Date().getTime()));
+            TestAdvertentie2.setBeginTijd(today);
+            TestAdvertentie2.setEindTijd(today);
 
 
             Advertentie TestAdvertentie3 = new Advertentie();
@@ -70,6 +75,8 @@ public class HondenDB {
             TestAdvertentie3.setErvaringHonden("sahdjsajn");
             TestAdvertentie3.setLocatie("rotterdam");
             TestAdvertentie3.setPrijs(2);
+            TestAdvertentie3.setBeginTijd(today);
+            TestAdvertentie3.setEindTijd(today);
 
             this.addApp_Gebruiker(TestPersoon2);
             this.addApp_Gebruiker(TestPersoon);
@@ -145,7 +152,7 @@ public class HondenDB {
     }
 
     private Advertentie addUserToAdvert(Advertentie a) {
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM App_Gebruiker WHERE id = '" + a.getAdvertentiePlaatser().toString()+ "'", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM App_Gebruiker WHERE id = '" + a.getAdvertentiePlaatser().toString() + "'", null);
 
         try {
             cursor.moveToFirst();
@@ -160,7 +167,7 @@ public class HondenDB {
     }
 
     public List<Afspraak> getAfspraken(UUID UserId) {
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM Afspraak WHERE Oppas = '" + UserId + "' or Eigenaar = '" +UserId+"'", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM Afspraak WHERE Oppas = '" + UserId + "' or Eigenaar = '" + UserId + "'", null);
         List<Afspraak> afspraken = new ArrayList<>();
         try {
             cursor.moveToFirst();
@@ -175,9 +182,9 @@ public class HondenDB {
 
         for (Afspraak a :
                 afspraken) {
-            if(a.getEigenaar()==UserId){
+            if (a.getEigenaar() == UserId) {
                 a.set_oppas(getAppGebruiker(a.getOppas()));
-            }else {
+            } else {
                 a.set_eigenaar(getAppGebruiker(a.getEigenaar()));
             }
             a.set_advertentie(getAdvertentie(a.getAdvertentie()));
@@ -189,7 +196,7 @@ public class HondenDB {
     }
 
     private App_Gebruiker getAppGebruiker(UUID id) {
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM App_Gebruiker WHERE id = '" + id+ "'", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM App_Gebruiker WHERE id = '" + id + "'", null);
 
         try {
             cursor.moveToFirst();
@@ -201,7 +208,7 @@ public class HondenDB {
     }
 
     private Advertentie getAdvertentie(UUID id) {
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM Advertentie WHERE id = '" + id+ "'", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM Advertentie WHERE id = '" + id + "'", null);
 
         try {
             cursor.moveToFirst();
@@ -216,8 +223,8 @@ public class HondenDB {
         String UUIDString = c.getString(c.getColumnIndex("id"));
         String Status = c.getString(c.getColumnIndex("Status"));
         double Afgesproken_prijs = c.getDouble(c.getColumnIndex("Afgesproken_prijs"));
-        boolean Isgeaccepteerdeigenaar = c.getInt(c.getColumnIndex("Isgeaccepteerdeigenaar"))>0;
-        boolean IsgeaccepteerdOppas = c.getInt(c.getColumnIndex("IsgeaccepteerdOppas"))>0;
+        boolean Isgeaccepteerdeigenaar = c.getInt(c.getColumnIndex("Isgeaccepteerdeigenaar")) > 0;
+        boolean IsgeaccepteerdOppas = c.getInt(c.getColumnIndex("IsgeaccepteerdOppas")) > 0;
         String Oppas = c.getString(c.getColumnIndex("Oppas"));
         String Eigenaar = c.getString(c.getColumnIndex("Eigenaar"));
         String Advertentie = c.getString(c.getColumnIndex("Advertentie"));
@@ -258,8 +265,8 @@ public class HondenDB {
 
     private Advertentie cursorToAdvertentie(Cursor c) {
         String UUIDString = c.getString(c.getColumnIndex("id"));
-        long BeginTijd = c.getLong(c.getColumnIndex("BeginTijd"));
-        long EindTijd = c.getLong(c.getColumnIndex("EindTijd"));
+        String BeginTijd = c.getString(c.getColumnIndex("BeginTijd"));
+        String EindTijd = c.getString(c.getColumnIndex("EindTijd"));
         double Prijs = c.getDouble(c.getColumnIndex("Prijs"));
         String Locatie = c.getString(c.getColumnIndex("Locatie"));
         String SpecialeVoorkeurenHond = c.getString(c.getColumnIndex("SpecialeVoorkeurenHond"));
@@ -269,8 +276,9 @@ public class HondenDB {
         String IdAdvertentiePlaatser = c.getString(c.getColumnIndex("IdAdvertentiePlaatser"));
 
         Advertentie advert = new Advertentie(UUID.fromString(UUIDString));
-        advert.setBeginTijd(new Date(BeginTijd*1000));
-        advert.setEindTijd(new Date(EindTijd*1000));
+
+        advert.setBeginTijd(Date.valueOf(BeginTijd));
+        advert.setEindTijd(Date.valueOf(EindTijd));
         advert.setPrijs(Prijs);
         advert.setLocatie(Locatie);
         advert.setSpecialeVoorkeurenHond(SpecialeVoorkeurenHond);

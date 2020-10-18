@@ -40,6 +40,9 @@ public class AdvertentieDetailFragment extends Fragment {
         TextView fromDate = (TextView) root.findViewById(R.id.from_id);
         fromDate.setText(_advertentie.getBeginTijd().toString());
 
+        TextView description = (TextView) root.findViewById(R.id.Description_id);
+        description.setText(_advertentie.getErvaringHonden());
+
         Button deal = (Button) root.findViewById(R.id.buttonDeal);
         deal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
