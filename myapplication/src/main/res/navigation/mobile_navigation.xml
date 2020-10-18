@@ -16,6 +16,11 @@
         android:name="com.example.myapplication.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
+    <fragment
+        android:id="@+id/nav_advertentie_oppas"
+        android:name="com.example.myapplication.ui.Advert.AdvertOppasFragment"
+        android:label="@string/advertentie_oppas"
+        tools:layout="@layout/advert_create_oppas_main" />
 
     <fragment
         android:id="@+id/nav_slideshow"
