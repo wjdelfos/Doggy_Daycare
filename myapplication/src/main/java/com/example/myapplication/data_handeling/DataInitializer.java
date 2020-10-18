@@ -59,9 +59,9 @@ public class DataInitializer extends SQLiteOpenHelper {
                         " Afgesproken_prijs double," +
                         " Isgeaccepteerdeigenaar BOOLEAN," +
                         " IsgeaccepteerdOppas BOOLEAN," +
-                        " Oppas int," +
-                        " Eigenaar int," +
-                        " Advertentie int," +
+                        " Oppas text," +
+                        " Eigenaar text," +
+                        " Advertentie text," +
                         " CONSTRAINT fk_gebruiker_afspraak" +
                         "    FOREIGN KEY (Oppas)" +
                         "    REFERENCES App_Gebruiker (id), " +

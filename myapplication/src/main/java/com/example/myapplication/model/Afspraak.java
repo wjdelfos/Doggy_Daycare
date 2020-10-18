@@ -15,9 +15,16 @@ public class Afspraak {
     private UUID Eigenaar;
     private UUID Advertentie;
 
+    private App_Gebruiker _oppas;
+    private App_Gebruiker _eigenaar;
+    private Advertentie _advertentie;
+
 
     public Afspraak(){
         ID= UUID.randomUUID();
+    }
+    public Afspraak(UUID id){
+        ID= id;
     }
 
     public Afspraak(double afgesprokenPrijs, StatusAfspraken statusAfspraak, boolean AcptOpps, boolean AcptEigenaar, UUID oppas, UUID eigenaar, UUID advertentie) {
@@ -92,6 +99,31 @@ public class Afspraak {
     public void setIsgeaccepteerdeigenaar(boolean isgeaccepteerdeigenaar) {
         Isgeaccepteerdeigenaar = isgeaccepteerdeigenaar;
     }
+
+    public App_Gebruiker get_oppas() {
+        return _oppas;
+    }
+
+    public void set_oppas(App_Gebruiker _oppas) {
+        this._oppas = _oppas;
+    }
+
+    public App_Gebruiker get_eigenaar() {
+        return _eigenaar;
+    }
+
+    public void set_eigenaar(App_Gebruiker _eigenaar) {
+        this._eigenaar = _eigenaar;
+    }
+
+    public com.example.myapplication.model.Advertentie get_advertentie() {
+        return _advertentie;
+    }
+
+    public void set_advertentie(com.example.myapplication.model.Advertentie _advertentie) {
+        this._advertentie = _advertentie;
+    }
+
     // endregion
 
 }

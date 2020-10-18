@@ -159,6 +159,79 @@ public class HondenDB {
         }
     }
 
+    public List<Afspraak> getAfspraken(UUID UserId) {
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM Afspraak WHERE Oppas = '" + UserId + "' or Eigenaar = '" +UserId+"'", null);
+        List<Afspraak> afspraken = new ArrayList<>();
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                Afspraak afspraak = cursorToAfspraak(cursor);
+                afspraken.add(afspraak);
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+
+        for (Afspraak a :
+                afspraken) {
+            if(a.getEigenaar()==UserId){
+                a.set_oppas(getAppGebruiker(a.getOppas()));
+            }else {
+                a.set_eigenaar(getAppGebruiker(a.getEigenaar()));
+            }
+            a.set_advertentie(getAdvertentie(a.getAdvertentie()));
+
+        }
+
+        return afspraken;
+
+    }
+
+    private App_Gebruiker getAppGebruiker(UUID id) {
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM App_Gebruiker WHERE id = '" + id+ "'", null);
+
+        try {
+            cursor.moveToFirst();
+            App_Gebruiker b = CurserToGebruiker(cursor);
+            return b;
+        } finally {
+            cursor.close();
+        }
+    }
+
+    private Advertentie getAdvertentie(UUID id) {
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM Advertentie WHERE id = '" + id+ "'", null);
+
+        try {
+            cursor.moveToFirst();
+            Advertentie advertentie = cursorToAdvertentie(cursor);
+            return advertentie;
+        } finally {
+            cursor.close();
+        }
+    }
+
+    private Afspraak cursorToAfspraak(Cursor c) {
+        String UUIDString = c.getString(c.getColumnIndex("id"));
+        String Status = c.getString(c.getColumnIndex("Status"));
+        double Afgesproken_prijs = c.getDouble(c.getColumnIndex("Afgesproken_prijs"));
+        boolean Isgeaccepteerdeigenaar = c.getInt(c.getColumnIndex("Isgeaccepteerdeigenaar"))>0;
+        boolean IsgeaccepteerdOppas = c.getInt(c.getColumnIndex("IsgeaccepteerdOppas"))>0;
+        String Oppas = c.getString(c.getColumnIndex("Oppas"));
+        String Eigenaar = c.getString(c.getColumnIndex("Eigenaar"));
+        String Advertentie = c.getString(c.getColumnIndex("Advertentie"));
+
+        Afspraak afspraak = new Afspraak(UUID.fromString(UUIDString));
+        afspraak.setStatusAfspraak(Afspraak.StatusAfspraken.valueOf(Status));
+        afspraak.setAfgesprokenPrijs(Afgesproken_prijs);
+        afspraak.setIsgeaccepteerdeigenaar(Isgeaccepteerdeigenaar);
+        afspraak.setIsgeaccepteerdOppas(IsgeaccepteerdOppas);
+        afspraak.setOppas(UUID.fromString(Oppas));
+        afspraak.setEigenaar(UUID.fromString(Eigenaar));
+        afspraak.setAdvertentie(UUID.fromString(Advertentie));
+        return afspraak;
+    }
 
     private App_Gebruiker CurserToGebruiker(Cursor c) {
         String UUIDString = c.getString(c.getColumnIndex("id"));
@@ -207,4 +280,5 @@ public class HondenDB {
         advert.setAdvertentiePlaatser(UUID.fromString(IdAdvertentiePlaatser));
         return advert;
     }
+
 }

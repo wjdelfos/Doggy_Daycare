@@ -7,9 +7,9 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
+    <string name="menu_home">Advertenties</string>
     <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_slideshow">Afspraken</string>
     <string name="signup_message">Meld je aan!</string>
     <string name="name1">Voornaam</string>
     <string name="password">Wachtwoord</string>
@@ -22,6 +22,8 @@
     <string name="advert_plaatser">Naam</string>
     <string name="locatie">Locatie</string>
     <string name="capaciteit">Capaciteit:</string>
+    <string name="status_placeholder">Status placeholder</string>
+    <string name="prijs">Prijs</string>
     <string-array name="genders">
         <item>Man</item>
         <item>Vrouw</item>
