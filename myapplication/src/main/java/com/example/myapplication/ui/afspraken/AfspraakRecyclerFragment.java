@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.afspraken;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.myapplication.AfspraakDetailActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.model.Afspraak;
 import com.example.myapplication.model.App_Gebruiker;
@@ -92,12 +94,13 @@ public class AfspraakRecyclerFragment extends Fragment {
             super(inflater.inflate(R.layout.row_afspraak, parent, false));
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {/* TODO create detail view
-                    Intent intent = new Intent(getActivity(), AdvertDetailActivity.class);
-                    intent.putExtra("Advertentie", mAdvertentie);
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), AfspraakDetailActivity.class);
+                    intent.putExtra("Advertentie", mAfspraak.get_advertentie());
+                    intent.putExtra("Afspraak", mAfspraak);
                     intent.putExtra("LoggedInUser", (App_Gebruiker) getActivity().getIntent()
                             .getSerializableExtra("user"));
-                    startActivity(intent);*/
+                    startActivity(intent);
 
                 }
             });
