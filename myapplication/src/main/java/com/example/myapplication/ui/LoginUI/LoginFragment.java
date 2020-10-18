@@ -16,11 +16,11 @@ import androidx.fragment.app.Fragment;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.SingUpActivity;
+import com.example.myapplication.model.App_Gebruiker;
 import com.example.myapplication.model.HondenDB;
 
 public class LoginFragment extends Fragment {
 
-    private LoginViewModel loginViewModel;
     private int _telefoonNummer;
     private String _password;
 
@@ -39,11 +39,17 @@ public class LoginFragment extends Fragment {
         Button LoginButton = (Button) root.findViewById(R.id.Login);
         LoginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //sql injection possible....
+                App_Gebruiker loggedInUser =HondenDB.get(getActivity()).CheckCredentials(_telefoonNummer, _password);
+                if (loggedInUser!=null) {
+                    //Create a user object that is accessible to other classes to display the user or user information for object creation.
 
-                if(HondenDB.get(getActivity()).CheckCredentials(_telefoonNummer,_password)){
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-                }else{
+                    loggedInUser.setNaam(loggedInUser.getNaam());
+
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtra("user",loggedInUser);
+                    startActivity(intent);
+                } else {
                     //TODO weergeven inlog is fout
                 }
             }
@@ -59,7 +65,7 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                _password=s.toString();
+                _password = s.toString();
             }
 
             @Override

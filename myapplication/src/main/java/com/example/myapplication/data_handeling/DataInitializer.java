@@ -29,8 +29,8 @@ public class DataInitializer extends SQLiteOpenHelper {
         db.execSQL(
                 "create table Advertentie(" +
                         "id text primary key," +
-                        " BeginTijd DateTime," +
-                        " EindTijd DateTime," +
+                        " BeginTijd datetime," +
+                        " EindTijd datetime," +
                         " Prijs double," +
                         " Locatie text," +
                         " SpecialeVoorkeurenHond text," +
@@ -55,11 +55,13 @@ public class DataInitializer extends SQLiteOpenHelper {
         db.execSQL(
                 "create table Afspraak(" +
                         "id text primary key," +
-                        " Status enum," +
+                        " Status text," +
                         " Afgesproken_prijs double," +
-                        " Oppas int," +
-                        " Eigenaar int," +
-                        " Advertentie int," +
+                        " Isgeaccepteerdeigenaar BOOLEAN," +
+                        " IsgeaccepteerdOppas BOOLEAN," +
+                        " Oppas text," +
+                        " Eigenaar text," +
+                        " Advertentie text," +
                         " CONSTRAINT fk_gebruiker_afspraak" +
                         "    FOREIGN KEY (Oppas)" +
                         "    REFERENCES App_Gebruiker (id), " +

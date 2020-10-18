@@ -1,9 +1,10 @@
 package com.example.myapplication.model;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.sql.Date;
 import java.util.UUID;
 
-public class Advertentie {
+public class Advertentie implements Serializable {
     private UUID ID;
     private enum AdvertentieTypes {eigenaar,oppas}
     private AdvertentieTypes AdvertentieType;
@@ -33,6 +34,9 @@ public class Advertentie {
     }
     public Advertentie(){
         ID= UUID.randomUUID();
+    }
+    public Advertentie(UUID id){
+        ID= id;
     }
 
     // region Getters en setters
@@ -119,7 +123,7 @@ public class Advertentie {
 
     public void set_AdvertentiePlaatser(App_Gebruiker _AdvertentiePlaatser) {
         this._AdvertentiePlaatser = _AdvertentiePlaatser;
-        this.ID=_AdvertentiePlaatser.getID();
+        this.AdvertentiePlaatser=_AdvertentiePlaatser.getID();
     }
 
 

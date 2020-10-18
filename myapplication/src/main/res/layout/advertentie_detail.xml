@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/From_ad"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/Till_ad"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Till:"
@@ -30,27 +30,27 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="87dp"
-        android:layout_height="33dp"
+        android:layout_width="91dp"
+        android:layout_height="30dp"
         android:text="Description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.198" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="68dp"
+        android:layout_height="29dp"
+        android:text="Capacity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.129"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.209" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="80dp"
-        android:layout_height="24dp"
-        android:text="Capacity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.126"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.415" />
+        app:layout_constraintVertical_bias="0.429" />
 
     <TextView
         android:id="@+id/textView6"
@@ -74,10 +74,10 @@
         app:layout_constraintHorizontal_bias="0.123"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.604" />
+        app:layout_constraintVertical_bias="0.548" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonDeal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Deal!"
@@ -101,7 +101,7 @@
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/ratingbar_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -109,66 +109,65 @@
         app:layout_constraintHorizontal_bias="0.245"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.71" />
+        app:layout_constraintVertical_bias="0.685" />
 
     <TextView
-        android:id="@+id/Description_ad"
-        android:layout_width="153dp"
-        android:layout_height="93dp"
-        android:text="Hier komt tekst van de gebruiker"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.162"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.297" />
-
-    <TextView
-        android:id="@+id/Date_from_ad"
+        android:id="@+id/from_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Datum??"
+        android:text="Date?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.263"
+        app:layout_constraintHorizontal_bias="0.268"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.089" />
 
     <TextView
-        android:id="@+id/Date_till_ad"
+        android:id="@+id/Till_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Datum??"
+        android:text="Till_id"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.263"
+        app:layout_constraintHorizontal_bias="0.264"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.136" />
 
     <TextView
-        android:id="@+id/Capacity_ad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Getal??"
+        android:id="@+id/Description_id"
+        android:layout_width="162dp"
+        android:layout_height="111dp"
+        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.386"
+        app:layout_constraintHorizontal_bias="0.176"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.419" />
+        app:layout_constraintVertical_bias="0.29" />
 
     <TextView
-        android:id="@+id/price_ad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Prijs in euro's??"
+        android:id="@+id/Capacity_id"
+        android:layout_width="63dp"
+        android:layout_height="35dp"
+        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.313"
+        app:layout_constraintHorizontal_bias="0.362"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.432" />
+
+    <TextView
+        android:id="@+id/Price_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price_id"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.349"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.501" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
