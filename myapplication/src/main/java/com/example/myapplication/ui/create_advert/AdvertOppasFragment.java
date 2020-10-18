@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,7 +51,9 @@ public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemS
 
                 temp.set_AdvertentiePlaatser(loggedInUser);
                 HondenDB.get(getActivity()).addAdvertentie(temp);
-                //TODO change focus or notify user
+                Toast.makeText(getActivity(),
+                        "Advert created", Toast.LENGTH_SHORT)
+                        .show();
             }
         });
 
