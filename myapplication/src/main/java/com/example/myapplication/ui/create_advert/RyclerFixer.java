@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.ui.create_advert;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.myapplication.R;
 
 public class RyclerFixer extends RecyclerView.Adapter<RyclerFixer.Myadapter> {
     String[] namen;

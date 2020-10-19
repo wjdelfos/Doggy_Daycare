@@ -32,7 +32,7 @@ public class HondenDB {
     }
 
     private void AddDummyData() {
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM App_Gebruiker", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM Advertentie", null);
         if (cursor.getCount() < 1) {
             Date today = new Date(new java.util.Date().getTime());
             App_Gebruiker TestPersoon = new App_Gebruiker();
@@ -101,7 +101,6 @@ public class HondenDB {
                     a = CurserToGebruiker(cursor);
                 }
                 return a;
-                //TODO set current user to this user
             }
         } finally {
             cursor.close();
@@ -159,7 +158,6 @@ public class HondenDB {
             App_Gebruiker b = CurserToGebruiker(cursor);
             a.set_AdvertentiePlaatser(b);
             return a;
-            //TODO set current user to this user
 
         } finally {
             cursor.close();
@@ -182,13 +180,9 @@ public class HondenDB {
 
         for (Afspraak a :
                 afspraken) {
-            if (a.getEigenaar() == UserId) {
-                a.set_oppas(getAppGebruiker(a.getOppas()));
-            } else {
-                a.set_eigenaar(getAppGebruiker(a.getEigenaar()));
-            }
+            a.set_oppas(getAppGebruiker(a.getOppas()));
+            a.set_eigenaar(getAppGebruiker(a.getEigenaar()));
             a.set_advertentie(getAdvertentie(a.getAdvertentie()));
-
         }
 
         return afspraken;
@@ -223,8 +217,8 @@ public class HondenDB {
         String UUIDString = c.getString(c.getColumnIndex("id"));
         String Status = c.getString(c.getColumnIndex("Status"));
         double Afgesproken_prijs = c.getDouble(c.getColumnIndex("Afgesproken_prijs"));
-        boolean Isgeaccepteerdeigenaar = c.getInt(c.getColumnIndex("Isgeaccepteerdeigenaar")) > 0;
-        boolean IsgeaccepteerdOppas = c.getInt(c.getColumnIndex("IsgeaccepteerdOppas")) > 0;
+        boolean Isgeaccepteerdeigenaar = Boolean.parseBoolean(c.getString(c.getColumnIndex("Isgeaccepteerdeigenaar")) );
+        boolean IsgeaccepteerdOppas = Boolean.parseBoolean(c.getString(c.getColumnIndex("IsgeaccepteerdOppas")) );
         String Oppas = c.getString(c.getColumnIndex("Oppas"));
         String Eigenaar = c.getString(c.getColumnIndex("Eigenaar"));
         String Advertentie = c.getString(c.getColumnIndex("Advertentie"));
@@ -289,4 +283,11 @@ public class HondenDB {
         return advert;
     }
 
+    public void UpdateAfspraakAcceptance(Afspraak afspraak) {
+        String sql = "update afspraak " +
+                "set Isgeaccepteerdeigenaar = '"+afspraak.isIsgeaccepteerdeigenaar()
+                +"' , IsgeaccepteerdOppas = '"+afspraak.isIsgeaccepteerdOppas()+
+                "' , Status = '"+afspraak.getStatusAfspraak()+"' where id = '"+afspraak.getID()+"'";
+        mDatabase.execSQL(sql);
+    }
 }

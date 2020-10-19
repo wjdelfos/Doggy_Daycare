@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.LoginUI;
+package com.example.myapplication.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.SignUpActivity;
+import com.example.myapplication.ui.sign_up.SignUpActivity;
 import com.example.myapplication.model.App_Gebruiker;
 import com.example.myapplication.model.HondenDB;
 

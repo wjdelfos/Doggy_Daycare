@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.RyclerFixer;
 
 public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 

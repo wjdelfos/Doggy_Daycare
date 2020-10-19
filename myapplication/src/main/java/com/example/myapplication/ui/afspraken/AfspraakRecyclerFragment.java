@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.myapplication.AfspraakDetailActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.model.Afspraak;
 import com.example.myapplication.model.App_Gebruiker;
@@ -117,7 +116,7 @@ public class AfspraakRecyclerFragment extends Fragment {
             mCapacityTextView.setText("Capacity: " + mAfspraak.get_advertentie().getCapaciteit());
             mDateTextView.setText(mAfspraak.get_advertentie().getBeginTijd().toString());
             mOwnerTextView.setText("Dog owner:  "+mAfspraak.get_eigenaar().getNaam());
-            mOppasTextView.setText("Dog sitter: "+loggedInUser.getNaam());
+            mOppasTextView.setText("Dog sitter: "+mAfspraak.get_oppas().getNaam());
             mLocationTextView.setText(mAfspraak.get_advertentie().getLocatie());
             mStatusTextView.setText(""+ mAfspraak.getStatusAfspraak());
         }

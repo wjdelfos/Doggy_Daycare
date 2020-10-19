@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.ui.sign_up;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.MainActivity;
+import com.example.myapplication.R;
 import com.example.myapplication.model.App_Gebruiker;
 import com.example.myapplication.model.HondenDB;
 

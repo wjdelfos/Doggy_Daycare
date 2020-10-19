@@ -1,8 +1,10 @@
-package com.example.myapplication;
+package com.example.myapplication.ui.advertentie;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.R;
 
 public class AdvertDetailActivity extends AppCompatActivity {
     @Override

@@ -14,13 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.AdvertDetailActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.model.Advertentie;
 import com.example.myapplication.model.App_Gebruiker;
 import com.example.myapplication.model.HondenDB;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdvertentieRecyclerFragment extends Fragment {

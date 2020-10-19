@@ -18,6 +18,8 @@ import com.example.myapplication.model.Afspraak;
 import com.example.myapplication.model.App_Gebruiker;
 import com.example.myapplication.model.HondenDB;
 
+import java.util.UUID;
+
 public class AdvertentieDetailFragment extends Fragment {
     @Nullable
     @Override
@@ -46,18 +48,25 @@ public class AdvertentieDetailFragment extends Fragment {
         deal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //TODO dynamically variables
-                if (_advertentie.getAdvertentiePlaatser()!= loggedInUser.getID()) {
+                UUID plaatser=_advertentie.getAdvertentiePlaatser();
+                UUID dealMaker=loggedInUser.getID();
+                if (!plaatser.equals(dealMaker)) {
                     Afspraak a = new Afspraak(_advertentie.getPrijs(),
                             Afspraak.StatusAfspraken.concept,
-                            true, false,
+                            false, true,
                             loggedInUser.getID(),
                             _advertentie.getAdvertentiePlaatser(),
                             _advertentie.getID());
                     HondenDB.get(getActivity()).addAfspraak(a);
+                    Toast.makeText(getActivity(),
+                            "Deal made!", Toast.LENGTH_SHORT)
+                            .show();
+                }else {
+                    Toast.makeText(getActivity(),
+                            "Cannot make deal with yourself", Toast.LENGTH_SHORT)
+                            .show();
                 }
-                Toast.makeText(getActivity(),
-                        "Deal made!", Toast.LENGTH_SHORT)
-                        .show();
+
             }
         });
         return root;
