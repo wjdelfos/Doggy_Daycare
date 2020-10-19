@@ -22,8 +22,8 @@ import com.example.myapplication.model.HondenDB;
 
 public class LoginFragment extends Fragment {
 
-    private int _telefoonNummer;
-    private String _password;
+    private int _telefoonNummer = 0;
+    private String _password = "";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +33,7 @@ public class LoginFragment extends Fragment {
         AanmeldButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SignUpActivity.class);
+                //getActivity().finish();
                 startActivity(intent);
             }
         });
@@ -47,7 +48,6 @@ public class LoginFragment extends Fragment {
                 if (loggedInUser!=null) {
                     // if a user has been created we can enter the application and the data is passed to the next activity
 
-                    loggedInUser.setNaam(loggedInUser.getNaam());
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     intent.putExtra("user",loggedInUser);
                     startActivity(intent);
@@ -88,7 +88,11 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                _telefoonNummer = Integer.parseInt(s.toString());
+                try{
+                    _telefoonNummer = Integer.parseInt(s.toString());
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

@@ -30,8 +30,8 @@ import java.util.UUID;
 public class SignUpFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private Spinner gender;
     private App_Gebruiker temp = new App_Gebruiker();
-    private String vnaam;
-    private String anaam;
+    private String vnaam="";
+    private String anaam="";
 
     @Nullable
     @Override
@@ -49,11 +49,21 @@ public class SignUpFragment extends Fragment implements AdapterView.OnItemSelect
         Aanmelden.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
-                    //Creates user according to user inputs
+                    //Creates user according to user inputs and checks weather the nescecarry fields have been filled in
+                    if (temp.getTelefoon_Nummer() != 0
+                            && temp.getWachtwoord() != null
+                            && temp.getPlaatsnaam() != null
+                            && !temp.getNaam().equals("")) {
 
-                    HondenDB.get(getActivity()).addApp_Gebruiker(temp);
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
+                        HondenDB.get(getActivity()).addApp_Gebruiker(temp);
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        intent.putExtra("user", temp);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(),
+                                "INVULLEN: location, telNR, naam en wachtwoord", Toast.LENGTH_SHORT)
+                                .show();
+                    }
                 } finally {
 
                 }
@@ -71,8 +81,26 @@ public class SignUpFragment extends Fragment implements AdapterView.OnItemSelect
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                vnaam = s.toString();
+                vnaam = s.length()>0?s.toString():"";
                 temp.setNaam(vnaam + anaam);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        EditText plaats = (EditText) v.findViewById(R.id.PlaceName);
+        plaats.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                temp.setPlaatsnaam(s.toString());
             }
 
             @Override
@@ -90,7 +118,7 @@ public class SignUpFragment extends Fragment implements AdapterView.OnItemSelect
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                anaam = s.toString();
+                anaam =  s.length()>0?s.toString():"";
                 temp.setNaam(vnaam + anaam);
             }
 
