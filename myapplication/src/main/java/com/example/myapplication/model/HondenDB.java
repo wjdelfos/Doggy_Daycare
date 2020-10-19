@@ -68,6 +68,7 @@ public class HondenDB {
             TestAdvertentie2.setCapaciteit(3);
             TestAdvertentie2.setPrijs(9);
             TestAdvertentie2.setLocatie("Rotterdam");
+            TestAdvertentie2.setErvaringHonden("Mijn honden hebben veel aandacht nodig en vinden het leuk om lange wandelingen te maken door het bos");
             TestAdvertentie2.setBeginTijd(today);
             TestAdvertentie2.setEindTijd(today);
             TestAdvertentie2.setAdvertentieType(Advertentie.AdvertentieTypes.eigenaar);

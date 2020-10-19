@@ -162,7 +162,7 @@ public class SignUpFragment extends Fragment implements AdapterView.OnItemSelect
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Log.i("variables", s.toString());
 
-                temp.setTelefoon_Nummer(Integer.parseInt(s.toString()));
+                temp.setTelefoon_Nummer(Integer.parseInt(s.toString().replaceAll("\\D", "")));
             }
 
             @Override

@@ -89,7 +89,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try{
-                    _telefoonNummer = Integer.parseInt(s.toString());
+                    _telefoonNummer = Integer.parseInt(s.toString().replaceAll("\\D", ""));
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
                 }
