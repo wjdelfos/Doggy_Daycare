@@ -17,6 +17,18 @@
             android:layout_height="match_parent"
             android:visibility="visible">
 
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="411dp"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
             <TextView
                 android:id="@+id/Capacity"
                 android:layout_width="106dp"
@@ -68,8 +80,8 @@
 
             <TextView
                 android:id="@+id/Oppas"
-                android:layout_width="183dp"
-                android:layout_height="24dp"
+                android:layout_width="228dp"
+                android:layout_height="25dp"
                 android:text="@string/advert_plaatser"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +92,7 @@
 
             <TextView
                 android:id="@+id/Owner"
-                android:layout_width="183dp"
+                android:layout_width="228dp"
                 android:layout_height="24dp"
                 android:text="@string/advert_plaatser"
                 app:layout_constraintBottom_toBottomOf="parent"

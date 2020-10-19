@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.NameUser);
         navUsername.setText(n);
+        TextView navPhone = (TextView) headerView.findViewById(R.id.PhoneUser);
+        navPhone.setText(""+loggedInUser.getTelefoon_Nummer());
     }
 
     @Override

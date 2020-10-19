@@ -36,16 +36,16 @@ public class HondenDB {
         if (cursor.getCount() < 1) {
             Date today = new Date(new java.util.Date().getTime());
             App_Gebruiker TestPersoon = new App_Gebruiker();
-            TestPersoon.setNaam("Gerard");
+            TestPersoon.setNaam("Gerard menkbeer");
             TestPersoon.setTelefoon_Nummer(123456789);
-            TestPersoon.setHuisnummer(5);
+            TestPersoon.setHuisnummer(90);
             TestPersoon.setIntroductieText("ik ben een test gebruiker");
             TestPersoon.setWachtwoord("welkom");
             TestPersoon.setPlaatsnaam("Delft");
 
 
             App_Gebruiker TestPersoon2 = new App_Gebruiker();
-            TestPersoon2.setNaam("bob");
+            TestPersoon2.setNaam("Bob de tester");
             TestPersoon2.setTelefoon_Nummer(123456789);
             TestPersoon2.setHuisnummer(5);
             TestPersoon2.setIntroductieText("ik ben een test gebruiker");
@@ -56,7 +56,7 @@ public class HondenDB {
             TestAdvertentie.set_AdvertentiePlaatser(TestPersoon);
             TestAdvertentie.setCapaciteit(3);
             TestAdvertentie.setErvaringHonden("Ik ben opgegroeid met honden");
-            TestAdvertentie.setLocatie("rotterdam");
+            TestAdvertentie.setLocatie("Almere");
             TestAdvertentie.setBeginTijd(today);
             TestAdvertentie.setEindTijd(today);
             TestAdvertentie.setPrijs(2.56);
@@ -64,7 +64,8 @@ public class HondenDB {
             Advertentie TestAdvertentie2 = new Advertentie();
             TestAdvertentie2.set_AdvertentiePlaatser(TestPersoon2);
             TestAdvertentie2.setCapaciteit(3);
-            TestAdvertentie2.setLocatie("rotterdam");
+            TestAdvertentie2.setPrijs(9);
+            TestAdvertentie2.setLocatie("Rotterdam");
             TestAdvertentie2.setBeginTijd(today);
             TestAdvertentie2.setEindTijd(today);
 
@@ -72,9 +73,9 @@ public class HondenDB {
             Advertentie TestAdvertentie3 = new Advertentie();
             TestAdvertentie3.set_AdvertentiePlaatser(TestPersoon2);
             TestAdvertentie3.setCapaciteit(5);
-            TestAdvertentie3.setErvaringHonden("sahdjsajn");
-            TestAdvertentie3.setLocatie("rotterdam");
-            TestAdvertentie3.setPrijs(2);
+            TestAdvertentie3.setErvaringHonden("Ik vindt honden super lief");
+            TestAdvertentie3.setLocatie("Den Haag");
+            TestAdvertentie3.setPrijs(4.5);
             TestAdvertentie3.setBeginTijd(today);
             TestAdvertentie3.setEindTijd(today);
 
