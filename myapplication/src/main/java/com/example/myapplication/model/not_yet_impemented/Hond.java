@@ -1,4 +1,4 @@
-package com.example.myapplication.model;
+package com.example.myapplication.model.not_yet_impemented;
 
 import java.util.UUID;
 import java.util.Date;
@@ -13,7 +13,6 @@ public class Hond {
     private UUID Eigenaar;
 
 
-    public Hond() {  this(UUID.randomUUID()); }
 
     public Hond(UUID id) { ID = id; }
 
@@ -59,5 +58,5 @@ public class Hond {
         Eigenaar = eigenaar;
     }
 
-    // end region
+    // endregion
 }

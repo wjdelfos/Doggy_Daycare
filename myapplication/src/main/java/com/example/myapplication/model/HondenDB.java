@@ -1,12 +1,12 @@
 package com.example.myapplication.model;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 
 import com.example.myapplication.data_handeling.DataInitializer;
+import com.example.myapplication.model.not_yet_impemented.Hond;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -60,6 +60,7 @@ public class HondenDB {
             TestAdvertentie.setBeginTijd(today);
             TestAdvertentie.setEindTijd(today);
             TestAdvertentie.setPrijs(2.56);
+            TestAdvertentie.setAdvertentieType(Advertentie.AdvertentieTypes.oppas);
 
             Advertentie TestAdvertentie2 = new Advertentie();
             TestAdvertentie2.set_AdvertentiePlaatser(TestPersoon2);
@@ -68,6 +69,7 @@ public class HondenDB {
             TestAdvertentie2.setLocatie("Rotterdam");
             TestAdvertentie2.setBeginTijd(today);
             TestAdvertentie2.setEindTijd(today);
+            TestAdvertentie2.setAdvertentieType(Advertentie.AdvertentieTypes.oppas);
 
 
             Advertentie TestAdvertentie3 = new Advertentie();
@@ -78,6 +80,7 @@ public class HondenDB {
             TestAdvertentie3.setPrijs(4.5);
             TestAdvertentie3.setBeginTijd(today);
             TestAdvertentie3.setEindTijd(today);
+            TestAdvertentie3.setAdvertentieType(Advertentie.AdvertentieTypes.oppas);
 
             this.addApp_Gebruiker(TestPersoon2);
             this.addApp_Gebruiker(TestPersoon);
@@ -114,7 +117,7 @@ public class HondenDB {
     }
 
     public void addAdvertentie(Advertentie advertentie) {
-        String sql = "INSERT INTO Advertentie VALUES ('" + advertentie.getID() + "','" + advertentie.getBeginTijd() + "','" + advertentie.getEindTijd() + "','" + advertentie.getPrijs() + "','" + advertentie.getLocatie() + "','" + advertentie.getSpecialeVoorkeurenHond() + "','" + advertentie.getCapaciteit() + "','" + advertentie.getErvaringHonden() + "','" + advertentie.getOptiesEten() + "','" + advertentie.getAdvertentiePlaatser() + "' )";
+        String sql = "INSERT INTO Advertentie VALUES ('" + advertentie.getID() + "','" + advertentie.getBeginTijd() + "','" + advertentie.getEindTijd() + "','" + advertentie.getPrijs() + "','"+ advertentie.getAdvertentieType()+"','" + advertentie.getLocatie() + "','" + advertentie.getSpecialeVoorkeurenHond() + "','" + advertentie.getCapaciteit() + "','" + advertentie.getErvaringHonden() + "','" + advertentie.getOptiesEten() + "','" + advertentie.getAdvertentiePlaatser() + "' )";
         mDatabase.execSQL(sql);
     }
 
@@ -263,6 +266,7 @@ public class HondenDB {
         String BeginTijd = c.getString(c.getColumnIndex("BeginTijd"));
         String EindTijd = c.getString(c.getColumnIndex("EindTijd"));
         double Prijs = c.getDouble(c.getColumnIndex("Prijs"));
+        String advertentieType = c.getString(c.getColumnIndex("AdvertentieType"));
         String Locatie = c.getString(c.getColumnIndex("Locatie"));
         String SpecialeVoorkeurenHond = c.getString(c.getColumnIndex("SpecialeVoorkeurenHond"));
         int Capaciteit = c.getInt(c.getColumnIndex("Capaciteit"));
@@ -275,6 +279,7 @@ public class HondenDB {
         advert.setBeginTijd(Date.valueOf(BeginTijd));
         advert.setEindTijd(Date.valueOf(EindTijd));
         advert.setPrijs(Prijs);
+        advert.setAdvertentieType(Advertentie.AdvertentieTypes.valueOf(advertentieType));
         advert.setLocatie(Locatie);
         advert.setSpecialeVoorkeurenHond(SpecialeVoorkeurenHond);
         advert.setCapaciteit(Capaciteit);

@@ -1,4 +1,4 @@
-package com.example.myapplication.model;
+package com.example.myapplication.model.not_yet_impemented;
 
 import java.util.UUID;
 

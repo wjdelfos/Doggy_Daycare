@@ -15,7 +15,7 @@
         android:id="@+id/nav_gallery"
         android:name="com.example.myapplication.ui.create_advert.AdvertEigenaarFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/advert_eigenaar_main" />
     <fragment
         android:id="@+id/nav_advertentie_oppas"
         android:name="com.example.myapplication.ui.create_advert.AdvertOppasFragment"

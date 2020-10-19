@@ -58,17 +58,12 @@ public class AfspraakRecyclerFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.fab:
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
     private void updateUI() {
-        //TODO create get query
-
-
         List<Afspraak> afspraakList = HondenDB.get(getActivity()).getAfspraken(loggedInUser.getID());
 
         if (mAdapter == null) {

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -53,14 +54,6 @@ public class AdvertentieRecyclerFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.fab:// TODO New advert
-                /*
-                Notitie notitie = new Notitie();
-                NotitieBlok.getCurrent(getActivity()).addNotitie(notitie);
-                Intent intent = new Intent(getActivity(), NotitieActivity.class);
-                intent.putExtra("com.example.noteapplication.notitie_id", notitie.getId());
-                startActivity(intent);*/
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -87,6 +80,7 @@ public class AdvertentieRecyclerFragment extends Fragment {
         private TextView mOwnerTextView;
         private TextView mLocationTextView;
         private ImageButton mFavourite;
+        private Button mType;
         private Boolean favourite;
 
 
@@ -107,6 +101,7 @@ public class AdvertentieRecyclerFragment extends Fragment {
             mPriceTextView = (TextView) itemView.findViewById(R.id.Prijs);
             mOwnerTextView = (TextView) itemView.findViewById(R.id.Owner);
             mLocationTextView = (TextView) itemView.findViewById(R.id.Location);
+            mType = (Button) itemView.findViewById(R.id.TypeAdvert);
 
         }
 
@@ -118,6 +113,7 @@ public class AdvertentieRecyclerFragment extends Fragment {
             mOwnerTextView.setText(mAdvertentie.get_AdvertentiePlaatser().getNaam());
             mLocationTextView.setText(mAdvertentie.getLocatie());
             mFavourite = (ImageButton) itemView.findViewById(R.id.imageButton);
+            mType.setText(mAdvertentie.getAdvertentieType()+" advertentie");
             mFavourite.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // wanneer favourite gedefinieerd is kan onderstaande zin weg en kunnen de comments weg

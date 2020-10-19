@@ -44,6 +44,8 @@ public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnIt
         View v = inflater.inflate(R.layout.advert_eigenaar_main, container, false);
         loggedInUser = (App_Gebruiker) getActivity().getIntent()
                 .getSerializableExtra("user");
+        temp.setBeginTijd(new Date(System.currentTimeMillis()));
+        temp.setEindTijd(new Date(System.currentTimeMillis()));
 
         hondenplus = v.findViewById(R.id.availableDogs);
 
@@ -64,6 +66,7 @@ public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnIt
         Button createAdvert = (Button) v.findViewById(R.id.createadvert);
         createAdvert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                temp.setAdvertentieType(Advertentie.AdvertentieTypes.eigenaar);
                 temp.set_AdvertentiePlaatser(loggedInUser);
                 temp.setErvaringHonden("Ik zoek een oppasser voor mijn honden");
                 HondenDB.get(getActivity()).addAdvertentie(temp);
@@ -96,7 +99,6 @@ public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnIt
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override

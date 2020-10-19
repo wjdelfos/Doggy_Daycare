@@ -38,6 +38,8 @@ public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemS
         loggedInUser = (App_Gebruiker) getActivity().getIntent()
                 .getSerializableExtra("user");
         View v = inflater.inflate(R.layout.advert_create_oppas_main, container, false);
+        temp.setBeginTijd(new Date(System.currentTimeMillis()));
+        temp.setEindTijd(new Date(System.currentTimeMillis()));
 
         Type = (Spinner) v.findViewById(R.id.TypeCare);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
@@ -50,7 +52,7 @@ public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemS
         Button createAdvert = (Button) v.findViewById(R.id.createadvert);
         createAdvert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                temp.setAdvertentieType(Advertentie.AdvertentieTypes.oppas);
                 temp.set_AdvertentiePlaatser(loggedInUser);
                 HondenDB.get(getActivity()).addAdvertentie(temp);
                 Toast.makeText(getActivity(),
@@ -82,7 +84,6 @@ public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemS
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -105,7 +106,6 @@ public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemS
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
