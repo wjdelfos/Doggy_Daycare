@@ -68,6 +68,7 @@ public class HondenDB {
             TestAdvertentie2.setCapaciteit(3);
             TestAdvertentie2.setPrijs(9);
             TestAdvertentie2.setLocatie("Rotterdam");
+            TestAdvertentie2.setErvaringHonden("Mijn honden hebben veel aandacht nodig en vinden het leuk om lange wandelingen te maken door het bos");
             TestAdvertentie2.setBeginTijd(today);
             TestAdvertentie2.setEindTijd(today);
             TestAdvertentie2.setAdvertentieType(Advertentie.AdvertentieTypes.eigenaar);
@@ -113,21 +114,60 @@ public class HondenDB {
     }
 
     public void addApp_Gebruiker(App_Gebruiker app_Gebruiker) {
-        String sql = "INSERT INTO App_Gebruiker VALUES ('" + app_Gebruiker.getID() + "', '" + app_Gebruiker.getNaam() + "', '" + app_Gebruiker.getPlaatsnaam() + "', '" + app_Gebruiker.getStraatnaam() + "', '" + app_Gebruiker.getHuisnummer() + "', '" + app_Gebruiker.getPostcode() + "','" + app_Gebruiker.getTelefoon_Nummer() + "', '" + app_Gebruiker.getGeboortedatum() + "', '" + app_Gebruiker.getWachtwoord() + "', '" + app_Gebruiker.getIntroductieText() + "' )";
+        String sql = "INSERT INTO App_Gebruiker VALUES ('" +
+                app_Gebruiker.getID() +
+                "', '" + app_Gebruiker.getNaam() +
+                "', '" + app_Gebruiker.getPlaatsnaam() +
+                "', '" + app_Gebruiker.getStraatnaam() +
+                "', '" + app_Gebruiker.getHuisnummer() +
+                "', '" + app_Gebruiker.getPostcode() +
+                "','" + app_Gebruiker.getTelefoon_Nummer() +
+                "', '" + app_Gebruiker.getGeboortedatum() +
+                "', '" + app_Gebruiker.getWachtwoord() +
+                "', '" + app_Gebruiker.getIntroductieText() + "' )";
         mDatabase.execSQL(sql);
     }
 
     public void addAdvertentie(Advertentie advertentie) {
-        String sql = "INSERT INTO Advertentie VALUES ('" + advertentie.getID() + "','" + advertentie.getBeginTijd() + "','" + advertentie.getEindTijd() + "','" + advertentie.getPrijs() + "','"+ advertentie.getAdvertentieType()+"','" + advertentie.getLocatie() + "','" + advertentie.getSpecialeVoorkeurenHond() + "','" + advertentie.getCapaciteit() + "','" + advertentie.getErvaringHonden() + "','" + advertentie.getOptiesEten() + "','" + advertentie.getAdvertentiePlaatser() + "' )";
+        String sql = "INSERT INTO Advertentie VALUES ('" +
+                advertentie.getID() +
+                "','" + advertentie.getBeginTijd() +
+                "','" + advertentie.getEindTijd() +
+                "','" + advertentie.getPrijs() +
+                "','"+ advertentie.getAdvertentieType()+
+                "','" + advertentie.getLocatie() +
+                "','" + advertentie.getSpecialeVoorkeurenHond() +
+                "','" + advertentie.getCapaciteit() +
+                "','" + advertentie.getErvaringHonden() +
+                "','" + advertentie.getOptiesEten() +
+                "','" + advertentie.getAdvertentiePlaatser() + "' )";
         mDatabase.execSQL(sql);
     }
 
     public void addAfspraak(Afspraak afspraak) {
-        String sql = "INSERT INTO Afspraak VALUES ('" + afspraak.getID() + "','" + afspraak.getStatusAfspraak() + "','" + afspraak.getAfgesprokenPrijs() + "','" + afspraak.isIsgeaccepteerdeigenaar() + "','" + afspraak.isIsgeaccepteerdOppas() + "','" + afspraak.getOppas() + "','" + afspraak.getEigenaar() + "','" + afspraak.getAdvertentie() + "' )";
+        String sql = "INSERT INTO Afspraak VALUES ('" +
+                afspraak.getID() +
+                "','" + afspraak.getStatusAfspraak() +
+                "','" + afspraak.getAfgesprokenPrijs() +
+                "','" + afspraak.isIsgeaccepteerdeigenaar() +
+                "','" + afspraak.isIsgeaccepteerdOppas() +
+                "','" + afspraak.getOppas() +
+                "','" + afspraak.getEigenaar() +
+                "','" + afspraak.getAdvertentie() + "' )";
+        mDatabase.execSQL(sql);
+    }
+
+    public void UpdateAfspraakAcceptance(Afspraak afspraak) {
+        String sql = "update afspraak " +
+                "set Isgeaccepteerdeigenaar = '"+afspraak.isIsgeaccepteerdeigenaar()
+                +"' , IsgeaccepteerdOppas = '"+afspraak.isIsgeaccepteerdOppas()
+                +"' , Status = '"+afspraak.getStatusAfspraak()
+                +"' where id = '"+afspraak.getID()+"'";
         mDatabase.execSQL(sql);
     }
 
     public List<Advertentie> getAdvertenties() {
+        // get all adverts
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM Advertentie ", null);
         List<Advertentie> advertenties = new ArrayList<>();
         try {
@@ -141,30 +181,17 @@ public class HondenDB {
             cursor.close();
         }
 
-        List<Advertentie> fullAdvertenties = new ArrayList<>();
+        //split so we don't have 2 concurring cursors
         for (Advertentie a :
                 advertenties) {
-            fullAdvertenties.add(addUserToAdvert(a));
+            a.set_AdvertentiePlaatser(getAppGebruiker(a.getAdvertentiePlaatser()));
         }
 
-        return fullAdvertenties;
-    }
-
-    private Advertentie addUserToAdvert(Advertentie a) {
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM App_Gebruiker WHERE id = '" + a.getAdvertentiePlaatser().toString() + "'", null);
-
-        try {
-            cursor.moveToFirst();
-            App_Gebruiker b = CurserToGebruiker(cursor);
-            a.set_AdvertentiePlaatser(b);
-            return a;
-
-        } finally {
-            cursor.close();
-        }
+        return advertenties;
     }
 
     public List<Afspraak> getAfspraken(UUID UserId) {
+        // This query gets appointments where the user is either a sitter or an owner
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM Afspraak WHERE Oppas = '" + UserId + "' or Eigenaar = '" + UserId + "'", null);
         List<Afspraak> afspraken = new ArrayList<>();
         try {
@@ -178,6 +205,7 @@ public class HondenDB {
             cursor.close();
         }
 
+        //split so we don't have 2 concurring cursors
         for (Afspraak a :
                 afspraken) {
             a.set_oppas(getAppGebruiker(a.getOppas()));
@@ -190,6 +218,7 @@ public class HondenDB {
     }
 
     private App_Gebruiker getAppGebruiker(UUID id) {
+        // get a specific user by ID
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM App_Gebruiker WHERE id = '" + id + "'", null);
 
         try {
@@ -202,6 +231,7 @@ public class HondenDB {
     }
 
     private Advertentie getAdvertentie(UUID id) {
+        //get an advert by ID
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM Advertentie WHERE id = '" + id + "'", null);
 
         try {
@@ -211,14 +241,6 @@ public class HondenDB {
         } finally {
             cursor.close();
         }
-    }
-
-    public void UpdateAfspraakAcceptance(Afspraak afspraak) {
-        String sql = "update afspraak " +
-                "set Isgeaccepteerdeigenaar = '"+afspraak.isIsgeaccepteerdeigenaar()
-                +"' , IsgeaccepteerdOppas = '"+afspraak.isIsgeaccepteerdOppas()+
-                "' , Status = '"+afspraak.getStatusAfspraak()+"' where id = '"+afspraak.getID()+"'";
-        mDatabase.execSQL(sql);
     }
 
     // region Cursor to object
