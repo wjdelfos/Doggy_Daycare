@@ -17,13 +17,13 @@ De app bevat de volgende functionaliteiten:
 
 Van te voren gemaakte inlog gegevens:
 
-user Gerard
-username: 123456789
-wachtwoord: welkom
+User Gerard
+- username: 123456789
+- wachtwoord: welkom
 
-user Bob
-username: 123456789
-wachtwoord: 123
+User Bob
+- username: 123456789
+- wachtwoord: 123
 
 
 De applicatie kan runnen zonder configuratie van te voren.
