@@ -18,6 +18,7 @@ import com.example.myapplication.model.Advertentie;
 import com.example.myapplication.model.Afspraak;
 import com.example.myapplication.model.App_Gebruiker;
 import com.example.myapplication.model.HondenDB;
+import com.example.myapplication.ui.messaging.MessagingActivity;
 
 import java.util.UUID;
 
@@ -49,6 +50,20 @@ public class AdvertentieDetailFragment extends Fragment {
         TextView description = (TextView) root.findViewById(R.id.Description_id);
         description.setText(_advertentie.getErvaringHonden());
         // endregion
+
+        Button Messaging = (Button) root.findViewById(R.id.Messaging);
+        Messaging.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                try {
+                    Intent intent = new Intent(getActivity(), MessagingActivity.class);
+                    startActivity(intent);
+                } catch(Exception e) {
+                    //e.toString();
+                }
+
+            }
+        });
+
 
         Button share = (Button) root.findViewById(R.id.buttonShare);
         share.setOnClickListener(new View.OnClickListener() {
