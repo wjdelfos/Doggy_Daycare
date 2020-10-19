@@ -7,12 +7,12 @@ Dit is een App om honden eigenaren en honden oppassers/fanaten met elkaar te lin
 
 
 De app bevat de volgende functionaliteiten:
-- aanmelden
-- inloggen
-- oppas advertentie maken
-- eigenaars advertentie maken
-- een voorstel/deal maken aan de hand van een advertentie
-- een voorstellen bekijken en accepteren
+- Aanmelden
+- Inloggen
+- Oppas advertentie maken
+- Eigenaars advertentie maken
+- Een voorstel/deal maken aan de hand van een advertentie
+- Een voorstellen bekijken en accepteren
 
 
 Van te voren gemaakte inlog gegevens:
