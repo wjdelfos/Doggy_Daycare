@@ -134,7 +134,7 @@ public class HondenDB {
                 "','" + advertentie.getBeginTijd() +
                 "','" + advertentie.getEindTijd() +
                 "','" + advertentie.getPrijs() +
-                "','"+ advertentie.getAdvertentieType()+
+                "','" + advertentie.getAdvertentieType() +
                 "','" + advertentie.getLocatie() +
                 "','" + advertentie.getSpecialeVoorkeurenHond() +
                 "','" + advertentie.getCapaciteit() +
@@ -157,14 +157,49 @@ public class HondenDB {
         mDatabase.execSQL(sql);
     }
 
-    public void UpdateAfspraakAcceptance(Afspraak afspraak) {
-        String sql = "update afspraak " +
-                "set Isgeaccepteerdeigenaar = '"+afspraak.isIsgeaccepteerdeigenaar()
-                +"' , IsgeaccepteerdOppas = '"+afspraak.isIsgeaccepteerdOppas()
-                +"' , Status = '"+afspraak.getStatusAfspraak()
-                +"' where id = '"+afspraak.getID()+"'";
+    public void addMessage(Message message) {
+        String sql = "INSERT INTO Message VALUES ('" +
+                message.getId() +
+                "','" + message.getContents() +
+                "','" + message.getSendAtTime() +
+                "','" + message.getSender() +
+                "','" + message.getReceiver() + "' )";
         mDatabase.execSQL(sql);
     }
+
+    public void UpdateAfspraakAcceptance(Afspraak afspraak) {
+        String sql = "update afspraak " +
+                "set Isgeaccepteerdeigenaar = '" + afspraak.isIsgeaccepteerdeigenaar()
+                + "' , IsgeaccepteerdOppas = '" + afspraak.isIsgeaccepteerdOppas()
+                + "' , Status = '" + afspraak.getStatusAfspraak()
+                + "' where id = '" + afspraak.getID() + "'";
+        mDatabase.execSQL(sql);
+    }
+
+    public List<Message> getMessages(UUID sender, UUID receiver) {
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM Message ", null);
+        List<Message> messages = new ArrayList<>();
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                Message m = cursorToMessage(cursor);
+                messages.add(m);
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+
+        //split so we don't have 2 concurring cursors
+        for (Message a :
+                messages) {
+            a.set_Sender(getAppGebruiker(a.getSender()));
+            a.set_Receiver(getAppGebruiker(a.getReceiver()));
+        }
+
+        return messages;
+    }
+
 
     public List<Advertentie> getAdvertenties() {
         // get all adverts
@@ -243,13 +278,33 @@ public class HondenDB {
         }
     }
 
+    public List<App_Gebruiker> getConversations(UUID id) {
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM App_Gebruiker where " +
+                "id in (select receiver from Message where sender= '"+id+ "' or receiver='"+id+ "') or " +
+                "id in (select sender from Message where sender= '"+id+ "' or receiver='"+id+ "' )", null);
+        List<App_Gebruiker> app_gebruikers = new ArrayList<>();
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                App_Gebruiker g = CurserToGebruiker(cursor);
+                if(!id.equals(g.getID())) {
+                    app_gebruikers.add(g);
+                }
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+        return app_gebruikers;
+    }
+
     // region Cursor to object
     private Afspraak cursorToAfspraak(Cursor c) {
         String UUIDString = c.getString(c.getColumnIndex("id"));
         String Status = c.getString(c.getColumnIndex("Status"));
         double Afgesproken_prijs = c.getDouble(c.getColumnIndex("Afgesproken_prijs"));
-        boolean Isgeaccepteerdeigenaar = Boolean.parseBoolean(c.getString(c.getColumnIndex("Isgeaccepteerdeigenaar")) );
-        boolean IsgeaccepteerdOppas = Boolean.parseBoolean(c.getString(c.getColumnIndex("IsgeaccepteerdOppas")) );
+        boolean Isgeaccepteerdeigenaar = Boolean.parseBoolean(c.getString(c.getColumnIndex("Isgeaccepteerdeigenaar")));
+        boolean IsgeaccepteerdOppas = Boolean.parseBoolean(c.getString(c.getColumnIndex("IsgeaccepteerdOppas")));
         String Oppas = c.getString(c.getColumnIndex("Oppas"));
         String Eigenaar = c.getString(c.getColumnIndex("Eigenaar"));
         String Advertentie = c.getString(c.getColumnIndex("Advertentie"));
@@ -315,6 +370,22 @@ public class HondenDB {
         advert.setAdvertentiePlaatser(UUID.fromString(IdAdvertentiePlaatser));
         return advert;
     }
+
+    private Message cursorToMessage(Cursor c) {
+        String UUIDString = c.getString(c.getColumnIndex("id"));
+        String Contents = c.getString(c.getColumnIndex("Contents"));
+        String SendAtTime = c.getString(c.getColumnIndex("SendAtTime"));
+        String Sender = c.getString(c.getColumnIndex("Sender"));
+        String Receiver = c.getString(c.getColumnIndex("Receiver"));
+
+        Message m = new Message(UUID.fromString(UUIDString));
+        m.setContents(Contents);
+        m.setSendAtTime(Date.valueOf(SendAtTime));
+        m.setReceiver(UUID.fromString(Receiver));
+        m.setSender(UUID.fromString(Sender));
+        return m;
+    }
+
 
     // endregion
 

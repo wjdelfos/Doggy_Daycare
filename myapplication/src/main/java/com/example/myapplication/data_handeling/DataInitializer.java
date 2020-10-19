@@ -93,6 +93,19 @@ public class DataInitializer extends SQLiteOpenHelper {
                         " CONSTRAINT fk_afspraak_review" +
                         "    FOREIGN KEY (Afspraak)" +
                         "    REFERENCES Afspraak (id))");
+        db.execSQL(
+                "create table Message(" +
+                        " id text primary key," +
+                        " Contents text," +
+                        " SendAtTime datetime," +
+                        " Sender text," +
+                        " Receiver text," +
+                        " CONSTRAINT fk_gebruiker_message" +
+                        "    FOREIGN KEY (Sender)" +
+                        "    REFERENCES App_Gebruiker (id)," +
+                        " CONSTRAINT fk_gebruiker_review" +
+                        "    FOREIGN KEY (Receiver)" +
+                        "    REFERENCES App_Gebruiker (id))");
     }
 
     @Override
