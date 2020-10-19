@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.advertentie;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +49,24 @@ public class AdvertentieDetailFragment extends Fragment {
         TextView description = (TextView) root.findViewById(R.id.Description_id);
         description.setText(_advertentie.getErvaringHonden());
         // endregion
+
+        Button share = (Button) root.findViewById(R.id.buttonShare);
+        share.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                try {
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Doggy Daycare");
+                    String shareMessage= "\nLet me recommend you this Advert\n\n";
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                    startActivity(Intent.createChooser(shareIntent, "choose one"));
+                } catch(Exception e) {
+                    //e.toString();
+                }
+
+            }
+        });
+
 
         // this on click listener adds a concept appointment to the database
         Button deal = (Button) root.findViewById(R.id.buttonDeal);
