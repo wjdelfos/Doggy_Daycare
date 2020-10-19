@@ -41,6 +41,9 @@ public class AdvertentieDetailFragment extends Fragment {
         TextView fromDate = (TextView) root.findViewById(R.id.from_id);
         fromDate.setText(_advertentie.getBeginTijd().toString());
 
+        TextView tillDate = (TextView) root.findViewById(R.id.Till_id);
+        tillDate.setText(_advertentie.getEindTijd().toString());
+
         TextView description = (TextView) root.findViewById(R.id.Description_id);
         description.setText(_advertentie.getErvaringHonden());
 
@@ -61,6 +64,7 @@ public class AdvertentieDetailFragment extends Fragment {
                     Toast.makeText(getActivity(),
                             "Deal made!", Toast.LENGTH_SHORT)
                             .show();
+                    getActivity().finish();
                 }else {
                     Toast.makeText(getActivity(),
                             "Cannot make deal with yourself", Toast.LENGTH_SHORT)
