@@ -20,6 +20,8 @@ import com.example.myapplication.model.App_Gebruiker;
 import com.example.myapplication.model.HondenDB;
 
 public class AfspraakDetailFragment extends Fragment {
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,7 +56,7 @@ public class AfspraakDetailFragment extends Fragment {
 
         Button deal = (Button) root.findViewById(R.id.ButtonAfspraak);
 
-
+        //logic for displaying the button and text
         TextView AcceptatieEigenaar = (TextView) root.findViewById(R.id.AcceptatieEigenaar);
         if (_afspraak.isIsgeaccepteerdeigenaar()) {
             AcceptatieEigenaar.setText("Geaccepteerd door hond eigenaar");
@@ -84,6 +86,7 @@ public class AfspraakDetailFragment extends Fragment {
         }
 
         deal.setOnClickListener(new View.OnClickListener() {
+            //Update the appointment to display a different state
             public void onClick(View v) {
                 if (UserIsOppas) {
                     _afspraak.setIsgeaccepteerdOppas(true);

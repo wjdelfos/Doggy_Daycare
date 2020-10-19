@@ -38,19 +38,23 @@ public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnIt
     RecyclerView hondenplus;
 
 
+    /*
+    * in this class a advert is made and dogs are statically added
+    * this file requires a lot of extra work to make it work dynamically
+    * */
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.advert_eigenaar_main, container, false);
         loggedInUser = (App_Gebruiker) getActivity().getIntent()
                 .getSerializableExtra("user");
+        //dummy values if user doesnt enter data
         temp.setBeginTijd(new Date(System.currentTimeMillis()));
         temp.setEindTijd(new Date(System.currentTimeMillis()));
 
         hondenplus = v.findViewById(R.id.availableDogs);
-
         DogNames = getResources().getStringArray(R.array.DummyDogNames);
-
         RyclerFixer myadapter = new RyclerFixer(getActivity(), DogNames);
         hondenplus.setAdapter(myadapter);
         hondenplus.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -66,6 +70,7 @@ public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnIt
         Button createAdvert = (Button) v.findViewById(R.id.createadvert);
         createAdvert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //setting known values to the advert
                 temp.setAdvertentieType(Advertentie.AdvertentieTypes.eigenaar);
                 temp.set_AdvertentiePlaatser(loggedInUser);
                 temp.setErvaringHonden("Ik zoek een oppasser voor mijn honden");

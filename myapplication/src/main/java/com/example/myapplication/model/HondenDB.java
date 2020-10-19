@@ -19,18 +19,19 @@ public class HondenDB {
     private SQLiteDatabase mDatabase;
     private SQLiteQueryBuilder QueryBuilder;
 
+
+    //this class is called to communicate with the database
     public static HondenDB get(Context context) {
         return sHonden == null ? new HondenDB(context) : sHonden;
     }
 
-    // private constructor zodat niemand anders een NotitieBlok kan maken
-    // en we dus garanderen dat er maar één is
     private HondenDB(Context context) {
         mContext = context.getApplicationContext();
         mDatabase = new DataInitializer(mContext).getWritableDatabase();
         AddDummyData();
     }
 
+    //Filling the database so some data can be shown the first time the app is opened
     private void AddDummyData() {
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM Advertentie", null);
         if (cursor.getCount() < 1) {
@@ -69,7 +70,7 @@ public class HondenDB {
             TestAdvertentie2.setLocatie("Rotterdam");
             TestAdvertentie2.setBeginTijd(today);
             TestAdvertentie2.setEindTijd(today);
-            TestAdvertentie2.setAdvertentieType(Advertentie.AdvertentieTypes.oppas);
+            TestAdvertentie2.setAdvertentieType(Advertentie.AdvertentieTypes.eigenaar);
 
 
             Advertentie TestAdvertentie3 = new Advertentie();
@@ -118,11 +119,6 @@ public class HondenDB {
 
     public void addAdvertentie(Advertentie advertentie) {
         String sql = "INSERT INTO Advertentie VALUES ('" + advertentie.getID() + "','" + advertentie.getBeginTijd() + "','" + advertentie.getEindTijd() + "','" + advertentie.getPrijs() + "','"+ advertentie.getAdvertentieType()+"','" + advertentie.getLocatie() + "','" + advertentie.getSpecialeVoorkeurenHond() + "','" + advertentie.getCapaciteit() + "','" + advertentie.getErvaringHonden() + "','" + advertentie.getOptiesEten() + "','" + advertentie.getAdvertentiePlaatser() + "' )";
-        mDatabase.execSQL(sql);
-    }
-
-    public void addHond(Hond hond) {
-        String sql = "INSERT INTO Hond VALUES ('" + hond.getID() + "','" + hond.getNaam() + "','" + hond.getLeeftijd() + "','" + hond.getRas() + "','" + hond.getOpmerkingen() + "','" + hond.getEigenaar() + "' )";
         mDatabase.execSQL(sql);
     }
 
@@ -217,6 +213,15 @@ public class HondenDB {
         }
     }
 
+    public void UpdateAfspraakAcceptance(Afspraak afspraak) {
+        String sql = "update afspraak " +
+                "set Isgeaccepteerdeigenaar = '"+afspraak.isIsgeaccepteerdeigenaar()
+                +"' , IsgeaccepteerdOppas = '"+afspraak.isIsgeaccepteerdOppas()+
+                "' , Status = '"+afspraak.getStatusAfspraak()+"' where id = '"+afspraak.getID()+"'";
+        mDatabase.execSQL(sql);
+    }
+
+    // region Cursor to object
     private Afspraak cursorToAfspraak(Cursor c) {
         String UUIDString = c.getString(c.getColumnIndex("id"));
         String Status = c.getString(c.getColumnIndex("Status"));
@@ -289,11 +294,6 @@ public class HondenDB {
         return advert;
     }
 
-    public void UpdateAfspraakAcceptance(Afspraak afspraak) {
-        String sql = "update afspraak " +
-                "set Isgeaccepteerdeigenaar = '"+afspraak.isIsgeaccepteerdeigenaar()
-                +"' , IsgeaccepteerdOppas = '"+afspraak.isIsgeaccepteerdOppas()+
-                "' , Status = '"+afspraak.getStatusAfspraak()+"' where id = '"+afspraak.getID()+"'";
-        mDatabase.execSQL(sql);
-    }
+    // endregion
+
 }

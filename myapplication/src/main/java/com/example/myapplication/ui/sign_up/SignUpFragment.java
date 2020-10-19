@@ -48,6 +48,8 @@ public class SignUpFragment extends Fragment implements AdapterView.OnItemSelect
         Aanmelden.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
+                    //Creates user according to user inputs
+
                     HondenDB.get(getActivity()).addApp_Gebruiker(temp);
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);

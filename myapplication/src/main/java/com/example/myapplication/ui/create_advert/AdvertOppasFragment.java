@@ -32,6 +32,10 @@ public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemS
     private Advertentie temp = new Advertentie();
     App_Gebruiker loggedInUser;
 
+
+    /*
+    * Look at AdvertEigenaarFragment for comments
+    * */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

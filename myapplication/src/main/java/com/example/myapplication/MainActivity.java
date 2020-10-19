@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
     private App_Gebruiker loggedInUser;
     private AppBarConfiguration mAppBarConfiguration;
 
+    /*
+    * Mostly template code
+    * */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        //setting user information
 
         loggedInUser = (App_Gebruiker) this.getIntent()
                 .getSerializableExtra("user");

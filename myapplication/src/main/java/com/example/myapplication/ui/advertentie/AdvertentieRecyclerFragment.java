@@ -73,6 +73,7 @@ public class AdvertentieRecyclerFragment extends Fragment {
     }
 
     private class AdvertentieHolder extends RecyclerView.ViewHolder {
+        //defines xml fields
         private Advertentie mAdvertentie;
         private TextView mCapacityTextView;
         private TextView mDateTextView;
@@ -86,6 +87,7 @@ public class AdvertentieRecyclerFragment extends Fragment {
 
         public AdvertentieHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.row_advertentie, parent, false));
+            //assigns xml fields
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -106,6 +108,7 @@ public class AdvertentieRecyclerFragment extends Fragment {
         }
 
         public void bind(Advertentie advertentie) {
+            //binds xml fields
             mAdvertentie = advertentie;
             mCapacityTextView.setText("Capacity: "+ mAdvertentie.getCapaciteit());
             mDateTextView.setText(mAdvertentie.getBeginTijd().toString());
@@ -117,7 +120,6 @@ public class AdvertentieRecyclerFragment extends Fragment {
             mFavourite.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // wanneer favourite gedefinieerd is kan onderstaande zin weg en kunnen de comments weg
-                    // TODO favorite definieren
                     mFavourite.setBackgroundResource(R.drawable.favourite_button_gekleurd);
                     //  if (favourite == false) {
                     //      mFavourite.setBackgroundResource(R.drawable.favourite_button_gekleurd);
