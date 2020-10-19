@@ -30,3 +30,7 @@ User Bob
 De applicatie kan runnen zonder configuratie van te voren.
 Er moet natuurlijk wel een Device zijn om de applicatie op te runnen.
 Let op: misschien moeten de gradle files worden geupdate.
+
+Voor de code review:
+kijk voor data handeling, modellen, controllers en UI in:  myapplication/src/main/java/com/example/myapplication
+
