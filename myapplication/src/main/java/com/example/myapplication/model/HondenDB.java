@@ -177,7 +177,7 @@ public class HondenDB {
     }
 
     public List<Message> getMessages(UUID sender, UUID receiver) {
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM Message ", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM Message where sender ='"+sender+"' and receiver = '"+receiver+"'", null);
         List<Message> messages = new ArrayList<>();
         try {
             cursor.moveToFirst();
