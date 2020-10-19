@@ -24,6 +24,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.model.App_Gebruiker;
 import com.example.myapplication.model.HondenDB;
 
+import java.sql.Date;
 import java.util.UUID;
 
 public class SignUpFragment extends Fragment implements AdapterView.OnItemSelectedListener {
@@ -108,7 +109,12 @@ public class SignUpFragment extends Fragment implements AdapterView.OnItemSelect
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //TODO update Birth date
+                temp.setGeboortedatum(new Date(System.currentTimeMillis()));
+                try {
+                    temp.setGeboortedatum(Date.valueOf(s.toString()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
