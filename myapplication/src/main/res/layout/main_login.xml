@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="200dp"
         android:layout_marginBottom="209dp"
-        android:text="Aanmelden"
+        android:text="Registreren"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

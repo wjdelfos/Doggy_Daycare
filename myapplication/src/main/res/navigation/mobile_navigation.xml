@@ -27,4 +27,10 @@
         android:name="com.example.myapplication.ui.afspraken.AfspraakRecyclerFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_inbox"
+        android:name="com.example.myapplication.ui.messaging.InboxRecyclerFragment"
+        android:label="@string/inbox"
+        tools:layout="@layout/fragmet_inbox" />
 </navigation>

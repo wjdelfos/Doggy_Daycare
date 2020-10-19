@@ -16,6 +16,10 @@ public class Message {
         Id = UUID.randomUUID();
     }
 
+    public Message(UUID fromString) {
+        Id=fromString;
+    }
+
     public UUID getId() {
         return Id;
     }
@@ -58,6 +62,7 @@ public class Message {
 
     public void set_Sender(App_Gebruiker _Sender) {
         this._Sender = _Sender;
+        this.Sender=_Sender.getID();
     }
 
     public App_Gebruiker get_Receiver() {
@@ -66,6 +71,7 @@ public class Message {
 
     public void set_Receiver(App_Gebruiker _Receiver) {
         this._Receiver = _Receiver;
+        this.Receiver=_Receiver.getID();
     }
 
 

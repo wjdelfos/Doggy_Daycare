@@ -33,7 +33,6 @@ public class LoginFragment extends Fragment {
         AanmeldButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SignUpActivity.class);
-                //getActivity().finish();
                 startActivity(intent);
             }
         });

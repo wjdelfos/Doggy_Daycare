@@ -55,8 +55,12 @@ public class AdvertentieDetailFragment extends Fragment {
         Messaging.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
-                    Intent intent = new Intent(getActivity(), MessagingActivity.class);
-                    startActivity(intent);
+                    if(!loggedInUser.getID().equals(_advertentie.getAdvertentiePlaatser())) {
+                        Intent intent = new Intent(getActivity(), MessagingActivity.class);
+                        intent.putExtra("user", loggedInUser);
+                        intent.putExtra("receiver", _advertentie.get_AdvertentiePlaatser());
+                        startActivity(intent);
+                    }
                 } catch(Exception e) {
                     //e.toString();
                 }
