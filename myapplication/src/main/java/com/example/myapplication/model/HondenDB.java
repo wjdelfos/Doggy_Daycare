@@ -1,12 +1,12 @@
 package com.example.myapplication.model;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 
 import com.example.myapplication.data_handeling.DataInitializer;
+import com.example.myapplication.model.not_yet_impemented.Hond;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -19,33 +19,34 @@ public class HondenDB {
     private SQLiteDatabase mDatabase;
     private SQLiteQueryBuilder QueryBuilder;
 
+
+    //this class is called to communicate with the database
     public static HondenDB get(Context context) {
         return sHonden == null ? new HondenDB(context) : sHonden;
     }
 
-    // private constructor zodat niemand anders een NotitieBlok kan maken
-    // en we dus garanderen dat er maar één is
     private HondenDB(Context context) {
         mContext = context.getApplicationContext();
         mDatabase = new DataInitializer(mContext).getWritableDatabase();
         AddDummyData();
     }
 
+    //Filling the database so some data can be shown the first time the app is opened
     private void AddDummyData() {
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM App_Gebruiker", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM Advertentie", null);
         if (cursor.getCount() < 1) {
             Date today = new Date(new java.util.Date().getTime());
             App_Gebruiker TestPersoon = new App_Gebruiker();
-            TestPersoon.setNaam("Gerard");
+            TestPersoon.setNaam("Gerard menkbeer");
             TestPersoon.setTelefoon_Nummer(123456789);
-            TestPersoon.setHuisnummer(5);
+            TestPersoon.setHuisnummer(90);
             TestPersoon.setIntroductieText("ik ben een test gebruiker");
             TestPersoon.setWachtwoord("welkom");
             TestPersoon.setPlaatsnaam("Delft");
 
 
             App_Gebruiker TestPersoon2 = new App_Gebruiker();
-            TestPersoon2.setNaam("bob");
+            TestPersoon2.setNaam("Bob de tester");
             TestPersoon2.setTelefoon_Nummer(123456789);
             TestPersoon2.setHuisnummer(5);
             TestPersoon2.setIntroductieText("ik ben een test gebruiker");
@@ -56,27 +57,31 @@ public class HondenDB {
             TestAdvertentie.set_AdvertentiePlaatser(TestPersoon);
             TestAdvertentie.setCapaciteit(3);
             TestAdvertentie.setErvaringHonden("Ik ben opgegroeid met honden");
-            TestAdvertentie.setLocatie("rotterdam");
+            TestAdvertentie.setLocatie("Almere");
             TestAdvertentie.setBeginTijd(today);
             TestAdvertentie.setEindTijd(today);
             TestAdvertentie.setPrijs(2.56);
+            TestAdvertentie.setAdvertentieType(Advertentie.AdvertentieTypes.oppas);
 
             Advertentie TestAdvertentie2 = new Advertentie();
             TestAdvertentie2.set_AdvertentiePlaatser(TestPersoon2);
             TestAdvertentie2.setCapaciteit(3);
-            TestAdvertentie2.setLocatie("rotterdam");
+            TestAdvertentie2.setPrijs(9);
+            TestAdvertentie2.setLocatie("Rotterdam");
             TestAdvertentie2.setBeginTijd(today);
             TestAdvertentie2.setEindTijd(today);
+            TestAdvertentie2.setAdvertentieType(Advertentie.AdvertentieTypes.eigenaar);
 
 
             Advertentie TestAdvertentie3 = new Advertentie();
             TestAdvertentie3.set_AdvertentiePlaatser(TestPersoon2);
             TestAdvertentie3.setCapaciteit(5);
-            TestAdvertentie3.setErvaringHonden("sahdjsajn");
-            TestAdvertentie3.setLocatie("rotterdam");
-            TestAdvertentie3.setPrijs(2);
+            TestAdvertentie3.setErvaringHonden("Ik vindt honden super lief");
+            TestAdvertentie3.setLocatie("Den Haag");
+            TestAdvertentie3.setPrijs(4.5);
             TestAdvertentie3.setBeginTijd(today);
             TestAdvertentie3.setEindTijd(today);
+            TestAdvertentie3.setAdvertentieType(Advertentie.AdvertentieTypes.oppas);
 
             this.addApp_Gebruiker(TestPersoon2);
             this.addApp_Gebruiker(TestPersoon);
@@ -101,7 +106,6 @@ public class HondenDB {
                     a = CurserToGebruiker(cursor);
                 }
                 return a;
-                //TODO set current user to this user
             }
         } finally {
             cursor.close();
@@ -114,12 +118,7 @@ public class HondenDB {
     }
 
     public void addAdvertentie(Advertentie advertentie) {
-        String sql = "INSERT INTO Advertentie VALUES ('" + advertentie.getID() + "','" + advertentie.getBeginTijd() + "','" + advertentie.getEindTijd() + "','" + advertentie.getPrijs() + "','" + advertentie.getLocatie() + "','" + advertentie.getSpecialeVoorkeurenHond() + "','" + advertentie.getCapaciteit() + "','" + advertentie.getErvaringHonden() + "','" + advertentie.getOptiesEten() + "','" + advertentie.getAdvertentiePlaatser() + "' )";
-        mDatabase.execSQL(sql);
-    }
-
-    public void addHond(Hond hond) {
-        String sql = "INSERT INTO Hond VALUES ('" + hond.getID() + "','" + hond.getNaam() + "','" + hond.getLeeftijd() + "','" + hond.getRas() + "','" + hond.getOpmerkingen() + "','" + hond.getEigenaar() + "' )";
+        String sql = "INSERT INTO Advertentie VALUES ('" + advertentie.getID() + "','" + advertentie.getBeginTijd() + "','" + advertentie.getEindTijd() + "','" + advertentie.getPrijs() + "','"+ advertentie.getAdvertentieType()+"','" + advertentie.getLocatie() + "','" + advertentie.getSpecialeVoorkeurenHond() + "','" + advertentie.getCapaciteit() + "','" + advertentie.getErvaringHonden() + "','" + advertentie.getOptiesEten() + "','" + advertentie.getAdvertentiePlaatser() + "' )";
         mDatabase.execSQL(sql);
     }
 
@@ -159,7 +158,6 @@ public class HondenDB {
             App_Gebruiker b = CurserToGebruiker(cursor);
             a.set_AdvertentiePlaatser(b);
             return a;
-            //TODO set current user to this user
 
         } finally {
             cursor.close();
@@ -182,13 +180,9 @@ public class HondenDB {
 
         for (Afspraak a :
                 afspraken) {
-            if (a.getEigenaar() == UserId) {
-                a.set_oppas(getAppGebruiker(a.getOppas()));
-            } else {
-                a.set_eigenaar(getAppGebruiker(a.getEigenaar()));
-            }
+            a.set_oppas(getAppGebruiker(a.getOppas()));
+            a.set_eigenaar(getAppGebruiker(a.getEigenaar()));
             a.set_advertentie(getAdvertentie(a.getAdvertentie()));
-
         }
 
         return afspraken;
@@ -219,12 +213,21 @@ public class HondenDB {
         }
     }
 
+    public void UpdateAfspraakAcceptance(Afspraak afspraak) {
+        String sql = "update afspraak " +
+                "set Isgeaccepteerdeigenaar = '"+afspraak.isIsgeaccepteerdeigenaar()
+                +"' , IsgeaccepteerdOppas = '"+afspraak.isIsgeaccepteerdOppas()+
+                "' , Status = '"+afspraak.getStatusAfspraak()+"' where id = '"+afspraak.getID()+"'";
+        mDatabase.execSQL(sql);
+    }
+
+    // region Cursor to object
     private Afspraak cursorToAfspraak(Cursor c) {
         String UUIDString = c.getString(c.getColumnIndex("id"));
         String Status = c.getString(c.getColumnIndex("Status"));
         double Afgesproken_prijs = c.getDouble(c.getColumnIndex("Afgesproken_prijs"));
-        boolean Isgeaccepteerdeigenaar = c.getInt(c.getColumnIndex("Isgeaccepteerdeigenaar")) > 0;
-        boolean IsgeaccepteerdOppas = c.getInt(c.getColumnIndex("IsgeaccepteerdOppas")) > 0;
+        boolean Isgeaccepteerdeigenaar = Boolean.parseBoolean(c.getString(c.getColumnIndex("Isgeaccepteerdeigenaar")) );
+        boolean IsgeaccepteerdOppas = Boolean.parseBoolean(c.getString(c.getColumnIndex("IsgeaccepteerdOppas")) );
         String Oppas = c.getString(c.getColumnIndex("Oppas"));
         String Eigenaar = c.getString(c.getColumnIndex("Eigenaar"));
         String Advertentie = c.getString(c.getColumnIndex("Advertentie"));
@@ -268,6 +271,7 @@ public class HondenDB {
         String BeginTijd = c.getString(c.getColumnIndex("BeginTijd"));
         String EindTijd = c.getString(c.getColumnIndex("EindTijd"));
         double Prijs = c.getDouble(c.getColumnIndex("Prijs"));
+        String advertentieType = c.getString(c.getColumnIndex("AdvertentieType"));
         String Locatie = c.getString(c.getColumnIndex("Locatie"));
         String SpecialeVoorkeurenHond = c.getString(c.getColumnIndex("SpecialeVoorkeurenHond"));
         int Capaciteit = c.getInt(c.getColumnIndex("Capaciteit"));
@@ -280,6 +284,7 @@ public class HondenDB {
         advert.setBeginTijd(Date.valueOf(BeginTijd));
         advert.setEindTijd(Date.valueOf(EindTijd));
         advert.setPrijs(Prijs);
+        advert.setAdvertentieType(Advertentie.AdvertentieTypes.valueOf(advertentieType));
         advert.setLocatie(Locatie);
         advert.setSpecialeVoorkeurenHond(SpecialeVoorkeurenHond);
         advert.setCapaciteit(Capaciteit);
@@ -288,5 +293,7 @@ public class HondenDB {
         advert.setAdvertentiePlaatser(UUID.fromString(IdAdvertentiePlaatser));
         return advert;
     }
+
+    // endregion
 
 }

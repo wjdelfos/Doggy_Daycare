@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.ui.sign_up;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,9 +19,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.MainActivity;
+import com.example.myapplication.R;
 import com.example.myapplication.model.App_Gebruiker;
 import com.example.myapplication.model.HondenDB;
 
+import java.sql.Date;
 import java.util.UUID;
 
 public class SignUpFragment extends Fragment implements AdapterView.OnItemSelectedListener {
@@ -46,6 +49,8 @@ public class SignUpFragment extends Fragment implements AdapterView.OnItemSelect
         Aanmelden.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
+                    //Creates user according to user inputs
+
                     HondenDB.get(getActivity()).addApp_Gebruiker(temp);
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
@@ -104,7 +109,12 @@ public class SignUpFragment extends Fragment implements AdapterView.OnItemSelect
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //TODO update Birth date
+                temp.setGeboortedatum(new Date(System.currentTimeMillis()));
+                try {
+                    temp.setGeboortedatum(Date.valueOf(s.toString()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

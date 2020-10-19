@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,26 +23,38 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.RyclerFixer;
+import com.example.myapplication.model.Advertentie;
+import com.example.myapplication.model.App_Gebruiker;
+import com.example.myapplication.model.HondenDB;
+
+import java.sql.Date;
 
 public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private Spinner Type;
     String DogNames[];
-
-
+    Advertentie temp = new Advertentie();
+    App_Gebruiker loggedInUser;
     RecyclerView hondenplus;
 
+
+    /*
+    * in this class a advert is made and dogs are statically added
+    * this file requires a lot of extra work to make it work dynamically
+    * */
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.advert_eigenaar_main, container, false);
+        loggedInUser = (App_Gebruiker) getActivity().getIntent()
+                .getSerializableExtra("user");
+        //dummy values if user doesnt enter data
+        temp.setBeginTijd(new Date(System.currentTimeMillis()));
+        temp.setEindTijd(new Date(System.currentTimeMillis()));
 
         hondenplus = v.findViewById(R.id.availableDogs);
-
         DogNames = getResources().getStringArray(R.array.DummyDogNames);
-
         RyclerFixer myadapter = new RyclerFixer(getActivity(), DogNames);
         hondenplus.setAdapter(myadapter);
         hondenplus.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -57,10 +70,14 @@ public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnIt
         Button createAdvert = (Button) v.findViewById(R.id.createadvert);
         createAdvert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                //TODO create account
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
+                //setting known values to the advert
+                temp.setAdvertentieType(Advertentie.AdvertentieTypes.eigenaar);
+                temp.set_AdvertentiePlaatser(loggedInUser);
+                temp.setErvaringHonden("Ik zoek een oppasser voor mijn honden");
+                HondenDB.get(getActivity()).addAdvertentie(temp);
+                Toast.makeText(getActivity(),
+                        "Advert created", Toast.LENGTH_SHORT)
+                        .show();
             }
         });
 
@@ -74,7 +91,7 @@ public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnIt
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //TODO update Price
+                temp.setPrijs(Double.parseDouble(s.toString()));
             }
 
             @Override
@@ -87,12 +104,16 @@ public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnIt
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //TODO update startdate
+                temp.setBeginTijd(new Date(System.currentTimeMillis()));
+                try {
+                    temp.setBeginTijd(Date.valueOf(s.toString()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -110,63 +131,31 @@ public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnIt
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //TODO update End date
+                temp.setEindTijd(new Date(System.currentTimeMillis()));
+                try {
+                    temp.setEindTijd(Date.valueOf(s.toString()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
             }
         });
-
-        EditText Starttime = (EditText) v.findViewById(R.id.startTime);
-        Starttime.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //TODO update start time
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
-        EditText EndTime = (EditText) v.findViewById(R.id.endTime);
-        EndTime.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.i("variables",s.toString());
-
-                //TODO end time
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-
-        });
-
-
-
-
 
         return v;
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.i("variables","Deus ex machina");
+        //position 0=bij eigenaar thuis 1=bij Oppas thuis
+        Log.i("variables", "postion is: " + position);
+        if (position == 0) {
+            temp.setLocatie(loggedInUser.getPlaatsnaam());
+        } else {
+            temp.setLocatie("Bij oppas thuis");
+        }
     }
 
     @Override

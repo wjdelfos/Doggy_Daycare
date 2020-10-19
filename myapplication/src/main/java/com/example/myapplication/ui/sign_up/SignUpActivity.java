@@ -1,8 +1,10 @@
-package com.example.myapplication;
+package com.example.myapplication.ui.sign_up;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.R;
 
 public class SignUpActivity extends AppCompatActivity {
     @Override

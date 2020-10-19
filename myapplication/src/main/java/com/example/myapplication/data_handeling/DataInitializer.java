@@ -12,6 +12,10 @@ public class DataInitializer extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, VERSION);
     }
 
+    /*
+    * In onCreate we initialize the structure of the database.
+    * there are 5 tables of which 3 are in use; Appgebruiker, Afspraken and Advertentie
+    * */
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
@@ -32,6 +36,7 @@ public class DataInitializer extends SQLiteOpenHelper {
                         " BeginTijd datetime," +
                         " EindTijd datetime," +
                         " Prijs double," +
+                        " AdvertentieType text," +
                         " Locatie text," +
                         " SpecialeVoorkeurenHond text," +
                         " Capaciteit int," +

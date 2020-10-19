@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.afspraken;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.R;
 import com.example.myapplication.model.Advertentie;
@@ -18,6 +20,8 @@ import com.example.myapplication.model.App_Gebruiker;
 import com.example.myapplication.model.HondenDB;
 
 public class AfspraakDetailFragment extends Fragment {
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -31,7 +35,12 @@ public class AfspraakDetailFragment extends Fragment {
         final Afspraak _afspraak = (Afspraak) getActivity().getIntent()
                 .getSerializableExtra("Afspraak");
 
-
+        final boolean UserIsOppas;
+        if(loggedInUser.getID().equals(_afspraak.getOppas())){
+            UserIsOppas=true;
+        }else {
+            UserIsOppas=false;
+        }
 
         TextView locatie = (TextView) root.findViewById(R.id.locatie_id);
         locatie.setText(_advertentie.getLocatie());
@@ -46,12 +55,50 @@ public class AfspraakDetailFragment extends Fragment {
         verhaal.setText(_advertentie.getErvaringHonden());
 
         Button deal = (Button) root.findViewById(R.id.ButtonAfspraak);
-        deal.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //TODO everything
 
+        //logic for displaying the button and text
+        TextView AcceptatieEigenaar = (TextView) root.findViewById(R.id.AcceptatieEigenaar);
+        if (_afspraak.isIsgeaccepteerdeigenaar()) {
+            AcceptatieEigenaar.setText("Geaccepteerd door hond eigenaar");
+            AcceptatieEigenaar.setBackgroundColor(Color.LTGRAY);
+            if (!UserIsOppas) {
+                deal.setVisibility(View.GONE);
+            }
+        } else {
+            AcceptatieEigenaar.setText("Niet geaccepteerd door hond eigenaar");
+            if (!UserIsOppas) {
+                deal.setText("Accept offer");
+            }
+        }
+
+        TextView AcceptatieOppas = (TextView) root.findViewById(R.id.AcceptatieOppas);
+        if (_afspraak.isIsgeaccepteerdOppas()) {
+            AcceptatieOppas.setText("Geaccepteerd door oppas");
+            AcceptatieOppas.setBackgroundColor(Color.LTGRAY);
+            if (UserIsOppas) {
+                deal.setVisibility(View.GONE);
+            }
+        } else {
+            AcceptatieOppas.setText("Niet geaccepteerd door oppas");
+            if (UserIsOppas) {
+                deal.setText("Accept offer");
+            }
+        }
+
+        deal.setOnClickListener(new View.OnClickListener() {
+            //Update the appointment to display a different state
+            public void onClick(View v) {
+                if (UserIsOppas) {
+                    _afspraak.setIsgeaccepteerdOppas(true);
+                } else {
+                    _afspraak.setIsgeaccepteerdeigenaar(true);
+                }
+                _afspraak.setStatusAfspraak(Afspraak.StatusAfspraken.geaccepteerd);
+                HondenDB.get(getActivity()).UpdateAfspraakAcceptance(_afspraak);
+                getActivity().finish();
             }
         });
+
         return root;
     }
 }

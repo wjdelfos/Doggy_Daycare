@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -14,13 +15,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.AdvertDetailActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.model.Advertentie;
 import com.example.myapplication.model.App_Gebruiker;
 import com.example.myapplication.model.HondenDB;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdvertentieRecyclerFragment extends Fragment {
@@ -55,21 +54,12 @@ public class AdvertentieRecyclerFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.fab:// TODO New advert
-                /*
-                Notitie notitie = new Notitie();
-                NotitieBlok.getCurrent(getActivity()).addNotitie(notitie);
-                Intent intent = new Intent(getActivity(), NotitieActivity.class);
-                intent.putExtra("com.example.noteapplication.notitie_id", notitie.getId());
-                startActivity(intent);*/
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
     private void updateUI() {
-        //TODO create get query
         List<Advertentie> advertenties = HondenDB.get(getActivity()).getAdvertenties();
 
         if (mAdapter == null) {
@@ -82,6 +72,7 @@ public class AdvertentieRecyclerFragment extends Fragment {
     }
 
     private class AdvertentieHolder extends RecyclerView.ViewHolder {
+        //defines xml fields
         private Advertentie mAdvertentie;
         private TextView mCapacityTextView;
         private TextView mDateTextView;
@@ -89,11 +80,13 @@ public class AdvertentieRecyclerFragment extends Fragment {
         private TextView mOwnerTextView;
         private TextView mLocationTextView;
         private ImageButton mFavourite;
+        private Button mType;
         private Boolean favourite;
 
 
         public AdvertentieHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.row_advertentie, parent, false));
+            //assigns xml fields
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -109,10 +102,12 @@ public class AdvertentieRecyclerFragment extends Fragment {
             mPriceTextView = (TextView) itemView.findViewById(R.id.Prijs);
             mOwnerTextView = (TextView) itemView.findViewById(R.id.Owner);
             mLocationTextView = (TextView) itemView.findViewById(R.id.Location);
+            mType = (Button) itemView.findViewById(R.id.TypeAdvert);
 
         }
 
         public void bind(Advertentie advertentie) {
+            //binds xml fields
             mAdvertentie = advertentie;
             mCapacityTextView.setText("Capacity: "+ mAdvertentie.getCapaciteit());
             mDateTextView.setText(mAdvertentie.getBeginTijd().toString());
@@ -120,10 +115,10 @@ public class AdvertentieRecyclerFragment extends Fragment {
             mOwnerTextView.setText(mAdvertentie.get_AdvertentiePlaatser().getNaam());
             mLocationTextView.setText(mAdvertentie.getLocatie());
             mFavourite = (ImageButton) itemView.findViewById(R.id.imageButton);
+            mType.setText(mAdvertentie.getAdvertentieType()+" advertentie");
             mFavourite.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // wanneer favourite gedefinieerd is kan onderstaande zin weg en kunnen de comments weg
-                    // TODO favorite definieren
                     mFavourite.setBackgroundResource(R.drawable.favourite_button_gekleurd);
                     //  if (favourite == false) {
                     //      mFavourite.setBackgroundResource(R.drawable.favourite_button_gekleurd);

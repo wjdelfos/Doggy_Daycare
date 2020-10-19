@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class Advertentie implements Serializable {
     private UUID ID;
-    private enum AdvertentieTypes {eigenaar,oppas}
+    public enum AdvertentieTypes {eigenaar,oppas}
     private AdvertentieTypes AdvertentieType;
     private Date BeginTijd;
     private Date EindTijd;
@@ -19,6 +19,7 @@ public class Advertentie implements Serializable {
     private UUID AdvertentiePlaatser;
     private App_Gebruiker _AdvertentiePlaatser;
 
+    // region constructors
     public Advertentie(UUID ID, AdvertentieTypes type, Date beginTijd, Date eindTijd, double prijs, String locatie, String specialeVoorkeurenHond, int capaciteit, String ervaringHonden, String optiesEten, UUID advertentiePlaatser) {
         this.ID = ID;
         AdvertentieType = type;
@@ -38,8 +39,17 @@ public class Advertentie implements Serializable {
     public Advertentie(UUID id){
         ID= id;
     }
-
+// endregion
     // region Getters en setters
+
+
+    public AdvertentieTypes getAdvertentieType() {
+        return AdvertentieType;
+    }
+
+    public void setAdvertentieType(AdvertentieTypes advertentieType) {
+        AdvertentieType = advertentieType;
+    }
 
     public UUID getID() {
         return ID;

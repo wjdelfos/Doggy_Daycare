@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
     private App_Gebruiker loggedInUser;
     private AppBarConfiguration mAppBarConfiguration;
 
+    /*
+    * Mostly template code
+    * */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,18 +40,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_advertentie_oppas, R.id.nav_slideshow)
                 .setDrawerLayout(drawer)
@@ -56,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        //setting user information
+
         loggedInUser = (App_Gebruiker) this.getIntent()
                 .getSerializableExtra("user");
         //Get the name of the logged in user
@@ -63,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.NameUser);
         navUsername.setText(n);
+        TextView navPhone = (TextView) headerView.findViewById(R.id.PhoneUser);
+        navPhone.setText(""+loggedInUser.getTelefoon_Nummer());
     }
 
     @Override

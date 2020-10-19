@@ -25,17 +25,25 @@ import com.example.myapplication.model.Advertentie;
 import com.example.myapplication.model.App_Gebruiker;
 import com.example.myapplication.model.HondenDB;
 
+import java.sql.Date;
+
 public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private Spinner Type;
     private Advertentie temp = new Advertentie();
     App_Gebruiker loggedInUser;
 
+
+    /*
+    * Look at AdvertEigenaarFragment for comments
+    * */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         loggedInUser = (App_Gebruiker) getActivity().getIntent()
                 .getSerializableExtra("user");
         View v = inflater.inflate(R.layout.advert_create_oppas_main, container, false);
+        temp.setBeginTijd(new Date(System.currentTimeMillis()));
+        temp.setEindTijd(new Date(System.currentTimeMillis()));
 
         Type = (Spinner) v.findViewById(R.id.TypeCare);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
@@ -48,7 +56,7 @@ public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemS
         Button createAdvert = (Button) v.findViewById(R.id.createadvert);
         createAdvert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                temp.setAdvertentieType(Advertentie.AdvertentieTypes.oppas);
                 temp.set_AdvertentiePlaatser(loggedInUser);
                 HondenDB.get(getActivity()).addAdvertentie(temp);
                 Toast.makeText(getActivity(),
@@ -80,12 +88,16 @@ public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemS
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //TODO update startdate
+                temp.setBeginTijd(new Date(System.currentTimeMillis()));
+                try {
+                    temp.setBeginTijd(Date.valueOf(s.toString()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -98,58 +110,22 @@ public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemS
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //TODO update End date
+                temp.setEindTijd(new Date(System.currentTimeMillis()));
+                try {
+                    temp.setEindTijd(Date.valueOf(s.toString()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
             }
         });
-
-        EditText Starttime = (EditText) v.findViewById(R.id.startTime);
-        Starttime.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //TODO update start time
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
-        EditText EndTime = (EditText) v.findViewById(R.id.endTime);
-        EndTime.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.i("variables", s.toString());
-
-                //TODO end time
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-
-        });
-
         EditText Capacity = (EditText) v.findViewById(R.id.capacity);
         Capacity.addTextChangedListener(new TextWatcher() {
             @Override

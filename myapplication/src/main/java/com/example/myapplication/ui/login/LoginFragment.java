@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.LoginUI;
+package com.example.myapplication.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.SignUpActivity;
+import com.example.myapplication.ui.sign_up.SignUpActivity;
 import com.example.myapplication.model.App_Gebruiker;
 import com.example.myapplication.model.HondenDB;
 
@@ -41,12 +41,13 @@ public class LoginFragment extends Fragment {
         LoginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //sql injection possible....
+                //Create a user object that is accessible to other classes to display the user or user information for object creation.
+
                 App_Gebruiker loggedInUser =HondenDB.get(getActivity()).CheckCredentials(_telefoonNummer, _password);
                 if (loggedInUser!=null) {
-                    //Create a user object that is accessible to other classes to display the user or user information for object creation.
+                    // if a user has been created we can enter the application and the data is passed to the next activity
 
                     loggedInUser.setNaam(loggedInUser.getNaam());
-
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     intent.putExtra("user",loggedInUser);
                     startActivity(intent);

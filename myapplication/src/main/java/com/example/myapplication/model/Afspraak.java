@@ -20,10 +20,7 @@ public class Afspraak implements Serializable {
     private App_Gebruiker _eigenaar;
     private Advertentie _advertentie;
 
-
-    public Afspraak(){
-        ID= UUID.randomUUID();
-    }
+    // region Constructors
     public Afspraak(UUID id){
         ID= id;
     }
@@ -38,6 +35,8 @@ public class Afspraak implements Serializable {
         Eigenaar = eigenaar;
         Advertentie = advertentie;
     }
+
+    // endregion
 
     // region Getters and setters
 
