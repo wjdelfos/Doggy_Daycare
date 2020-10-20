@@ -14,6 +14,7 @@ De app bevat de volgende functionaliteiten:
 - Een voorstel/deal maken aan de hand van een advertentie
 - Een voorstellen bekijken en accepteren
 - Advertentie Delen
+- Berichten sturen en inzien
 
 
 Van te voren gemaakte inlog gegevens:
