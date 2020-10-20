@@ -1,6 +1,5 @@
-package com.example.myapplication.ui.messaging;
+package com.example.myapplication.controller.messaging;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -22,9 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.model.App_Gebruiker;
-import com.example.myapplication.model.HondenDB;
+import com.example.myapplication.data_handeling.HondenDB;
 import com.example.myapplication.model.Message;
-import com.example.myapplication.ui.advertentie.AdvertDetailActivity;
 
 import java.sql.Date;
 import java.util.List;

@@ -1,6 +1,5 @@
-package com.example.myapplication.ui.create_advert;
+package com.example.myapplication.controller.create_advert;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,32 +17,45 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.model.Advertentie;
 import com.example.myapplication.model.App_Gebruiker;
-import com.example.myapplication.model.HondenDB;
+import com.example.myapplication.data_handeling.HondenDB;
 
 import java.sql.Date;
 
-public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+
     private Spinner Type;
-    private Advertentie temp = new Advertentie();
+    String DogNames[];
+    Advertentie temp = new Advertentie();
     App_Gebruiker loggedInUser;
+    RecyclerView hondenplus;
 
 
     /*
-    * Look at AdvertEigenaarFragment for comments
+    * in this class a advert is made and dogs are statically added
+    * this file requires a lot of extra work to make it work dynamically
     * */
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.advert_eigenaar_main, container, false);
         loggedInUser = (App_Gebruiker) getActivity().getIntent()
                 .getSerializableExtra("user");
-        View v = inflater.inflate(R.layout.advert_create_oppas_main, container, false);
+        //dummy values if user doesnt enter data
         temp.setBeginTijd(new Date(System.currentTimeMillis()));
         temp.setEindTijd(new Date(System.currentTimeMillis()));
+
+        hondenplus = v.findViewById(R.id.availableDogs);
+        DogNames = getResources().getStringArray(R.array.DummyDogNames);
+        RyclerFixer myadapter = new RyclerFixer(getActivity(), DogNames);
+        hondenplus.setAdapter(myadapter);
+        hondenplus.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         Type = (Spinner) v.findViewById(R.id.TypeCare);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
@@ -56,8 +68,10 @@ public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemS
         Button createAdvert = (Button) v.findViewById(R.id.createadvert);
         createAdvert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                temp.setAdvertentieType(Advertentie.AdvertentieTypes.oppas);
+                //setting known values to the advert
+                temp.setAdvertentieType(Advertentie.AdvertentieTypes.eigenaar);
                 temp.set_AdvertentiePlaatser(loggedInUser);
+                temp.setErvaringHonden("Ik zoek een oppasser voor mijn honden");
                 HondenDB.get(getActivity()).addAdvertentie(temp);
                 Toast.makeText(getActivity(),
                         "Advert created", Toast.LENGTH_SHORT)
@@ -110,6 +124,7 @@ public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemS
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
@@ -126,39 +141,6 @@ public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemS
             public void afterTextChanged(Editable s) {
             }
         });
-        EditText Capacity = (EditText) v.findViewById(R.id.capacity);
-        Capacity.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                temp.setCapaciteit(Integer.parseInt(s.toString()));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
-        EditText experience = (EditText) v.findViewById(R.id.experience);
-        experience.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                temp.setErvaringHonden(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
 
         return v;
     }
@@ -168,9 +150,9 @@ public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemS
         //position 0=bij eigenaar thuis 1=bij Oppas thuis
         Log.i("variables", "postion is: " + position);
         if (position == 0) {
-            temp.setLocatie("bij hond eigenaar");
-        } else {
             temp.setLocatie(loggedInUser.getPlaatsnaam());
+        } else {
+            temp.setLocatie("Bij oppas thuis");
         }
     }
 
@@ -179,3 +161,4 @@ public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemS
 
     }
 }
+

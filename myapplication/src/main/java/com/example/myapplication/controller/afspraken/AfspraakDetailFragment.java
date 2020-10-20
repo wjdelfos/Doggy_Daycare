@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.afspraken;
+package com.example.myapplication.controller.afspraken;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,13 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.R;
 import com.example.myapplication.model.Advertentie;
 import com.example.myapplication.model.Afspraak;
 import com.example.myapplication.model.App_Gebruiker;
-import com.example.myapplication.model.HondenDB;
+import com.example.myapplication.data_handeling.HondenDB;
 
 public class AfspraakDetailFragment extends Fragment {
 

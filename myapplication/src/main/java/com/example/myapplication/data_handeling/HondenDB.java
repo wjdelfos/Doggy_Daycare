@@ -1,12 +1,14 @@
-package com.example.myapplication.model;
+package com.example.myapplication.data_handeling;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 
-import com.example.myapplication.data_handeling.DataInitializer;
-import com.example.myapplication.model.not_yet_impemented.Hond;
+import com.example.myapplication.model.Advertentie;
+import com.example.myapplication.model.Afspraak;
+import com.example.myapplication.model.App_Gebruiker;
+import com.example.myapplication.model.Message;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -177,7 +179,11 @@ public class HondenDB {
     }
 
     public List<Message> getMessages(UUID sender, UUID receiver) {
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM Message where sender ='"+sender+"' and receiver = '"+receiver+"'", null);
+        //Getting messages where the sender and reciever are involved
+        Cursor cursor = mDatabase.rawQuery(
+                "SELECT * FROM Message where " +
+                "(sender ='"+sender+"' and receiver = '"+receiver+"') " +
+                "or (sender ='"+receiver+"' and receiver = '"+sender+"')", null);
         List<Message> messages = new ArrayList<>();
         try {
             cursor.moveToFirst();

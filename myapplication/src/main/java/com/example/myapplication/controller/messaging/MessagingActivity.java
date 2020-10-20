@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.messaging;
+package com.example.myapplication.controller.messaging;
 
 import android.os.Bundle;
 

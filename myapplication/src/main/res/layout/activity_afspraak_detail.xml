@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <fragment
-    android:name="com.example.myapplication.ui.afspraken.AfspraakDetailFragment"
+    android:name="com.example.myapplication.controller.afspraken.AfspraakDetailFragment"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_container"
     android:layout_width="match_parent"

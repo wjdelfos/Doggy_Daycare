@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.advertentie;
+package com.example.myapplication.controller.advertentie;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.R;
 import com.example.myapplication.model.Advertentie;
 import com.example.myapplication.model.App_Gebruiker;
-import com.example.myapplication.model.HondenDB;
+import com.example.myapplication.data_handeling.HondenDB;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.create_advert;
+package com.example.myapplication.controller.create_advert;
 
 import android.content.Context;
 import android.graphics.Color;
