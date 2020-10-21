@@ -27,6 +27,8 @@ public class AfspraakRecyclerFragment extends Fragment {
     private RecyclerView mAfspraakRecyclerView;
     private AfspraakAdapter mAdapter;
 
+    //This is the fragment controller that controls the recycler view of ""afspraken""
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -26,6 +26,8 @@ public class AdvertentieRecyclerFragment extends Fragment {
     private RecyclerView mAdvertentieRecyclerView;
     private AdvertentieAdapter mAdapter;
 
+    //This is the fragment controller that controls the recycler view of adverts
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -118,14 +120,7 @@ public class AdvertentieRecyclerFragment extends Fragment {
             mType.setText(mAdvertentie.getAdvertentieType()+" advertentie");
             mFavourite.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    // wanneer favourite gedefinieerd is kan onderstaande zin weg en kunnen de comments weg
                     mFavourite.setBackgroundResource(R.drawable.favourite_button_gekleurd);
-                    //  if (favourite == false) {
-                    //      mFavourite.setBackgroundResource(R.drawable.favourite_button_gekleurd);
-                    //      favourite = true;
-                    //  } else {
-                    //      mFavourite.setBackgroundResource(R.drawable.favourite_button);
-                    //  }
 
                 }
             });

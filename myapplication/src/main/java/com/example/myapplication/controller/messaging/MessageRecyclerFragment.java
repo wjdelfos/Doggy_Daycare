@@ -27,6 +27,8 @@ import java.sql.Date;
 import java.util.List;
 
 public class MessageRecyclerFragment extends Fragment {
+    //This is the fragment controller that controls the recycler view of the messages
+
     private RecyclerView mMessageRecyclerView;
     private MessageAdapter mAdapter;
     private String contents;

@@ -12,6 +12,10 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
 
 public class MessageTests {
+    /*
+     * These tests test the initialisation of a model in different ways
+     * */
+
     @Test
     public void StandardInitialisation() {
         Message result = new Message();

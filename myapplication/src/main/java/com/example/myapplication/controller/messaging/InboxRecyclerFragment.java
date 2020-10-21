@@ -20,6 +20,8 @@ import com.example.myapplication.data_handeling.HondenDB;
 import java.util.List;
 
 public class InboxRecyclerFragment extends Fragment {
+    //This is the fragment controller that controls the recycler view of the inbox(different chats)
+
     private RecyclerView mInboxRecyclerView;
     private InboxAdapter mAdapter;
 
@@ -85,6 +87,8 @@ public class InboxRecyclerFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), MessagingActivity.class);
+
+                    //pass needed users to next activity
                     intent.putExtra("user", loggedInUser);
                     intent.putExtra("receiver", mGebruiker);
                     startActivity(intent);

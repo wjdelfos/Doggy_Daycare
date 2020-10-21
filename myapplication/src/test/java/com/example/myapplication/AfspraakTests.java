@@ -13,9 +13,11 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class AfspraakTests {
+    /*
+     * These tests test the initialisation of a model in different ways
+     * */
 
     //init with specific id
-
     @Test
     public void InitialisationUUID() {
         UUID input =UUID.randomUUID();

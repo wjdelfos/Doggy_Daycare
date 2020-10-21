@@ -48,7 +48,7 @@ public class SignUpFragment extends Fragment implements AdapterView.OnItemSelect
         Aanmelden.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
-                    //Creates user according to user inputs and checks weather the nescecarry fields have been filled in
+                    //Creates user according to user inputs and checks weather the necessary fields have been filled in
                     if (temp.getTelefoon_Nummer() != 0
                             && temp.getWachtwoord() != null
                             && temp.getPlaatsnaam() != null

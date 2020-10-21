@@ -47,16 +47,19 @@ public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnIt
         View v = inflater.inflate(R.layout.advert_eigenaar_main, container, false);
         loggedInUser = (App_Gebruiker) getActivity().getIntent()
                 .getSerializableExtra("user");
-        //dummy values if user doesnt enter data
+
+        //dummy values if user doesn't enter data
         temp.setBeginTijd(new Date(System.currentTimeMillis()));
         temp.setEindTijd(new Date(System.currentTimeMillis()));
 
+        //set list of dogs to add to the advert
         hondenplus = v.findViewById(R.id.availableDogs);
         DogNames = getResources().getStringArray(R.array.DummyDogNames);
         RyclerFixer myadapter = new RyclerFixer(getActivity(), DogNames);
         hondenplus.setAdapter(myadapter);
         hondenplus.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        //sets values for a spinner of where the dog is staying during the dog sitting
         Type = (Spinner) v.findViewById(R.id.TypeCare);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.Types, android.R.layout.simple_spinner_item);
@@ -64,7 +67,7 @@ public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnIt
         Type.setAdapter(adapter);
         Type.setOnItemSelectedListener(this);
 
-
+        //set a click listener if the user wants to create an advert
         Button createAdvert = (Button) v.findViewById(R.id.createadvert);
         createAdvert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -79,6 +82,7 @@ public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnIt
             }
         });
 
+        // region texts listeners for input fields
         EditText Price = (EditText) v.findViewById(R.id.price);
         Price.addTextChangedListener(new TextWatcher() {
 
@@ -141,6 +145,7 @@ public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnIt
             public void afterTextChanged(Editable s) {
             }
         });
+        // endregion
 
         return v;
     }

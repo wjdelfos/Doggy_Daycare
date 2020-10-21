@@ -12,6 +12,9 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
 
 public class AdvertentieTests {
+    /*
+    * These tests test the initialisation of a model in different ways
+    * */
     @Test
     public void StandardInitialisation() {
         Advertentie result = new Advertentie();

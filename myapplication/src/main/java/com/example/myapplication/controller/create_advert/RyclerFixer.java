@@ -18,6 +18,8 @@ public class RyclerFixer extends RecyclerView.Adapter<RyclerFixer.Myadapter> {
     String[] namen;
     Context context;
 
+    //This is the component that creates the recycler view for the dog scrolling menu in AdvertEigenaarFragment
+
 
     public RyclerFixer(Context ct, String[] s1) {
         context = ct;

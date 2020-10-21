@@ -32,7 +32,7 @@ public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemS
 
 
     /*
-    * Look at AdvertEigenaarFragment for comments
+    * this file is very simular to another file. Look at AdvertEigenaarFragment for comments
     * */
     @Nullable
     @Override

@@ -12,6 +12,10 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
 
 public class App_GebruikerTests {
+    /*
+     * These tests test the initialisation of a model in different ways
+     * */
+
     @Test
     public void StandardInitialisation() {
         App_Gebruiker result = new App_Gebruiker();
