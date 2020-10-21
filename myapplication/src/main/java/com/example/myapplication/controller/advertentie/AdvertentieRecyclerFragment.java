@@ -62,7 +62,7 @@ public class AdvertentieRecyclerFragment extends Fragment {
     }
 
     private void updateUI() {
-        List<Advertentie> advertenties = HondenDB.get(getActivity()).getAdvertenties();
+        List<Advertentie> advertenties = HondenDB.get(getActivity(),false).getAdvertenties();
 
         if (mAdapter == null) {
             mAdapter = new AdvertentieAdapter(advertenties);

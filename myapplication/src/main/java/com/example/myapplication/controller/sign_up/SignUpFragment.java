@@ -54,7 +54,7 @@ public class SignUpFragment extends Fragment implements AdapterView.OnItemSelect
                             && temp.getPlaatsnaam() != null
                             && !temp.getNaam().equals("")) {
 
-                        HondenDB.get(getActivity()).addApp_Gebruiker(temp);
+                        HondenDB.get(getActivity(),false).addApp_Gebruiker(temp);
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         intent.putExtra("user", temp);
                         startActivity(intent);

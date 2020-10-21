@@ -24,7 +24,7 @@ public class DatabaseUnitTests {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
         //this is a user called bob in the database that is automatically added the first time the database is run
-        String result=HondenDB.get(appContext).CheckCredentials(123456789,"123").getNaam();
+        String result=HondenDB.get(appContext,true).CheckCredentials(123456789,"123").getNaam();
         assertEquals(result,"Bob de tester");
     }
 
@@ -39,14 +39,14 @@ public class DatabaseUnitTests {
         newAdvert.setEindTijd(date);
         newAdvert.setAdvertentieType(Advertentie.AdvertentieTypes.oppas);
         //add a valid user to the test advert
-        newAdvert.setAdvertentiePlaatser(HondenDB.get(appContext).CheckCredentials(123456789,"123").getID());
+        newAdvert.setAdvertentiePlaatser(HondenDB.get(appContext,true).CheckCredentials(123456789,"123").getID());
 
         //action
         boolean result = false;
-        HondenDB.get(appContext).addAdvertentie(newAdvert);
+        HondenDB.get(appContext,true).addAdvertentie(newAdvert);
 
         //checking for entry with that ID
-        for (Advertentie a :HondenDB.get(appContext).getAdvertenties()) {
+        for (Advertentie a :HondenDB.get(appContext,true).getAdvertenties()) {
             if (a.getID().equals(newAdvert.getID())) {
                 result = true;
             }

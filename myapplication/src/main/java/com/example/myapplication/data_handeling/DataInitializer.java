@@ -8,8 +8,8 @@ public class DataInitializer extends SQLiteOpenHelper {
     private static final int VERSION = 1;
     private static final String DATABASE_NAME = "honden.db";
 
-    public DataInitializer(Context context) {
-        super(context, DATABASE_NAME, null, VERSION);
+    public DataInitializer(Context context,boolean IsTest) {
+        super(context, IsTest?"test"+DATABASE_NAME:DATABASE_NAME, null, VERSION);
     }
 
     /*

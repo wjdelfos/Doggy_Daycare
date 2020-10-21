@@ -17,19 +17,22 @@ import java.util.UUID;
 
 public class HondenDB {
     private static HondenDB sHonden;
+    private static Boolean IsTest;
     private Context mContext;
     private SQLiteDatabase mDatabase;
     private SQLiteQueryBuilder QueryBuilder;
 
 
     //this class is called to communicate with the database
-    public static HondenDB get(Context context) {
+    //Boolean for other db in test cases
+    public static HondenDB get(Context context,Boolean isTest) {
+        IsTest=isTest;
         return sHonden == null ? new HondenDB(context) : sHonden;
     }
 
     private HondenDB(Context context) {
         mContext = context.getApplicationContext();
-        mDatabase = new DataInitializer(mContext).getWritableDatabase();
+        mDatabase = new DataInitializer(mContext,IsTest).getWritableDatabase();
         AddDummyData();
     }
 

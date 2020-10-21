@@ -116,7 +116,7 @@ public class AdvertentieDetailFragment extends Fragment {
                                 _advertentie.getID());
                     }
 
-                    HondenDB.get(getActivity()).addAfspraak(a);
+                    HondenDB.get(getActivity(),false).addAfspraak(a);
 
                     //popup to show it worked
                     Toast.makeText(getActivity(),

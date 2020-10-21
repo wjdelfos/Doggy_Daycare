@@ -43,7 +43,7 @@ public class LoginFragment extends Fragment {
                 //sql injection possible....
                 //Create a user object that is accessible to other classes to display the user or user information for object creation.
 
-                App_Gebruiker loggedInUser =HondenDB.get(getActivity()).CheckCredentials(_telefoonNummer, _password);
+                App_Gebruiker loggedInUser =HondenDB.get(getActivity(),false).CheckCredentials(_telefoonNummer, _password);
                 if (loggedInUser!=null) {
                     // if a user has been created we can enter the application and the data is passed to the next activity
 

@@ -66,7 +66,7 @@ public class AfspraakRecyclerFragment extends Fragment {
     }
 
     private void updateUI() {
-        List<Afspraak> afspraakList = HondenDB.get(getActivity()).getAfspraken(loggedInUser.getID());
+        List<Afspraak> afspraakList = HondenDB.get(getActivity(),false).getAfspraken(loggedInUser.getID());
 
         if (mAdapter == null) {
             mAdapter = new AfspraakAdapter(afspraakList);

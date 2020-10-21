@@ -56,7 +56,7 @@ public class AdvertOppasFragment extends Fragment implements AdapterView.OnItemS
             public void onClick(View v) {
                 temp.setAdvertentieType(Advertentie.AdvertentieTypes.oppas);
                 temp.set_AdvertentiePlaatser(loggedInUser);
-                HondenDB.get(getActivity()).addAdvertentie(temp);
+                HondenDB.get(getActivity(),false).addAdvertentie(temp);
                 Toast.makeText(getActivity(),
                         "Advert created", Toast.LENGTH_SHORT)
                         .show();

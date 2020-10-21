@@ -75,7 +75,7 @@ public class AdvertEigenaarFragment extends Fragment implements AdapterView.OnIt
                 temp.setAdvertentieType(Advertentie.AdvertentieTypes.eigenaar);
                 temp.set_AdvertentiePlaatser(loggedInUser);
                 temp.setErvaringHonden("Ik zoek een oppasser voor mijn honden");
-                HondenDB.get(getActivity()).addAdvertentie(temp);
+                HondenDB.get(getActivity(),false).addAdvertentie(temp);
                 Toast.makeText(getActivity(),
                         "Advert created", Toast.LENGTH_SHORT)
                         .show();

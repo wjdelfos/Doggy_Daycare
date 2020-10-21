@@ -93,7 +93,7 @@ public class AfspraakDetailFragment extends Fragment {
                     _afspraak.setIsgeaccepteerdeigenaar(true);
                 }
                 _afspraak.setStatusAfspraak(Afspraak.StatusAfspraken.geaccepteerd);
-                HondenDB.get(getActivity()).UpdateAfspraakAcceptance(_afspraak);
+                HondenDB.get(getActivity(),false).UpdateAfspraakAcceptance(_afspraak);
                 getActivity().finish();
             }
         });

@@ -74,7 +74,7 @@ public class MessageRecyclerFragment extends Fragment {
                 message.set_Sender(loggedInUser);
                 message.setSendAtTime(new Date(System.currentTimeMillis()));
                 message.setContents(contents);
-                HondenDB.get(getActivity()).addMessage(message);
+                HondenDB.get(getActivity(),false).addMessage(message);
                 SendBox.setText("");
                 updateUI();
             }
@@ -106,7 +106,7 @@ public class MessageRecyclerFragment extends Fragment {
     }
 
     private void updateUI() {
-        List<Message> messages= HondenDB.get(getActivity()).getMessages(loggedInUser.getID(),_receiver.getID());
+        List<Message> messages= HondenDB.get(getActivity(),false).getMessages(loggedInUser.getID(),_receiver.getID());
 
         if (mAdapter == null) {
             mAdapter = new MessageAdapter(messages);

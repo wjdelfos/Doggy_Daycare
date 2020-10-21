@@ -63,7 +63,7 @@ public class InboxRecyclerFragment extends Fragment {
     }
 
     private void updateUI() {
-        List<App_Gebruiker> gebruikers = HondenDB.get(getActivity()).getConversations(loggedInUser.getID());
+        List<App_Gebruiker> gebruikers = HondenDB.get(getActivity(),false).getConversations(loggedInUser.getID());
 
         if (mAdapter == null) {
             mAdapter = new InboxAdapter(gebruikers);
