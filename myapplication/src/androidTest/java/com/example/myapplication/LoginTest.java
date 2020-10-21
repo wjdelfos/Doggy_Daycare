@@ -1,17 +1,17 @@
 package com.example.myapplication;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import androidx.test.espresso.intent.Intents;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
 import com.example.myapplication.controller.login.LoginActivity;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -73,7 +73,7 @@ public class LoginTest {
     }
 
     @Test
-    public void Loggin() {
+    public void Login() {
         // Type text and then press the button.
         onView(withId(R.id.Telefoon_nr))
                 .perform(typeText(Username), closeSoftKeyboard());
