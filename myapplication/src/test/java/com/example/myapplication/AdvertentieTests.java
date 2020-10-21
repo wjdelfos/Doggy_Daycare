@@ -1,4 +1,4 @@
-package com.example.myapplication.UnitTests;
+package com.example.myapplication;
 
 import com.example.myapplication.model.Advertentie;
 
