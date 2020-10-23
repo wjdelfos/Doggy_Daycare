@@ -55,7 +55,7 @@ public class AfspraakDetailFragment extends Fragment {
 
         Button deal = (Button) root.findViewById(R.id.ButtonAfspraak);
 
-        //logic for displaying the button and text
+        //logic for displaying the accept button and text weather the deal has been accepted
         TextView AcceptatieEigenaar = (TextView) root.findViewById(R.id.AcceptatieEigenaar);
         if (_afspraak.isIsgeaccepteerdeigenaar()) {
             AcceptatieEigenaar.setText("Geaccepteerd door hond eigenaar");

@@ -45,10 +45,10 @@ public class MessageRecyclerFragment extends Fragment {
 
         loggedInUser = (App_Gebruiker) getActivity().getIntent()
                 .getSerializableExtra("user");
-        _receiver  = (App_Gebruiker) getActivity().getIntent()
+        _receiver = (App_Gebruiker) getActivity().getIntent()
                 .getSerializableExtra("receiver");
 
-        final EditText SendBox= (EditText) view.findViewById(R.id.messageInput);
+        final EditText SendBox = (EditText) view.findViewById(R.id.messageInput);
         SendBox.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -58,7 +58,7 @@ public class MessageRecyclerFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                contents=s.toString();
+                contents = s.toString();
             }
 
             @Override
@@ -69,14 +69,18 @@ public class MessageRecyclerFragment extends Fragment {
         Button send = view.findViewById(R.id.buttonSend);
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Message message = new Message();
-                message.set_Receiver(_receiver);
-                message.set_Sender(loggedInUser);
-                message.setSendAtTime(new Date(System.currentTimeMillis()));
-                message.setContents(contents);
-                HondenDB.get(getActivity(),false).addMessage(message);
-                SendBox.setText("");
-                updateUI();
+                try {
+                    Message message = new Message();
+                    message.set_Receiver(_receiver);
+                    message.set_Sender(loggedInUser);
+                    message.setSendAtTime(new Date(System.currentTimeMillis()));
+                    message.setContents(contents);
+                    HondenDB.get(getActivity(), false).addMessage(message);
+                    SendBox.setText("");
+                    updateUI();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -106,7 +110,7 @@ public class MessageRecyclerFragment extends Fragment {
     }
 
     private void updateUI() {
-        List<Message> messages= HondenDB.get(getActivity(),false).getMessages(loggedInUser.getID(),_receiver.getID());
+        List<Message> messages = HondenDB.get(getActivity(), false).getMessages(loggedInUser.getID(), _receiver.getID());
 
         if (mAdapter == null) {
             mAdapter = new MessageAdapter(messages);
@@ -130,7 +134,7 @@ public class MessageRecyclerFragment extends Fragment {
             //assigns xml fields
             mContents = (TextView) itemView.findViewById(R.id.contents);
             mType = (Button) itemView.findViewById(R.id.TypeAdvert);
-            mCard= (CardView) itemView.findViewById(R.id.MessageCard);
+            mCard = (CardView) itemView.findViewById(R.id.MessageCard);
         }
 
         public void bind(Message message) {

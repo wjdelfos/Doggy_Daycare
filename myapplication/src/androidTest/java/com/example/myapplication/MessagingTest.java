@@ -7,7 +7,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
 import com.example.myapplication.controller.login.LoginActivity;
-import com.example.myapplication.controller.messaging.MessagingActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -19,37 +18,29 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
-import static androidx.test.espresso.intent.Intents.intended;
-import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class TestThroughEntireApp {
+public class MessagingTest {
 
     private String Username;
     private String Password;
+    private String Message;
 
     @Rule
     public ActivityScenarioRule<LoginActivity> activityRule
             = new ActivityScenarioRule<>(LoginActivity.class);
 
     @Before
-    public void initStrings() {
-        // Specify a valid string.
+    public void SetupScenario() {
+        // log in and start a chat with a specified user
         Username = "123456789";
         Password="123";
+        Message="TestMessage";
         Intents.init();
-    }
-
-    @After
-    public void tearDown() {
-        Intents.release();
-    }
-
-    @Test
-    public void WalkThoughLoginTillMessaging() {
-        //Walk through entire app
         onView(withId(R.id.Telefoon_nr))
                 .perform(typeText(Username), closeSoftKeyboard());
         onView(withId(R.id.Wachtwoord))
@@ -58,9 +49,26 @@ public class TestThroughEntireApp {
         onView(withId(R.id.AdvertRecycler)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(0,click()));
         onView(withId(R.id.Messaging)).perform(click());
+    }
+
+    @After
+    public void tearDown() {
+        Intents.release();
+    }
+
+    @Test
+    public void SendMessage() {
+        //Setup
+        onView(withId(R.id.messageInput))
+                .perform(typeText(Message), closeSoftKeyboard());
+
+        //action
+        onView(withId(R.id.buttonSend)).perform(click());
 
 
-        //check if the activity messaging has been reached. If so all steps have succeded
-        intended(hasComponent(MessagingActivity.class.getName()));
+        //check if the message field is empty, it is empty if the message has been added successfully
+        onView(withId(R.id.messageInput))
+                .check(matches(withText("")));
+
     }
 }
